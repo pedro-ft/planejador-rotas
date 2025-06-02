@@ -24,6 +24,20 @@ const criarNovoDestino = (dadosDestino) => {
     })
 }
 
+const buscarTodos = () => {
+    return new Promise((resolve, reject) => {
+        db.find({}).sort({ createdAt: -1}).exec((err, destinos) => {
+            if(err){
+                const error = new Error("Erro ao buscar destinos no banco de dados.")
+                error.statusCode = 500
+                return reject(error)
+            }
+            resolve(destinos)
+        })
+    })
+}
+
 module.exports = {
-    criarNovoDestino
+    criarNovoDestino,
+    buscarTodos
 }
