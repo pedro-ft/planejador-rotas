@@ -28,7 +28,30 @@ const listarDestinos = async (req, res) => {
     }
 }
 
+const atualizarDestino = async (req, res) => {
+    try {
+        const idDoDestino = req.params.id
+        const dadosAtualizados = req.body
+
+        const destinoAtualizado = await destinoService.atualizarDestinoPorId(idDoDestino, dadosAtualizados)
+
+        if (!destinoAtualizado) {
+            return res.status(404).json({ message: "Destino não encontrado para atualização." });
+        }
+
+        res.status(200).json({
+            message: "Destino atualizado com sucesso",
+            data: destinoAtualizado
+        })
+    } catch (error){
+        res.status(error.statusCode || 500).json({
+            message: error.message || "Ocorreu um erro no servidor ao atualizar o destino."
+        })
+    }
+}
+
 module.exports = {
     criarDestino,
-    listarDestinos
+    listarDestinos,
+    atualizarDestino
 }

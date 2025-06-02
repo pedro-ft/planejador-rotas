@@ -37,7 +37,29 @@ const buscarTodos = () => {
     })
 }
 
+const atualizarDestinoPorId = (id, dadosAtualizados) => {
+    return new Promise((resolve, reject) => {
+        if(!dadosAtualizados || Object.keys(dadosAtualizados).length === 0) {
+            const error = new Error("Nenhum dado foi fornecido")
+            error.statusCode = 400
+            return reject(error);
+        }
+        db.update({ _id: id }, { $set: dadosAtualizados }, { returnUpdatedDocs: true }, (err, numAffected, affectedDocuments, upsert) => {
+            if (err) {
+                const error = new Error("Erro ao atualizar destino no banco de dados.");
+                error.statusCode = 500; 
+                return reject(error);
+            }
+            if (numAffected === 0) {
+                return resolve(null);
+            }
+            resolve(affectedDocuments);
+        })
+    })
+}
+
 module.exports = {
     criarNovoDestino,
-    buscarTodos
+    buscarTodos,
+    atualizarDestinoPorId
 }
