@@ -58,8 +58,22 @@ const atualizarDestinoPorId = (id, dadosAtualizados) => {
     })
 }
 
+const deletarDestinoPorId = (id) => {
+    return new Promise((resolve, reject) => {
+        db.remove({_id: id}, {}, (err, numRemoved) => {
+            if (err) {
+                const error = new Error ("Erro ao excluir destino no banco de dados")
+                error.statusCode = 500
+                return reject(error)
+            }
+            resolve({numRemoved: numRemoved})
+        })
+    })
+}
+
 module.exports = {
     criarNovoDestino,
     buscarTodos,
-    atualizarDestinoPorId
+    atualizarDestinoPorId,
+    deletarDestinoPorId
 }

@@ -50,8 +50,30 @@ const atualizarDestino = async (req, res) => {
     }
 }
 
+const deletarDestino = async (req, res) => {
+    try{
+        const idDoDestino = req.params.id;
+
+        const resultadoExclusao = await destinoService.deletarDestinoPorId(idDoDestino)
+
+        if(resultadoExclusao.numRemoved === 0) {
+            return res.status(404).json({ message: "Destino não foi encontrado" })
+        }
+        
+        res.status(200).json({
+            message: "Destino excluido com sucesso",
+            data: {id: idDoDestino, numRemoved: resultadoExclusao.numRemoved}
+        })
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            message: error.message || "Ocorreu um erro no servidor ao excluir o destino"
+        })
+    }
+}
+
 module.exports = {
     criarDestino,
     listarDestinos,
-    atualizarDestino
+    atualizarDestino,
+    deletarDestino
 }
