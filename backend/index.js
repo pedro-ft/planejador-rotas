@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const destinosRoutes = require('./routes/destinoRoutes');
+const rotaRoutes = require('./routes/rotaRoutes')
 
 const app = express();
 const PORT = 4000;
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/destinos', destinosRoutes)
+app.use('/api/rotas', rotaRoutes)
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta http://localhost:${PORT}`);

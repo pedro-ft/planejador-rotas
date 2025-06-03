@@ -1,7 +1,3 @@
 {"cidade":"Salvador","pais":"Brasil","observacoes":"Visitar o Pelourinho","lat":0,"lon":0,"_id":"8mNC8yjCjUrhvOI5","createdAt":{"$$date":1748853221336},"updatedAt":{"$$date":1748853221336}}
-{"cidade":"Londres","pais":"Inglaterra","observacoes":"Viajar de avião","lat":0,"lon":0,"_id":"YNTHUxQ9aU1CcUpI","createdAt":{"$$date":1748888268782},"updatedAt":{"$$date":1748898981559},"data":""}
 {"cidade":"Curitiba","pais":"Brasil","observacoes":"Levar roupa de frio","lat":0,"lon":0,"_id":"ZSSAmWc188dFemjT","createdAt":{"$$date":1748887360524},"updatedAt":{"$$date":1748887360524}}
-{"$$deleted":true,"_id":"YNTHUxQ9aU1CcUpI"}
-{"cidade":"Chicago","pais":"Estados Unidos","observacoes":"Rua Teste, 123","lat":0,"lon":0,"_id":"AaiMKZHLmQNAgUo3","createdAt":{"$$date":1748927666794},"updatedAt":{"$$date":1748927666794}}
 {"cidade":"Londres","pais":"Inglaterra","observacoes":"Férias","lat":0,"lon":0,"_id":"dtnWp5ev5XhXwZgx","createdAt":{"$$date":1748930725813},"updatedAt":{"$$date":1748930725813}}
-{"$$deleted":true,"_id":"AaiMKZHLmQNAgUo3"}

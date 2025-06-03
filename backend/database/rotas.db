@@ -1,0 +1,2 @@
+{"nome":"Minha Rota Atualizada com Novo Nome","destinos":[{"_id":"ID_REAL_DO_DESTINO_EXISTENTE_1","cidade":"Destino A Atualizado","pais":"País A","observacoes":"Observação do Destino A"}],"_id":"KPbCfkIBD4evXHID","createdAt":{"$$date":1748933137875},"updatedAt":{"$$date":1748934793313}}
+{"$$deleted":true,"_id":"KPbCfkIBD4evXHID"}
