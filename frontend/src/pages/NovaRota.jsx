@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import InputNome from '../components/Rotas/InputNome';
 import AdicionarDestino from '../components/Rotas/AdicionarDestino';
 import ListaDestinos from '../components/Rotas/ListaDestinos';
@@ -8,6 +9,8 @@ import ResumoRota from '../components/Rotas/ResumoRota';
 // import './NovaRota.module.css';
 
 function NovaRota() {
+    const navigate = useNavigate();
+
     const [nomeRota, setNomeRota] = useState('');
     const [destinosNaRota, setDestinosNaRota] = useState([]);
 
@@ -124,10 +127,7 @@ function NovaRota() {
             setNomeRota('');
             setDestinosNaRota([]);
 
-            // No futuro, poderíamos navegar para a página da rota recém-criada ou para a lista de rotas
-            // Ex: navigate(`/rotas/${rotaSalva.data._id}`) ou navigate('/')
-            // Para isso, precisaríamos do hook useNavigate do react-router-dom
-
+            navigate('/');
         } catch (error) {
             console.error("Falha ao salvar a rota no backend:", error);
             alert(`Erro ao salvar rota: ${error.message}`);
@@ -137,9 +137,13 @@ function NovaRota() {
     return (
         <div className="pagina-nova-rota" style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
             <div style={{ marginBottom: '20px' }}>
-                <a href="/">&larr; Voltar para Lista</a> {/* Placeholder */}
+                <button 
+                    onClick={() => navigate('/')} 
+                    style={{ background: 'none', border: 'none', color: '#0275d8', cursor: 'pointer', padding: '0', fontSize: '1em' }}
+                >
+                    &larr; Voltar para Lista
+                </button>
             </div>
-
             <h2>Adicionar Nova Rota</h2>
 
             <InputNome valor={nomeRota} aoMudar={handleMudarNomeRota} />
