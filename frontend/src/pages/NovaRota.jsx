@@ -86,10 +86,52 @@ function NovaRota() {
         setNomeRota(novoNome);
     };
     
-    const handleSalvarRota = () => {
-        console.log("Salvar Rota:", { nomeRota: nomeRota, destinos: destinosNaRota });
-        alert("Rota '" + nomeRota + "' salva (simulação)!");
-        // Lógica futura para salvar a rota completa, se necessário.
+    const handleSalvarRota = async () => {
+        if (!nomeRota.trim()) {
+            alert("Por favor, dê um nome para a sua rota antes de salvar.");
+            return;
+        }
+        if (destinosNaRota.length === 0) {
+            alert("Adicione pelo menos um destino à rota antes de salvar.");
+            return;
+        }
+
+        const dadosNovaRotaParaApi = {
+            nome: nomeRota,
+            destinos: destinosNaRota
+        };
+
+        console.log("Enviando para POST /api/rotas:", dadosNovaRotaParaApi);
+
+        try {
+            const response = await fetch('http://localhost:4000/api/rotas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dadosNovaRotaParaApi),
+            });
+
+            if (!response.ok) {
+                const erroData = await response.json();
+                throw new Error(erroData.message || `Erro HTTP ao salvar rota: ${response.status}`);
+            }
+
+            const rotaSalva = await response.json();
+            console.log("Rota salva no backend:", rotaSalva.data);
+            alert(`Rota "${rotaSalva.data.nome}" salva com sucesso no backend!`);
+
+            setNomeRota('');
+            setDestinosNaRota([]);
+
+            // No futuro, poderíamos navegar para a página da rota recém-criada ou para a lista de rotas
+            // Ex: navigate(`/rotas/${rotaSalva.data._id}`) ou navigate('/')
+            // Para isso, precisaríamos do hook useNavigate do react-router-dom
+
+        } catch (error) {
+            console.error("Falha ao salvar a rota no backend:", error);
+            alert(`Erro ao salvar rota: ${error.message}`);
+        }
     };
 
     return (
