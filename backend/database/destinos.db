@@ -1,18 +1,15 @@
-{"cidade":"Paris","pais":"França","observacoes":"Torre Eiffel","lat":0,"lon":0,"_id":"bTzqn4BZUkf0qVH0","createdAt":{"$$date":1749012460280},"updatedAt":{"$$date":1749012460280}}
-{"cidade":"Berlim","pais":"Alemanha","observacoes":"Muro de Berlim","lat":0,"lon":0,"_id":"ukqRr2UWe8wbZqWt","createdAt":{"$$date":1749012470656},"updatedAt":{"$$date":1749012470656}}
-{"cidade":"Budapeste","pais":"Hungria","observacoes":"Puskaz Arena","lat":0,"lon":0,"_id":"9Y2lUjp7bdureEwO","createdAt":{"$$date":1749012484886},"updatedAt":{"$$date":1749012484886}}
-{"cidade":"Bombinhas","pais":"Brasil","observacoes":"","lat":0,"lon":0,"_id":"9QF5pGJEqjnZBFQC","createdAt":{"$$date":1749012625022},"updatedAt":{"$$date":1749012625022}}
-{"cidade":"Porto Alegre","pais":"Brasil","observacoes":"","lat":0,"lon":0,"_id":"Qo4A9vkRS7SumwQl","createdAt":{"$$date":1749012639621},"updatedAt":{"$$date":1749012639621}}
-{"cidade":"teste","pais":"teste","observacoes":"","lat":0,"lon":0,"_id":"jIn4HY3H7ot6PYMs","createdAt":{"$$date":1749012662036},"updatedAt":{"$$date":1749012662036}}
-{"cidade":"dsad","pais":"dsad","observacoes":"","lat":0,"lon":0,"_id":"VTcAPnRWJCr1YjTG","createdAt":{"$$date":1749013443205},"updatedAt":{"$$date":1749013443205}}
 {"cidade":"dasdsa","pais":"dsadsad","observacoes":"dsadsa","lat":0,"lon":0,"_id":"4q4bM3X81OqdHwmG","createdAt":{"$$date":1749015043706},"updatedAt":{"$$date":1749015043706}}
-{"cidade":"Londres","pais":"Inglaterra","observacoes":"Big Bang","nomeDaRotaPertecente":"Viagem Escolar","lat":0,"lon":0,"_id":"M7nZkCMgIpBnQfjY","createdAt":{"$$date":1749020308987},"updatedAt":{"$$date":1749020308987}}
+{"cidade":"Londres","pais":"Inglaterra","observacoes":"Big Bang","lat":0,"lon":0,"_id":"87NyjgLVNQ6z3VQq","createdAt":{"$$date":1749071904895},"updatedAt":{"$$date":1749071904895}}
+{"cidade":"Bombinhas","pais":"Brasil","observacoes":"","lat":0,"lon":0,"_id":"9QF5pGJEqjnZBFQC","createdAt":{"$$date":1749012625022},"updatedAt":{"$$date":1749012625022}}
+{"cidade":"Budapeste","pais":"Hungria","observacoes":"Puskaz Arena","lat":0,"lon":0,"_id":"9Y2lUjp7bdureEwO","createdAt":{"$$date":1749012484886},"updatedAt":{"$$date":1749012484886}}
 {"cidade":"Nova York","pais":"Estados Unidos","observacoes":"Estatua da Liberdade","nomeDaRotaPertecente":"Viagem Escolar","lat":0,"lon":0,"_id":"GeoOknDIgjmz5f5I","createdAt":{"$$date":1749020327886},"updatedAt":{"$$date":1749020327886}}
-{"cidade":"testeDelete","pais":"Testabdo","observacoes":"","nomeDaRotaPertecente":"teste","lat":0,"lon":0,"_id":"0VYhBwhtB9zNRr8g","createdAt":{"$$date":1749020386524},"updatedAt":{"$$date":1749020386524}}
-{"$$deleted":true,"_id":"0VYhBwhtB9zNRr8g"}
+{"cidade":"Londres","pais":"Inglaterra","observacoes":"Big Bang","nomeDaRotaPertecente":"Viagem Escolar","lat":0,"lon":0,"_id":"M7nZkCMgIpBnQfjY","createdAt":{"$$date":1749020308987},"updatedAt":{"$$date":1749020308987}}
+{"cidade":"Curitiba","pais":"Brasil","observacoes":"Jardim Botânico","lat":0,"lon":0,"_id":"P025t4aynFm5RucF","createdAt":{"$$date":1749071997802},"updatedAt":{"$$date":1749071997802}}
+{"cidade":"Porto Alegre","pais":"Brasil","observacoes":"","lat":0,"lon":0,"_id":"Qo4A9vkRS7SumwQl","createdAt":{"$$date":1749012639621},"updatedAt":{"$$date":1749012639621}}
 {"cidade":"Seattle","pais":"Estados Unidos","observacoes":"","lat":0,"lon":0,"_id":"WVK6slEL8BBmhspK","createdAt":{"$$date":1749022102746},"updatedAt":{"$$date":1749022102746}}
-{"cidade":"dsda","pais":"dsa","observacoes":"","nomeDaRotaPertecente":"","lat":0,"lon":0,"_id":"SYqpSg1iyhjVSP3H","createdAt":{"$$date":1749023604607},"updatedAt":{"$$date":1749023604607}}
-{"$$deleted":true,"_id":"SYqpSg1iyhjVSP3H"}
-{"cidade":"dsad","pais":"dsad","observacoes":"dsad","nomeDaRotaPertecente":"","lat":0,"lon":0,"_id":"RmVCC8tWwEbS1yx3","createdAt":{"$$date":1749025794519},"updatedAt":{"$$date":1749025794519}}
-{"$$deleted":true,"_id":"RmVCC8tWwEbS1yx3"}
-{"$$deleted":true,"_id":"VTcAPnRWJCr1YjTG"}
+{"cidade":"Paris","pais":"França","observacoes":"Torre Eiffel","lat":0,"lon":0,"_id":"bTzqn4BZUkf0qVH0","createdAt":{"$$date":1749012460280},"updatedAt":{"$$date":1749012460280}}
+{"cidade":"teste","pais":"teste","observacoes":"","lat":0,"lon":0,"_id":"jIn4HY3H7ot6PYMs","createdAt":{"$$date":1749012662036},"updatedAt":{"$$date":1749012662036}}
+{"cidade":"Berlim","pais":"Alemanha","observacoes":"Muro de Berlim","lat":0,"lon":0,"_id":"ukqRr2UWe8wbZqWt","createdAt":{"$$date":1749012470656},"updatedAt":{"$$date":1749012470656}}
+{"$$deleted":true,"_id":"P025t4aynFm5RucF"}
+{"cidade":"Curitiba","pais":"Brasil","observacoes":"Jardim Botânico","lat":-25.443093,"lon":-49.240636,"_id":"eT0k2Fun7Uthovp0","createdAt":{"$$date":1749072217220},"updatedAt":{"$$date":1749072217220}}
+{"cidade":"Ponta Grossa","pais":"Brasil","observacoes":"Rua Coronel Francisco Ribas, 1162","lat":-25.08379,"lon":-50.163896,"_id":"paC2UvyWIzFx7fmq","createdAt":{"$$date":1749072406454},"updatedAt":{"$$date":1749072406454}}
