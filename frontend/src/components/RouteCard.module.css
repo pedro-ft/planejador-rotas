@@ -1,0 +1,128 @@
+.routeCard {
+    background-color: #3b4252;
+    color: #d8dee9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease-in-out;
+    display: flex; 
+    flex-direction: column; 
+}
+
+.routeCard:hover {
+    transform: translateY(-3px);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #4c566a;
+    padding-bottom: 10px;
+}
+
+.routeName {
+    margin: 0;
+    font-size: 1.6em; 
+    color: #eceff4;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actionButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.actionIcon {
+    width: 22px;
+    height: 22px;
+}
+
+.destinationsSection {
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.destinationsTitle {
+    font-size: 0.95em;
+    color: #d8dee9;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.destinationsList {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 0.95em;
+    overflow-y: auto;
+    position: relative; 
+}
+
+.destinationsList li {
+    padding: 4px 0;
+    position: relative;
+}
+.destinationsList li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.destinationsList li::before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    border: 2px solid #3b4252; 
+    z-index: 2;
+}
+.destinationsList li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 5px; 
+    top: calc(50%);
+    width: 2px;
+    height: calc(100%);
+    background-color: #8690a3; 
+    z-index: 1;
+}
+
+.destinationDetail {
+    font-size: 0.85em;
+    color: #a3be8c;
+    margin-left: 5px;
+}
+
+.summarySection {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #eceff4;
+    border-top: 1px solid #4c566a;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.summaryIcon {
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+    vertical-align: top;
+}
+
+.creationDate {
+    font-size: 0.8em;
+    color: #d8dee9;
+    text-align: right;
+    margin-top: 10px;
+}

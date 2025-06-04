@@ -1,0 +1,92 @@
+.appHeader {
+    background-color: #3b4252;
+    color: #eceff4;
+    padding: 1.5rem 2rem;
+    max-width: 1280px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    position: fixed;
+    top: 1rem;          
+    left: 15%;         
+    right: 15%;        
+    z-index: 1000;  
+}
+
+.logoArea {
+    display: flex;
+    align-items: center;
+}
+
+.logoIcon {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+}
+
+.logoText {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #eceff4;
+    text-decoration: none;
+}
+
+.navActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.buttonLink {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+    font-size: 15px;
+}
+
+.buttonLink .icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 0.5rem;
+}
+
+.listarRotasBtn {
+    background-color: #5e81ac;
+}
+
+.listarRotasBtn:hover {
+    background-color: #81a1c1;
+}
+
+.novaRotaBtn {
+    background-color: #a3be8c;
+}
+
+.novaRotaBtn:hover {
+    background-color: #b4d0a0;
+}
+
+.userInfo {
+    font-size: 15px;
+    color: #d8dee9;
+    align-items: center;
+    display: flex;
+}
+
+.userIcon {
+    width: 22px;
+    height: 22px;
+    margin-right: 0.5rem;
+}
+
+.groupActions {
+    display: flex;
+    gap: 2rem;
+}

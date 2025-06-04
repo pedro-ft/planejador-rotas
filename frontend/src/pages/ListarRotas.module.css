@@ -1,0 +1,51 @@
+.listarRotasPageContainer {
+    max-width: 1280px; 
+    margin: 0 auto;    
+}
+
+.pageTitle {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    color: #eceff4; 
+    font-size: 2rem;
+}
+
+.rotasGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 25px;
+}
+
+.loadingMessage,
+.errorMessage,
+.noRotasMessage {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.1em;
+}
+
+.loadingMessage {
+    color: #eceff4;
+}
+
+.errorMessage {
+    color: #bf616a;
+    background-color: #4c566a20;
+    border: 1px solid #bf616a;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.noRotasMessage {
+    color: #d8dee9;
+}
+
+.noRotasMessage a {
+    color: #88c0d0;
+    text-decoration: underline;
+}
+
+.noRotasMessage a:hover {
+    color: #8fbcbb;
+}

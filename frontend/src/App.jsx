@@ -3,11 +3,13 @@ import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import NovaRota from './pages/NovaRota';
 import ListarRotas from './pages/ListarRotas';
+import Header from './components/Header/Header';
 
 function App() {
     return (
         <div className="App">
-            <main style={{padding: '0 20px'}}>
+            <Header />
+            <main className="main">
                 <Routes>
                     <Route path="/" element={<ListarRotas />} />
                     <Route path="/rotas" element={<ListarRotas />} />
