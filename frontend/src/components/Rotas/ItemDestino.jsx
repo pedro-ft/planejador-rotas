@@ -4,32 +4,44 @@ import setaCima from '../../assets/setaCima.svg'
 import setaBaixo from '../../assets/setaBaixo.svg'
 import excluirIcon from '../../assets/excluirIcon.svg'
 
-function ItemDestino({ destino, aoDeletar, aoReordenarCima, aoReordenarBaixo }) {
+function ItemDestino({ destino, aoDeletar, aoReordenarCima, aoReordenarBaixo, index, totalDestinos }) {
     if (!destino || !destino._id) {
         return null; 
     }
 
+    const podeMoverParaCima = index > 0;
+    const podeMoverParaBaixo = index < totalDestinos - 1;
+
     return (
     <li className={styles.itemDestino}>
             <div className={styles.destinoInfo}>
-                <span className={styles.destinoNome}>{destino.nome || destino.cidade || 'Nome não disponível'}</span><span className={styles.destinoNome}>{destino.pais || 'Nome não disponível'}</span>
-                <span className={styles.destinoSubtitulo}>{destino.endereco || destino.observacoes || '(Sem detalhes adicionais)'}</span>
+                <span className={styles.destinoNome}>Cidade: {destino.cidade || 'Nome não disponível'}</span>
+                <span className={styles.destinoNome}>País: {destino.pais || 'Pais não disponível'}</span>
+                <span className={styles.destinoSubtitulo}>Endereço: {destino.observacoes || '(Sem detalhes adicionais)'}</span>
             </div>
             <div className={styles.itemActions}>
-                <img 
-                    src={setaCima} 
-                    alt="Reordenar para Cima" 
-                    className={styles.actionIcon} 
-                    onClick={() => aoReordenarCima && aoReordenarCima(destino._id)} 
-                    title="Mover para cima"
-                />
-                <img 
-                    src={setaBaixo} 
-                    alt="Reordenar para Baixo" 
-                    className={styles.actionIcon} 
-                    onClick={() => aoReordenarBaixo && aoReordenarBaixo(destino._id)}
-                    title="Mover para baixo"
-                />
+                {podeMoverParaCima ? (
+                    <img 
+                        src={setaCima} 
+                        alt="Reordenar para Cima" 
+                        className={styles.actionIcon} 
+                        onClick={() => aoReordenarCima && aoReordenarCima(destino._id)} 
+                        title="Mover para cima"
+                    />
+                ) : (
+                    <span style={{ width: '20px', height: '20px', marginRight: '12px' }}></span> // Espaçador para alinhar
+                )}
+                {podeMoverParaBaixo ? (
+                    <img 
+                        src={setaBaixo} 
+                        alt="Reordenar para Baixo" 
+                        className={styles.actionIcon} 
+                        onClick={() => aoReordenarBaixo && aoReordenarBaixo(destino._id)}
+                        title="Mover para baixo"
+                    />
+                ) : (
+                    <span style={{ width: '20px', height: '20px', marginRight: '12px' }}></span> // Espaçador para alinhar
+                )}                
                 <img 
                     src={excluirIcon} 
                     alt="Excluir Destino" 

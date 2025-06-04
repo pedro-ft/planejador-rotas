@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemDestino from './ItemDestino'
 
-function ListaDestinos({ destinos, aoDeletar }) {
+function ListaDestinos({ destinos, aoDeletar, aoMoverParaCima, aoMoverParaBaixo }) {
     return (
         <div style={{ marginBottom: '30px', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
             <h3>Destinos da Rota ({destinos.length})</h3>
@@ -9,11 +9,15 @@ function ListaDestinos({ destinos, aoDeletar }) {
                 <p>Nenhum destino adicionado ainda.</p>
             ) : (
                 <ul>
-                    {destinos.map(destino => (
+                    {destinos.map((destino, index) => (
                         <ItemDestino 
                             key={destino._id} 
                             destino={destino} 
                             aoDeletar={aoDeletar} 
+                            aoReordenarCima={aoMoverParaCima}     
+                            aoReordenarBaixo={aoMoverParaBaixo} 
+                            index={index}    
+                            totalDestinos={destinos.length}
                         />
                     ))}
                 </ul>

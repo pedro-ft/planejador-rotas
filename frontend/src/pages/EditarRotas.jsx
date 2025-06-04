@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getRotaPorId, atualizarRota, criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino } from '../services/apiClient';
-import styles from './EditarRotas.module.css'; // Importar o CSS Module da página
+import styles from './EditarRotas.module.css';
+
 import InputNome from '../components/Rotas/InputNome';
 import AdicionarDestino from '../components/Rotas/AdicionarDestino';
 import ListaDestinos from '../components/Rotas/ListaDestinos';
@@ -19,7 +20,6 @@ function EditarRotaPage() {
 
     useEffect(() => {
         const carregarDadosRota = async () => {
-            // ... (sua lógica de fetch existente) ...
             if (!idRota) return;
             setIsLoading(true);
             setError(null);
@@ -44,14 +44,40 @@ function EditarRotaPage() {
 
     // ... (suas funções handleMudarNomeRota, handleAdicionarDestino, handleDeletarDestino - sem mudanças na lógica interna por enquanto) ...
     const handleMudarNomeRota = (novoNome) => setNomeRota(novoNome);
-    const handleAdicionarDestino = async (dadosFormularioDestino) => { /* ... sua lógica ... */ try { const r = await apiCriarDestino({cidade: dadosFormularioDestino.nome, pais: dadosFormularioDestino.pais, observacoes: dadosFormularioDestino.endereco}); setDestinosNaRota(d => [...d, r.data]);} catch(e){alert(e.message);}};
-    const handleDeletarDestino = async (idDoDestinoParaRemover) => { /* ... sua lógica ... */ if(!window.confirm("Remover este destino da rota?")) return; setDestinosNaRota(d => d.filter(dest => dest._id !== idDoDestinoParaRemover)); };
+    const handleAdicionarDestino = async (dadosFormularioDestino) => { /* ... sua lógica ... */ try { const r = await apiCriarDestino({cidade: dadosFormularioDestino.nome, pais: dadosFormularioDestino.pais, observacoes: dadosFormularioDestino.observacoes}); setDestinosNaRota(d => [...d, r.data]);} catch(e){alert(e.message);}};
+    
+    const handleDeletarDestino = async (idDoDestinoParaRemover) => {
+        if (!window.confirm("Tem certeza que deseja remover este destino da rota E APAGÁ-LO PERMANENTEMENTE do sistema? Esta ação não pode ser desfeita.")) {
+            return;
+        }
+
+        try {
+            await apiDeletarDestino(idDoDestinoParaRemover); 
+            setDestinosNaRota(destinosAnteriores =>
+                destinosAnteriores.filter(destino => destino._id !== idDoDestinoParaRemover)
+            );
+
+            alert("Destino removido da rota e apagado do sistema com sucesso!");
+
+        } catch (error) {
+            console.error("Erro ao deletar destino:", error);
+            alert(`Erro ao tentar deletar o destino: ${error.message}. Verifique se ele ainda está na lista.`);
+        }
+    };
 
 
     const handleSalvarAlteracoes = async () => {
-        // ... (sua lógica existente para salvar) ...
         if (!nomeRota.trim()) { alert("O nome da rota não pode ser vazio."); return; }
-        const dadosRotaAtualizada = { nome: nomeRota, destinos: destinosNaRota };
+
+        const destinosAtualizadosParaApi = destinosNaRota.map(destino => ({
+            ...destino, // Mantém todos os outros campos do destino
+            nomeDaRotaPertencente: nomeRota // Define/atualiza para o nome da rota atual
+        }));
+         const dadosRotaAtualizada = {
+            nome: nomeRota,
+            destinos: destinosAtualizadosParaApi, 
+        };
+
         try {
             setIsLoading(true);
             const respostaApi = await atualizarRota(idRota, dadosRotaAtualizada);
@@ -78,6 +104,35 @@ function EditarRotaPage() {
         );
     }
 
+     const moverDestino = (idDoDestino, direcao) => {
+        setDestinosNaRota(destinosAtuais => {
+            const index = destinosAtuais.findIndex(d => d._id === idDoDestino);
+
+            if (index === -1) return destinosAtuais;
+
+            if (direcao === 'cima' && index === 0) return destinosAtuais;
+            if (direcao === 'baixo' && index === destinosAtuais.length - 1) return destinosAtuais;
+
+            const novosDestinos = [...destinosAtuais];
+            const destinoMovido = novosDestinos.splice(index, 1)[0];
+
+            if (direcao === 'cima') {
+                novosDestinos.splice(index - 1, 0, destinoMovido);
+            } else { // direcao === 'baixo'
+                novosDestinos.splice(index + 1, 0, destinoMovido);
+            }
+            return novosDestinos;
+        });
+    };
+
+    const handleMoverDestinoParaCima = (idDoDestino) => {
+        moverDestino(idDoDestino, 'cima');
+    };
+
+    const handleMoverDestinoParaBaixo = (idDoDestino) => {
+        moverDestino(idDoDestino, 'baixo');
+    };
+
     return (
         <div className={styles.paginaEditarRota}>
             <button className={styles.voltarButton} onClick={() => navigate('/')}>
@@ -100,7 +155,7 @@ function EditarRotaPage() {
             <div className={styles.sectionCard}>
                 {/* O ListaDestinosDaRota já tem um div wrapper, podemos passar o título como prop ou adicionar aqui */}
                 <h3 className={styles.sectionTitle}>Destinos da Rota ({destinosNaRota.length})</h3>
-                <ListaDestinos destinos={destinosNaRota} aoDeletar={handleDeletarDestino} />
+                <ListaDestinos destinos={destinosNaRota} aoDeletar={handleDeletarDestino} aoMoverParaCima={handleMoverDestinoParaCima}  aoMoverParaBaixo={handleMoverDestinoParaBaixo}/>
             </div>
 
             <div className={styles.sectionCard}>

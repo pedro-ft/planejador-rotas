@@ -11,3 +11,8 @@
 {"cidade":"testeDelete","pais":"Testabdo","observacoes":"","nomeDaRotaPertecente":"teste","lat":0,"lon":0,"_id":"0VYhBwhtB9zNRr8g","createdAt":{"$$date":1749020386524},"updatedAt":{"$$date":1749020386524}}
 {"$$deleted":true,"_id":"0VYhBwhtB9zNRr8g"}
 {"cidade":"Seattle","pais":"Estados Unidos","observacoes":"","lat":0,"lon":0,"_id":"WVK6slEL8BBmhspK","createdAt":{"$$date":1749022102746},"updatedAt":{"$$date":1749022102746}}
+{"cidade":"dsda","pais":"dsa","observacoes":"","nomeDaRotaPertecente":"","lat":0,"lon":0,"_id":"SYqpSg1iyhjVSP3H","createdAt":{"$$date":1749023604607},"updatedAt":{"$$date":1749023604607}}
+{"$$deleted":true,"_id":"SYqpSg1iyhjVSP3H"}
+{"cidade":"dsad","pais":"dsad","observacoes":"dsad","nomeDaRotaPertecente":"","lat":0,"lon":0,"_id":"RmVCC8tWwEbS1yx3","createdAt":{"$$date":1749025794519},"updatedAt":{"$$date":1749025794519}}
+{"$$deleted":true,"_id":"RmVCC8tWwEbS1yx3"}
+{"$$deleted":true,"_id":"VTcAPnRWJCr1YjTG"}

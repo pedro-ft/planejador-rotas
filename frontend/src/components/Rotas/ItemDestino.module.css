@@ -33,7 +33,6 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-    filter: invert(80%) sepia(10%) saturate(100%) hue-rotate(170deg) brightness(95%) contrast(85%); /* Para ícones cinza claro */
 }
 .actionIcon:hover {
     filter: invert(90%) sepia(10%) saturate(150%) hue-rotate(180deg) brightness(100%) contrast(90%); /* Mais claro no hover */
