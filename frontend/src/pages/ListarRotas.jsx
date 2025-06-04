@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import RouteCard from '../components/RouteCard'
 import styles from './ListarRotas.module.css'
+import { getRotas, deletarRota as apiDeletarRota } from '../services/apiClient';
 
 function ListarRotas() {
     const [rotas, setRotas] = useState([]);
@@ -12,13 +13,8 @@ function ListarRotas() {
         setIsLoading(true);
         setError(null);
         try {
-            const response = await fetch('http://localhost:4000/api/rotas');
-            if (!response.ok) {
-                const erroData = await response.json().catch(() => ({}));
-                throw new Error(erroData.message || `Erro HTTP: ${response.status}`);
-            }
-            const data = await response.json();
-            setRotas(data.data || []);
+            const respostaApi = await getRotas();
+            setRotas(respostaApi.data || []); 
         } catch (err) {
             setError(err.message);
             console.error("Falha ao buscar rotas:", err);

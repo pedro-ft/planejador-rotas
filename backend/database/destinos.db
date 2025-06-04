@@ -6,3 +6,7 @@
 {"cidade":"teste","pais":"teste","observacoes":"","lat":0,"lon":0,"_id":"jIn4HY3H7ot6PYMs","createdAt":{"$$date":1749012662036},"updatedAt":{"$$date":1749012662036}}
 {"cidade":"dsad","pais":"dsad","observacoes":"","lat":0,"lon":0,"_id":"VTcAPnRWJCr1YjTG","createdAt":{"$$date":1749013443205},"updatedAt":{"$$date":1749013443205}}
 {"cidade":"dasdsa","pais":"dsadsad","observacoes":"dsadsa","lat":0,"lon":0,"_id":"4q4bM3X81OqdHwmG","createdAt":{"$$date":1749015043706},"updatedAt":{"$$date":1749015043706}}
+{"cidade":"Londres","pais":"Inglaterra","observacoes":"Big Bang","nomeDaRotaPertecente":"Viagem Escolar","lat":0,"lon":0,"_id":"M7nZkCMgIpBnQfjY","createdAt":{"$$date":1749020308987},"updatedAt":{"$$date":1749020308987}}
+{"cidade":"Nova York","pais":"Estados Unidos","observacoes":"Estatua da Liberdade","nomeDaRotaPertecente":"Viagem Escolar","lat":0,"lon":0,"_id":"GeoOknDIgjmz5f5I","createdAt":{"$$date":1749020327886},"updatedAt":{"$$date":1749020327886}}
+{"cidade":"testeDelete","pais":"Testabdo","observacoes":"","nomeDaRotaPertecente":"teste","lat":0,"lon":0,"_id":"0VYhBwhtB9zNRr8g","createdAt":{"$$date":1749020386524},"updatedAt":{"$$date":1749020386524}}
+{"$$deleted":true,"_id":"0VYhBwhtB9zNRr8g"}

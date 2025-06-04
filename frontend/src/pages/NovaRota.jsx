@@ -4,13 +4,12 @@ import InputNome from '../components/Rotas/InputNome';
 import AdicionarDestino from '../components/Rotas/AdicionarDestino';
 import ListaDestinos from '../components/Rotas/ListaDestinos';
 import ResumoRota from '../components/Rotas/ResumoRota';
-// import apiClient from '../services/api'; // Supondo um futuro arquivo para chamadas API
+import { criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, criarRota as apiCriarRota } from '../services/apiClient';
 
 // import './NovaRota.module.css';
 
 function NovaRota() {
     const navigate = useNavigate();
-
     const [nomeRota, setNomeRota] = useState('');
     const [destinosNaRota, setDestinosNaRota] = useState([]);
 
@@ -20,69 +19,28 @@ function NovaRota() {
         const dadosParaApi = {
             cidade: dadosNovoDestino.nome,
             pais: dadosNovoDestino.pais,
-            observacoes: dadosNovoDestino.endereco
+            observacoes: dadosNovoDestino.endereco,
+            nomeDaRotaPertecente: nomeRota
         };
 
         try {
-            const response = await fetch('http://localhost:4000/api/destinos', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dadosParaApi),
-            });
-
-            if (!response.ok) {
-                const erroData = await response.json();
-                throw new Error(erroData.message || `Erro HTTP: ${response.status}`);
-            }
-
-            const destinoSalvo = await response.json();
-
-            console.log("Destino salvo pela API:", destinoSalvo);
-            setDestinosNaRota(destinosAnteriores => [...destinosAnteriores, destinoSalvo.data]);
-
+            const respostaApi = await apiCriarDestino(dadosParaApi);
+            setDestinosNaRota(destinosAnteriores => [...destinosAnteriores, respostaApi.data]);
         } catch (error) {
-            console.error("Falha ao adicionar destino:", error);
             alert(`Erro ao adicionar destino: ${error.message}`);
         }
     };
 
     const handleDeletarDestino = async (idDoDestino) => {
-        console.log("Deletar destino ID:", idDoDestino);
-        
-    if (!window.confirm("Tem certeza que deseja excluir este destino?")) {
-        return;
-    }
-
-    try {
-        const response = await fetch(`http://localhost:4000/api/destinos/${idDoDestino}`, {
-            method: 'DELETE',
-        });
-
-        if (!response.ok) {
-            const erroData = await response.json();
-            throw new Error(erroData.message || `Erro HTTP: ${response.status}`);
-        }
-
-        const resultadoApi = await response.json(); 
-        console.log("Resposta da API ao deletar:", resultadoApi);
-
-        if (resultadoApi.data && resultadoApi.data.numRemoved > 0) {
+        if (!window.confirm("Tem certeza que deseja excluir este destino da rota atual?")) return;
+        try {
+            await apiDeletarDestino(idDoDestino);
             setDestinosNaRota(destinosAnteriores => 
                 destinosAnteriores.filter(destino => destino._id !== idDoDestino)
             );
-            alert("Destino excluído com sucesso!");
-        } else {
-            console.warn("Nenhum destino foi removido pela API, ou resposta inesperada:", resultadoApi);
-            alert("Destino não encontrado ou já havia sido removido.");
+        } catch (error) {
+            alert(`Erro ao deletar destino: ${error.message}`);
         }
-
-    } catch (error) {
-        console.error("Falha ao deletar destino:", error);
-        alert(`Erro ao deletar destino: ${error.message}`);
-    }
-
     };
 
     const handleMudarNomeRota = (novoNome) => {
@@ -90,46 +48,18 @@ function NovaRota() {
     };
     
     const handleSalvarRota = async () => {
-        if (!nomeRota.trim()) {
-            alert("Por favor, dê um nome para a sua rota antes de salvar.");
-            return;
-        }
-        if (destinosNaRota.length === 0) {
-            alert("Adicione pelo menos um destino à rota antes de salvar.");
-            return;
-        }
-
+        if (!nomeRota.trim() || destinosNaRota.length === 0) { return; }
         const dadosNovaRotaParaApi = {
             nome: nomeRota,
-            destinos: destinosNaRota
+            destinos: destinosNaRota 
         };
-
-        console.log("Enviando para POST /api/rotas:", dadosNovaRotaParaApi);
-
         try {
-            const response = await fetch('http://localhost:4000/api/rotas', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dadosNovaRotaParaApi),
-            });
-
-            if (!response.ok) {
-                const erroData = await response.json();
-                throw new Error(erroData.message || `Erro HTTP ao salvar rota: ${response.status}`);
-            }
-
-            const rotaSalva = await response.json();
-            console.log("Rota salva no backend:", rotaSalva.data);
-            alert(`Rota "${rotaSalva.data.nome}" salva com sucesso no backend!`);
-
+            const respostaApi = await apiCriarRota(dadosNovaRotaParaApi); // <<< Usar apiClient
+            alert(`Rota "${respostaApi.data.nome}" salva com sucesso no backend!`);
             setNomeRota('');
             setDestinosNaRota([]);
-
             navigate('/');
         } catch (error) {
-            console.error("Falha ao salvar a rota no backend:", error);
             alert(`Erro ao salvar rota: ${error.message}`);
         }
     };

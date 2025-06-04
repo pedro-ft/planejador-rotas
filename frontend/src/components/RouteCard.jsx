@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
+import { deletarRota as apiDeletarRota } from '../services/apiClient';
 import styles from './RouteCard.module.css';
 import editarIcon from '../assets/editarIcon.svg';
 import excluirIcon from '../assets/excluirIcon.svg';
@@ -25,13 +26,7 @@ function RouteCard({ rota, onRotaDeletada }) {
     const handleDelete = async () => {
         if (window.confirm(`Tem certeza que deseja excluir a rota "${rota.nome}"?`)) {
             try {
-                const response = await fetch(`http://localhost:4000/api/rotas/${rota._id}`, {
-                    method: 'DELETE',
-                });
-                if (!response.ok) {
-                    const erroData = await response.json().catch(() => ({}));
-                    throw new Error(erroData.message || `Erro ao deletar rota: ${response.status}`);
-                }
+                await apiDeletarRota(rota._id);
                 if (onRotaDeletada) {
                     onRotaDeletada(rota._id);
                 }
