@@ -45,9 +45,10 @@ async function request(endpoint, options = {}) {
 }
 
 export const getRotas = () => request('/rotas');
+export const getRotaPorId = (idRota) => request(`/rotas/${idRota}`); 
 export const criarRota = (dadosRota) => request('/rotas', { method: 'POST', body: JSON.stringify(dadosRota) });
 export const deletarRota = (idRota) => request(`/rotas/${idRota}`, { method: 'DELETE' });
-// Adicionar getRotaPorId(id), atualizarRota(id, dados) quando necessário
+export const atualizarRota = (idRota, dadosAtualizados) => request(`/rotas/${idRota}`, { method: 'PUT', body: JSON.stringify(dadosAtualizados) });
 
 // export const getDestinos = () => request('/destinos'); // Se precisarmos listar todos os destinos independentemente
 export const criarDestino = (dadosDestino) => request('/destinos', { method: 'POST', body: JSON.stringify(dadosDestino) });

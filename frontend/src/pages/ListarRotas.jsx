@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import RouteCard from '../components/RouteCard'
 import styles from './ListarRotas.module.css'
-import { getRotas, deletarRota as apiDeletarRota } from '../services/apiClient';
+import { getRotas} from '../services/apiClient';
 
 function ListarRotas() {
     const [rotas, setRotas] = useState([]);

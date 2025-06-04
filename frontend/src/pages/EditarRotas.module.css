@@ -1,0 +1,80 @@
+.paginaEditarRota {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #d8dee9; /* Cor de texto padrão para a página */
+}
+
+.voltarButton {
+    background: none;
+    border: none;
+    color: #88c0d0; /* Azul claro para links/ações */
+    cursor: pointer;
+    padding: 0;
+    font-size: 1em;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+}
+.voltarButton:hover {
+    color: #8fbcbb;
+}
+
+.pageTitle {
+    font-size: 2rem;
+    color: #eceff4;
+    margin-bottom: 30px;
+    text-align: left; /* Alinhado à esquerda como na imagem */
+}
+
+.sectionCard { /* Estilo base para cada "card" de seção */
+    background-color: #434c5e; /* Fundo dos cards internos */
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border: 1px solid #4c566a;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.sectionTitle { /* Título dentro de cada card, ex: "Adicionar Destino" */
+    font-size: 1.3rem;
+    color: #eceff4;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #4c566a;
+    padding-bottom: 10px;
+}
+
+.saveButtonContainer {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.saveButton {
+    padding: 12px 25px;
+    background-color: #a3be8c; /* Verde para salvar/atualizar */
+    color: #2e3440; /* Texto escuro para contraste no botão verde */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+.saveButton:hover {
+    background-color: #b4d0a0;
+}
+.saveButton:disabled {
+    background-color: #4c566a;
+    cursor: not-allowed;
+}
+
+.loadingMessage, .errorMessage {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.1em;
+    color: #d8dee9;
+}
+.errorMessage {
+    color: #bf616a;
+}

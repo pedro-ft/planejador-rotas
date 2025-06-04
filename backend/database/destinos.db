@@ -10,3 +10,4 @@
 {"cidade":"Nova York","pais":"Estados Unidos","observacoes":"Estatua da Liberdade","nomeDaRotaPertecente":"Viagem Escolar","lat":0,"lon":0,"_id":"GeoOknDIgjmz5f5I","createdAt":{"$$date":1749020327886},"updatedAt":{"$$date":1749020327886}}
 {"cidade":"testeDelete","pais":"Testabdo","observacoes":"","nomeDaRotaPertecente":"teste","lat":0,"lon":0,"_id":"0VYhBwhtB9zNRr8g","createdAt":{"$$date":1749020386524},"updatedAt":{"$$date":1749020386524}}
 {"$$deleted":true,"_id":"0VYhBwhtB9zNRr8g"}
+{"cidade":"Seattle","pais":"Estados Unidos","observacoes":"","lat":0,"lon":0,"_id":"WVK6slEL8BBmhspK","createdAt":{"$$date":1749022102746},"updatedAt":{"$$date":1749022102746}}

@@ -19,8 +19,7 @@ function RouteCard({ rota, onRotaDeletada }) {
     const distanciaEstimadaTotalKm = numeroDeTrechos * 15;
 
     const handleEdit = () => {
-        //navigate(`/rotas/editar/${rota._id}`);
-        alert("Funcionalidade de editar rota ainda não implementada.");
+        navigate(`/rotas/editar/${rota._id}`);
     };
 
     const handleDelete = async () => {

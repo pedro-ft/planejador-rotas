@@ -1,0 +1,22 @@
+.inputContainer {
+    /* O div wrapper já é estilizado como sectionCard no pai */
+}
+.label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500; /* Um pouco menos que bold */
+    color: #d8dee9;
+}
+.inputField {
+    width: 100%; /* Ocupa a largura do container pai */
+    padding: 12px 15px;
+    border: 1px solid #4c566a; /* Borda mais escura */
+    background-color: #2e3440; /* Fundo do input bem escuro */
+    color: #eceff4; /* Texto claro no input */
+    border-radius: 6px;
+    box-sizing: border-box; /* Para o padding não aumentar a largura total */
+    font-size: 1em;
+}
+.inputField::placeholder {
+    color: #a3be8c60;
+}
