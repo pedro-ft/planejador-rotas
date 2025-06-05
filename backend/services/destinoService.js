@@ -1,18 +1,13 @@
 const dbDestinos = require('../database/destinos.tabela');
-
 const ORS_API_KEY = process.env.ORS_API_KEY;
 
 const criarNovoDestino = (dadosDestino) => {
     return new Promise(async (resolve ,reject) => {
         if (!dadosDestino.cidade || !dadosDestino.cidade.trim()) {
-            const error = new Error("A cidade do destino é obrigatória.");
-            error.statusCode = 400;
-            return reject(error);
+            return reject({ message: "A cidade do destino é obrigatória.", statusCode: 400 });
         }
         if (!dadosDestino.pais || !dadosDestino.pais.trim()) {
-            const error = new Error("O país do destino é obrigatório.");
-            error.statusCode = 400;
-            return reject(error);
+            return reject({ message: "O país do destino é obrigatório.", statusCode: 400 });
         }
 
         let lat = 0;
@@ -29,12 +24,10 @@ const criarNovoDestino = (dadosDestino) => {
                 const geocodeData = await geocodeResponse.json();
 
                 if (!geocodeResponse.ok) {
-                    console.error("Erro da API ORS:", geocodeResponse.status, geocodeData);
                     const orsErrorMessage = geocodeData.error?.message || geocodeData.error || `Falha na comunicação com o serviço de geocodificação (status: ${geocodeResponse.status})`;
                     return reject({ statusCode: 502, message: `Serviço de geocodificação indisponível ou retornou um erro: ${orsErrorMessage}` });
                 }
                 if (!geocodeData.features || geocodeData.features.length === 0) {
-                    console.warn(`Geocodificação não encontrou coordenadas para "${enderecoTextual}".`);
                     return reject({ statusCode: 400, message: `Endereço não localizável: "${enderecoTextual}". Verifique os dados fornecidos.` });
                 }
                 
@@ -43,8 +36,7 @@ const criarNovoDestino = (dadosDestino) => {
                 lat = coordinates[1];
 
             } catch (geocodeError) {
-                console.error("Exceção durante a chamada de geocodificação para ORS:", geocodeError);
-                return reject({ statusCode: 503, message: `Falha ao conectar com o serviço de geocodificação: ${geocodeError.message}` }); // 503 Service Unavailable
+                return reject({ statusCode: 503, message: `Falha ao conectar com o serviço de geocodificação: ${geocodeError.message}` });
             }
         }
 
@@ -58,9 +50,7 @@ const criarNovoDestino = (dadosDestino) => {
 
         dbDestinos.insert(destinoParaSalvar, (err, novoDestinoSalvo) => {
             if (err) {
-                const error = new Error("Erro ao inserir destino no banco de dados.");
-                error.statusCode = 500;
-                return reject(error);
+                return reject({ message: "Erro ao inserir destino no banco de dados.", statusCode: 500 });
             }
             resolve(novoDestinoSalvo);
         });
@@ -71,9 +61,7 @@ const buscarTodos = () => {
     return new Promise((resolve, reject) => {
         dbDestinos.find({}).sort({ createdAt: -1}).exec((err, destinos) => {
             if(err){
-                const error = new Error("Erro ao buscar destinos no banco de dados.")
-                error.statusCode = 500
-                return reject(error)
+                return reject({ message: "Erro ao buscar destinos no banco de dados.", statusCode: 500 });
             }
             resolve(destinos)
         })
@@ -83,15 +71,11 @@ const buscarTodos = () => {
 const atualizarDestinoPorId = (id, dadosAtualizados) => {
     return new Promise((resolve, reject) => {
         if(!dadosAtualizados || Object.keys(dadosAtualizados).length === 0) {
-            const error = new Error("Nenhum dado foi fornecido")
-            error.statusCode = 400
-            return reject(error);
+            return reject({ message: "Nenhum dado foi fornecido para atualização.", statusCode: 400 });
         }
-        dbDestinos.update({ _id: id }, { $set: dadosAtualizados }, { returnUpdatedDocs: true }, (err, numAffected, affectedDocuments, upsert) => {
+        dbDestinos.update({ _id: id }, { $set: dadosAtualizados }, { returnUpdatedDocs: true }, (err, numAffected, affectedDocuments) => {
             if (err) {
-                const error = new Error("Erro ao atualizar destino no banco de dados.");
-                error.statusCode = 500; 
-                return reject(error);
+                return reject({ message: "Erro ao atualizar destino no banco de dados.", statusCode: 500 });
             }
             if (numAffected === 0) {
                 return resolve(null);
@@ -105,9 +89,7 @@ const deletarDestinoPorId = (id) => {
     return new Promise((resolve, reject) => {
         dbDestinos.remove({_id: id}, {}, (err, numRemoved) => {
             if (err) {
-                const error = new Error ("Erro ao excluir destino no banco de dados")
-                error.statusCode = 500
-                return reject(error)
+                return reject({ message: "Erro ao excluir destino no banco de dados.", statusCode: 500 });
             }
             resolve({numRemoved: numRemoved})
         })

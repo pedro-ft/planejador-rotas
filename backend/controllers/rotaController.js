@@ -4,7 +4,7 @@ const criarRota = async (req, res) => {
     try {
         const novaRota = await rotaService.criarNova(req.body);
         res.status(201).json({
-            message: "Rota criada com sucesso!",
+            message: "Rota criada com sucesso.",
             data: novaRota
         });
     } catch (error) {
@@ -60,7 +60,7 @@ const atualizarRota = async (req, res) => {
         }
 
         res.status(200).json({
-            message: "Rota atualizada com sucesso!",
+            message: "Rota atualizada com sucesso.",
             data: rotaAtualizada
         });
     } catch (error) {
@@ -97,16 +97,6 @@ const obterDetalhesRota = async (req, res) => {
         if (!coordenadas || !Array.isArray(coordenadas) || coordenadas.length < 2) {
             return res.status(400).json({ message: "Formato de coordenadas inválido ou insuficiente." });
         }
-
-        // Formatar as coordenadas se necessário (o ORS espera [longitude, latitude])
-        // Se seus objetos de destino têm { lat: ..., lon: ... }, você precisará mapeá-los
-        // antes de passar para rotaService.calcularDetalhesRotaExterna.
-        // Exemplo de como o frontend enviaria (e o controller receberia):
-        // [ { "lon": -46.6333, "lat": -23.5505 }, { "lon": -43.1729, "lat": -22.9068 } ]
-        // E o ORS precisa: [ [-46.6333, -23.5505], [-43.1729, -22.9068] ]
-
-        // Vamos assumir que o frontend já envia no formato [[lon, lat], [lon, lat]]
-        // Se não, a transformação seria feita aqui ou no service.
 
         const detalhes = await rotaService.calcularDetalhesRota(coordenadas);
 

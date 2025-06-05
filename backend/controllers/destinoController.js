@@ -4,7 +4,7 @@ const criarDestino = async (req, res) => {
     try{
         const novoDestino = await destinoService.criarNovoDestino(req.body)
          res.status(201).json({
-            message: "Destino criado com sucesso!",
+            message: "Destino criado com sucesso.",
             data: novoDestino
     })
     }catch(error){
@@ -18,12 +18,12 @@ const listarDestinos = async (req, res) => {
     try{
         const todosOsDestinos = await destinoService.buscarTodos();
         res.status(200).json({
-            message: "Destinos listados com sucesso!",
+            message: "Destinos listados com sucesso.",
             data: todosOsDestinos
         })
     }catch (error){
         res.status(error.statusCode || 500).json({
-            message: error.message || "Ocorreu um erro ao criar ao listar os destinos."
+            message: error.message || "Ocorreu um erro ao listar os destinos."
         })
     }
 }
@@ -57,7 +57,7 @@ const deletarDestino = async (req, res) => {
         const resultadoExclusao = await destinoService.deletarDestinoPorId(idDoDestino)
 
         if(resultadoExclusao.numRemoved === 0) {
-            return res.status(404).json({ message: "Destino não foi encontrado" })
+            return res.status(404).json({ message: "Destino não encontrado para exclusão." })
         }
         
         res.status(200).json({
