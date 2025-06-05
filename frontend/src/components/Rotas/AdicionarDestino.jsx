@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useId } from 'react';
+import styles from './AdicionarDestino.module.css'
 
-function AdicionarDestino({ aoAdicionar }) {
+function AdicionarDestino({ aoAdicionar, aoDispararAlerta }) {
     const [nomeDestino, setNomeDestino] = useState('');
     const [paisDestino, setPaisDestino] = useState('');
     const [enderecoDestino, setEnderecoDestino] = useState('');
 
+    const idNome = useId();
+    const idPais = useId();
+    const idEndereco = useId();
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!nomeDestino.trim() || !paisDestino.trim()) {
-            alert("Por favor, informe o nome do destino.");
+            if (aoDispararAlerta) {
+                aoDispararAlerta("Atenção", "Por favor, informe o nome da Cidade e o País.");
+            } else {
+                alert("Por favor, informe o Nome da Cidade e o País.");
+            }
             return;
         }
         aoAdicionar({
@@ -21,47 +30,44 @@ function AdicionarDestino({ aoAdicionar }) {
     };
 
     return (
-        <div style={{ marginBottom: '30px', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
-            <h3>Adicionar Destino</h3>
-            <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: '15px' }}>
-                    <label htmlFor="formInputNomeDestino" style={{ display: 'block', marginBottom: '5px' }}>Nome do Destino (Cidade)</label>
-                    <input
-                        type="text"
-                        id="formInputNomeDestino"
-                        value={nomeDestino}
-                        onChange={(e) => setNomeDestino(e.target.value)}
-                        placeholder="Ex: Ponto Turístico A, Cliente X"
-                        style={{ width: 'calc(100% - 20px)', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                    />
-                </div>
-                                <div style={{ marginBottom: '15px' }}>
-                    <label htmlFor="formInputPaisDestino" style={{ display: 'block', marginBottom: '5px' }}>País</label>
-                    <input
-                        type="text"
-                        id="formInputPaisDestino"
-                        value={paisDestino}
-                        onChange={(e) => setPaisDestino(e.target.value)}
-                        placeholder="Ex: Brasil, França"
-                        style={{ width: 'calc(100% - 20px)', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                    />
-                </div>
-                <div style={{ marginBottom: '15px' }}>
-                    <label htmlFor="formInputEnderecoDestino" style={{ display: 'block', marginBottom: '5px' }}>Endereço ou Coordenadas</label>
-                    <input
-                        type="text"
-                        id="formInputEnderecoDestino"
-                        value={enderecoDestino}
-                        onChange={(e) => setEnderecoDestino(e.target.value)}
-                        placeholder="Ex: Rua Exemplo, 123 ou -23.5505, -46.6333"
-                        style={{ width: 'calc(100% - 20px)', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                    />
-                </div>
-                <button type="submit" style={{ padding: '10px 15px', backgroundColor: '#5cb85c', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-                    + Adicionar Destino à Rota
-                </button>
-            </form>
-        </div>
+        <form onSubmit={handleSubmit} className={styles.formAdicionarDestino}>
+            <div className={styles.formGroup}>
+                <label htmlFor={idNome} className={styles.label}>Cidade</label>
+                <input
+                    type="text"
+                    id={idNome}
+                    value={nomeDestino}
+                    onChange={(e) => setNomeDestino(e.target.value)}
+                    placeholder="Ex: Salvador, Paris, Tóquio"
+                    className={styles.inputField}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label htmlFor={idPais} className={styles.label}>País</label>
+                <input
+                    type="text"
+                    id={idPais}
+                    value={paisDestino}
+                    onChange={(e) => setPaisDestino(e.target.value)}
+                    placeholder="Ex: Brasil, França, Japão"
+                    className={styles.inputField}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label htmlFor={idEndereco} className={styles.label}>Endereço ou Nome do Local</label>
+                <input
+                    type="text"
+                    id={idEndereco}
+                    value={enderecoDestino}
+                    onChange={(e) => setEnderecoDestino(e.target.value)}
+                    placeholder="Ex: Rua das Palmeiras, 123 ou Torre Eiffel"
+                    className={styles.inputField}
+                />
+            </div>
+            <button type="submit" className={styles.submitButton}>
+                + Adicionar Destino à Rota
+            </button>
+        </form>
     );
 }
 

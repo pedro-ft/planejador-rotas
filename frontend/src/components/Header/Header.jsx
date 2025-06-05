@@ -7,7 +7,7 @@ import iconeAdicionar from '../../assets/addIcon.svg';
 import userIcon from '../../assets/userIcon.svg'
 
 function Header() {
-    const nomeUsuario = "pedrotaborda"; // Pode vir de um estado/contexto no futuro
+    const nomeUsuario = "pedrotaborda";
 
     return (
         <header className={styles.appHeader}>

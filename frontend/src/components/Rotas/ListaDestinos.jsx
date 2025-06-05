@@ -1,28 +1,25 @@
 import React from 'react'
 import ItemDestino from './ItemDestino'
+import styles from './ListaDestinos.module.css';
 
 function ListaDestinos({ destinos, aoDeletar, aoMoverParaCima, aoMoverParaBaixo }) {
+    if (destinos.length === 0) {
+        return <p className={styles.listaVaziaMensagem}>Nenhum destino adicionado ainda.</p>;
+    }
     return (
-        <div style={{ marginBottom: '30px', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
-            <h3>Destinos da Rota ({destinos.length})</h3>
-            {destinos.length === 0 ? (
-                <p>Nenhum destino adicionado ainda.</p>
-            ) : (
-                <ul>
-                    {destinos.map((destino, index) => (
-                        <ItemDestino 
-                            key={destino._id} 
-                            destino={destino} 
-                            aoDeletar={aoDeletar} 
-                            aoReordenarCima={aoMoverParaCima}     
-                            aoReordenarBaixo={aoMoverParaBaixo} 
-                            index={index}    
-                            totalDestinos={destinos.length}
-                        />
-                    ))}
-                </ul>
-            )}
-        </div>
+        <ul className={styles.lista}>
+            {destinos.map((destino, index) => (
+                <ItemDestino 
+                    key={destino._id} 
+                    destino={destino} 
+                    aoDeletar={aoDeletar} 
+                    aoReordenarCima={aoMoverParaCima}     
+                    aoReordenarBaixo={aoMoverParaBaixo} 
+                    index={index}      
+                    totalDestinos={destinos.length}
+                />
+            ))}
+        </ul>
     );
 }
 

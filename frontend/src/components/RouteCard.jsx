@@ -8,7 +8,7 @@ import excluirIcon from '../assets/excluirIcon.svg';
 import tempoIcon from '../assets/tempoIcon.svg';
 import distanciaIcon from '../assets/distanciaIcon.svg';
 
-function RouteCard({ rota, onRotaDeletada }) {
+function RouteCard({ rota, onRotaDeletada, aoAbrirConfirmacao, aoAbrirAlerta }) {
     const navigate = useNavigate();
 
     if (!rota) return null;
@@ -25,18 +25,21 @@ function RouteCard({ rota, onRotaDeletada }) {
     };
 
     const handleDelete = async () => {
-        if (window.confirm(`Tem certeza que deseja excluir a rota "${rota.nome}"?`)) {
-            try {
-                await apiDeletarRota(rota._id);
-                if (onRotaDeletada) {
-                    onRotaDeletada(rota._id);
+        aoAbrirConfirmacao(
+            "Confirmar Exclusão de Rota",
+            `Tem certeza que deseja excluir a rota?`,
+            async () => {
+                try {
+                    await apiDeletarRota(rota._id);
+                    if (onRotaDeletada) {
+                        onRotaDeletada(rota._id);
+                    }
+                } catch (error) {
+                    console.error("Falha ao deletar rota:", error);
+                    aoAbrirAlerta("Erro na Exclusão", `Erro ao deletar rota: ${error.message}`);
                 }
-                alert(`Rota "${rota.nome}" excluída com sucesso!`);
-            } catch (error) {
-                console.error("Falha ao deletar rota:", error);
-                alert(`Erro ao deletar rota: ${error.message}`);
             }
-        }
+        )
     };
 
     return (
@@ -56,7 +59,7 @@ function RouteCard({ rota, onRotaDeletada }) {
             <div className={styles.destinationsSection}>
                 <p className={styles.destinationsTitle}>Destinos ({rota.destinos ? rota.destinos.length : 0}):</p>
                 <ul className={styles.destinationsList}>
-                    {rota.destinos && rota.destinos.slice(0, 3).map((destino, index) => (
+                    {rota.destinos && rota.destinos.slice(0, 5).map((destino, index) => (
                         <li key={destino._id || index}>
                             {destino.nome || destino.cidade}, {destino.pais}
                             {destino.observacoes ? <span className={styles.destinationDetail}> ({destino.observacoes})</span> : ''}

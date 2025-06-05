@@ -1,0 +1,41 @@
+.linhaResumo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    color: #eceff4; 
+}
+.iconeResumo {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+.statusCalculo { 
+    font-style: italic;
+    font-size: 0.9em;
+    color: #d8dee9;
+}
+.textoErro {
+    color: #bf616a;
+    font-weight: bold;
+}
+.segmentosContainer {
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+.segmentosTitulo {
+    font-weight: bold;
+    color: #eceff4;
+    margin-bottom: 5px;
+}
+.listaSegmentos {
+    list-style-type: none;
+    padding-left: 15px;
+}
+.itemSegmento {
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+}
+.itemSegmento span {
+    margin: 0 8px;
+}

@@ -1,5 +1,5 @@
 .appHeader {
-    background-color: #3b4252;
+    background-color: #434c5e;
     color: #eceff4;
     padding: 1.5rem 2rem;
     max-width: 1280px;
@@ -10,8 +10,9 @@
     border-radius: 10px;
     position: fixed;
     top: 1rem;          
-    left: 15%;         
-    right: 15%;        
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;     
     z-index: 1000;  
 }
 
@@ -33,6 +34,10 @@
     text-decoration: none;
 }
 
+.logoText:hover{
+    color: #eceff4;
+}
+
 .navActions {
     display: flex;
     align-items: center;
@@ -43,7 +48,7 @@
     padding: 0.6rem 1.2rem;
     border-radius: 6px;
     text-decoration: none;
-    color: white;
+    color: #eceff4;
     display: flex;
     align-items: center;
     font-weight: 500;
@@ -62,20 +67,22 @@
 }
 
 .listarRotasBtn:hover {
-    background-color: #81a1c1;
+    background-color: #3574b3;
+    color: #eceff4;
 }
 
 .novaRotaBtn {
-    background-color: #a3be8c;
+    background-color: #8dbb64;
 }
 
 .novaRotaBtn:hover {
-    background-color: #b4d0a0;
+    background-color: #70b63e;
+    color: #eceff4;
 }
 
 .userInfo {
     font-size: 15px;
-    color: #d8dee9;
+    color: #eceff4;
     align-items: center;
     display: flex;
 }

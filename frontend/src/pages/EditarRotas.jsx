@@ -2,23 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getRotaPorId, atualizarRota, criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, obterCalculoDetalhesRota } from '../services/apiClient';
 import styles from './EditarRotas.module.css';
-
 import InputNome from '../components/Rotas/InputNome';
 import AdicionarDestino from '../components/Rotas/AdicionarDestino';
 import ListaDestinos from '../components/Rotas/ListaDestinos';
 import ResumoRota from '../components/Rotas/ResumoRota';
+import Modal from '../components/Modal/Modal';
 
 function EditarRotaPage() {
     const { idRota } = useParams();
     const navigate = useNavigate();
-
     const [nomeRota, setNomeRota] = useState('');
     const [destinosNaRota, setDestinosNaRota] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [rotaOriginal, setRotaOriginal] = useState(null);
-
-
     const [previaDetalhes, setPreviaDetalhes] = useState(null);
     const [isLoadingPrevia, setIsLoadingPrevia] = useState(false);
     const [errorPrevia, setErrorPrevia] = useState(null);
@@ -51,6 +48,44 @@ function EditarRotaPage() {
         carregarDadosRota();
     }, [idRota]);
 
+        const [modalConfig, setModalConfig] = useState({
+            isOpen: false,
+            title: '',
+            message: '',
+            showConfirmButton: false,
+            onConfirm: null,
+            confirmText: "Confirmar",
+            cancelText: "Cancelar"
+        });
+    
+        const abrirAlerta = (title, message) => {
+            setModalConfig({
+                isOpen: true,
+                title: title,
+                message: message,
+                showConfirmButton: false, 
+                onConfirm: null,
+                cancelText: "OK"
+            });
+        };
+    
+        const abrirConfirmacao = (title, message, onConfirmCallback, confirmText = "Sim", cancelText = "Não") => {
+            setModalConfig({
+                isOpen: true,
+                title: title,
+                message: message,
+                showConfirmButton: true,
+                onConfirm: onConfirmCallback,
+                confirmText: confirmText,
+                cancelText: cancelText
+            });
+        };
+    
+        const fecharModal = () => {
+            setModalConfig(prev => ({ ...prev, isOpen: false, onConfirm: null })); // Limpa onConfirm
+        };
+    
+
     const invalidarPrevia = () => {
         setPreviaDetalhes(null);
         setErrorPrevia(null);
@@ -63,38 +98,40 @@ function EditarRotaPage() {
     const dadosParaApi = {
         cidade: dadosFormularioDestino.nome,
         pais: dadosFormularioDestino.pais,
-        observacoes: dadosFormularioDestino.endereco 
+        observacoes: dadosFormularioDestino.endereco, 
+        nomeDaRotaPertecente: nomeRota
     };
     try {
         const respostaApi = await apiCriarDestino(dadosParaApi);
         setDestinosNaRota(destinosAnteriores => [...destinosAnteriores, respostaApi.data]);
         invalidarPrevia();
-    } catch (e) {
-        alert(e.message);
-        console.error("Erro ao adicionar novo destino em EditarRotaPage:", e);
+    } catch (error) {
+         abrirAlerta("Erro", `Erro ao adicionar destino: ${error.message}`);
     }
 };
 
     
     const handleDeletarDestino = async (idDoDestinoParaRemover) => {
-        if (!window.confirm("Tem certeza que deseja remover este destino da rota E APAGÁ-LO PERMANENTEMENTE do sistema? Esta ação não pode ser desfeita.")) {
-            return;
-        }
-        try {
-            await apiDeletarDestino(idDoDestinoParaRemover); 
-            setDestinosNaRota(destinosAnteriores =>
-                destinosAnteriores.filter(destino => destino._id !== idDoDestinoParaRemover)
-            );
-            invalidarPrevia();
-        } catch (error) {
-            console.error("Erro ao deletar destino:", error);
-            alert(`Erro ao tentar deletar o destino: ${error.message}. Verifique se ele ainda está na lista.`);
-        }
+        abrirConfirmacao(
+            "Confirmar Exclusão",
+            "Tem certeza que deseja remover o destino  da rota?",
+            async () => {
+                try {
+                    await apiDeletarDestino(idDoDestinoParaRemover); 
+                    setDestinosNaRota(destinosAnteriores =>
+                        destinosAnteriores.filter(destino => destino._id !== idDoDestinoParaRemover)
+                    );
+                    invalidarPrevia();
+                } catch (error) {
+                    abrirAlerta("Erro na Exclusão", `Erro ao tentar deletar o destino: ${error.message}.`);
+                }
+            }
+        )   
     };
 
     const handleCalcularPrevia = async () => {
         if (destinosNaRota.length < 2) {
-            alert("Adicione pelo menos dois destinos para calcular a prévia da rota.");
+            abrirAlerta("Atenção", "Adicione pelo menos dois destinos para calcular a prévia da rota.");
             return;
         }
         const coordenadasParaCalculo = destinosNaRota.map(d => {
@@ -120,7 +157,10 @@ function EditarRotaPage() {
 
 
     const handleSalvarAlteracoes = async () => {
-        if (!nomeRota.trim()) { alert("O nome da rota não pode ser vazio."); return; }
+        if (!nomeRota.trim()) { 
+            abrirAlerta("Atenção", "O nome da rota não pode ser vazio."); 
+            return; 
+        }
 
         const destinosAtualizadosParaApi = destinosNaRota.map(destino => ({
             ...destino, 
@@ -133,11 +173,10 @@ function EditarRotaPage() {
         try {
             setIsLoading(true);
             const respostaApi = await atualizarRota(idRota, dadosRotaAtualizada);
-            alert(`Rota "${respostaApi.data.nome}" atualizada com sucesso!`);
             navigate('/');
         } catch (error) {
             console.error("Erro ao atualizar rota:", error);
-            alert(`Erro ao atualizar rota: ${error.message}`);
+            abrirAlerta("Erro ao Atualizar", `Erro ao atualizar rota: ${error.message}`);
         } finally {
             setIsLoading(false);
         }
@@ -196,10 +235,13 @@ function EditarRotaPage() {
 
     return (
         <div className={styles.paginaEditarRota}>
-            <button className={styles.voltarButton} onClick={() => navigate('/')}>
-                &larr; Voltar para Lista
-            </button>
-            <h2 className={styles.pageTitle}>Editar Rota</h2>
+            <div className={styles.pageHeaderContainer}>
+                <button className={styles.voltarButton} onClick={() => navigate('/')}>
+                    &larr; Voltar para Lista
+                </button>
+                <h2 className={styles.pageTitle}>Editar Rota</h2>
+            </div>
+
             <div className={styles.sectionCard}>
                 <h3 className={styles.sectionTitle}>Nome da Rota</h3>
                 <InputNome valor={nomeRota} aoMudar={handleMudarNomeRota} />
@@ -207,11 +249,10 @@ function EditarRotaPage() {
 
             <div className={styles.sectionCard}>
                 <h3 className={styles.sectionTitle}>Adicionar Destino</h3>
-                <AdicionarDestino aoAdicionar={handleAdicionarDestino} /> 
+                <AdicionarDestino aoAdicionar={handleAdicionarDestino} aoDispararAlerta={abrirAlerta}/> 
             </div>
 
             <div className={styles.sectionCard}>
-                {/* O ListaDestinosDaRota já tem um div wrapper, podemos passar o título como prop ou adicionar aqui */}
                 <h3 className={styles.sectionTitle}>Destinos da Rota ({destinosNaRota.length})</h3>
                 <ListaDestinos destinos={destinosNaRota} aoDeletar={handleDeletarDestino} aoMoverParaCima={handleMoverDestinoParaCima}  aoMoverParaBaixo={handleMoverDestinoParaBaixo}/>
             </div>
@@ -224,27 +265,41 @@ function EditarRotaPage() {
                     error={errorPrevia}         
                     numDestinosNaRotaAtual={destinosNaRota.length}
                 />
-                {destinosNaRota.length >= 2 && (
+                <div className={styles.ButtonContainer}>
+                    {destinosNaRota.length >= 2 && (
+                        <button 
+                            onClick={handleCalcularPrevia} 
+                            disabled={isLoadingPrevia}
+                            className={styles.calcularPreviaButton}
+                        >
+                            {isLoadingPrevia ? 'Calculando Prévia...' : 'Calcular Prévia Detalhada'}
+                        </button>
+                    )}
                     <button 
-                        onClick={handleCalcularPrevia} 
-                        disabled={isLoadingPrevia}
-                        // className={styles.calcularPreviaButton}
-                        style={{ marginTop: '15px', padding: '10px 15px', backgroundColor: '#88c0d0', /* ... */ }}
+                        onClick={handleSalvarAlteracoes} 
+                        disabled={isLoading}
+                        className={styles.saveButton}
                     >
-                        {isLoadingPrevia ? 'Calculando Prévia...' : 'Calcular Prévia Detalhada'}
+                        {isLoading ? 'Atualizando...' : 'Atualizar Rota'}
                     </button>
-                )}
+                </div>
             </div>
-
-            <div className={styles.saveButtonContainer}>
-                <button 
-                    onClick={handleSalvarAlteracoes} 
-                    disabled={isLoading}
-                    className={styles.saveButton}
-                >
-                    {isLoading ? 'Atualizando...' : 'Atualizar Rota'}
-                </button>
-            </div>
+            <Modal 
+                isOpen={modalConfig.isOpen}
+                onClose={() => {
+                    if (modalConfig.onCloseAction) {
+                        modalConfig.onCloseAction();
+                    }
+                    fecharModal(); 
+                }}
+                title={modalConfig.title}
+                showConfirmButton={modalConfig.showConfirmButton}
+                onConfirm={modalConfig.onConfirm}
+                confirmText={modalConfig.confirmText}
+                cancelText={modalConfig.cancelText}
+            >
+                <p>{modalConfig.message}</p>
+            </Modal>
         </div>
     );
 }

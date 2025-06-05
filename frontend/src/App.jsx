@@ -1,10 +1,11 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import './App.css';
 import NovaRota from './pages/NovaRota';
 import ListarRotas from './pages/ListarRotas';
 import EditarRotas from './pages/EditarRotas';
 import Header from './components/Header/Header';
+import NotFound from './pages/NotFound';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     <Route path="/rotas" element={<ListarRotas />} />
                     <Route path="/rotas/nova" element={<NovaRota />} /> 
                     <Route path="/rotas/editar/:idRota" element={<EditarRotas />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
         </div>

@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('OO servidor backend está funcionando')
+  res.send('O servidor backend está funcionando.')
 });
 
 app.use('/api/destinos', destinosRoutes)

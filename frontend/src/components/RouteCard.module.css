@@ -1,6 +1,6 @@
 .routeCard {
     background-color: #3b4252;
-    color: #d8dee9;
+    color: #eceff4;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
@@ -24,7 +24,7 @@
 
 .routeName {
     margin: 0;
-    font-size: 1.6em; 
+    font-size: 2em; 
     color: #eceff4;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .destinationsTitle {
-    font-size: 0.95em;
+    font-size: 1em;
     color: #d8dee9;
     margin-bottom: 8px;
     margin-top: 8px;
@@ -60,13 +60,13 @@
 .destinationsList {
     list-style-type: none;
     padding-left: 0;
-    font-size: 0.95em;
+    font-size: 1em;
     overflow-y: auto;
     position: relative; 
 }
 
 .destinationsList li {
-    padding: 4px 0;
+    padding: 4px 0 4px 25px;
     position: relative;
 }
 .destinationsList li:last-child {
@@ -145,28 +145,21 @@
 }
 .segmentsList li {
     margin-bottom: 4px;
-    display: flex; /* Para alinhar ícones com texto */
+    display: flex; 
     align-items: center;
 }
-.inlineSummaryIcon { /* Ícones menores para os segmentos */
+.inlineSummaryIcon { 
     width: 14px;
     height: 14px;
     margin-right: 4px;
-    margin-left: 8px; /* Espaço antes do ícone no trecho */
+    margin-left: 8px;
     vertical-align: middle;
-    filter: invert(90%) sepia(10%) saturate(150%) hue-rotate(180deg) brightness(100%) contrast(90%);
-}
-.segmentsList li:first-child .inlineSummaryIcon:first-of-type { /* Remove margem esquerda do primeiro ícone no primeiro trecho */
-    margin-left: 0;
 }
 
-
-/* ESTILO PARA MENSAGEM DE ERRO NO CÁLCULO */
 .calculationError {
     font-size: 0.85em;
-    color: #ebcb8b; /* Cor de aviso (amarelo do Nord) */
-    margin-top: 10px;
-    padding: 8px;
-    background-color: #4c566a40;
-    border-left: 3px solid #ebcb8b;
+    color: #eceff481;
+    margin-top: 15px;
+    padding: 10px;
+    font-style: italic;
 }

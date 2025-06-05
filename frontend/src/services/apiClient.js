@@ -11,7 +11,6 @@ async function request(endpoint, options = {}) {
 
     const defaultHeaders = {
         'Content-Type': 'application/json',
-        // No futuro, se tiver autenticação, o token iria aqui:
         // 'Authorization': `Bearer ${seuTokenDeAutenticacao}`,
     };
 

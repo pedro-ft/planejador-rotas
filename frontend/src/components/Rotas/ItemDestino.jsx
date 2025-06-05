@@ -29,7 +29,7 @@ function ItemDestino({ destino, aoDeletar, aoReordenarCima, aoReordenarBaixo, in
                         title="Mover para cima"
                     />
                 ) : (
-                    <span style={{ width: '20px', height: '20px', marginRight: '12px' }}></span> // Espaçador para alinhar
+                    <span style={{ width: '20px', height: '20px'}}></span>
                 )}
                 {podeMoverParaBaixo ? (
                     <img 
@@ -40,7 +40,7 @@ function ItemDestino({ destino, aoDeletar, aoReordenarCima, aoReordenarBaixo, in
                         title="Mover para baixo"
                     />
                 ) : (
-                    <span style={{ width: '20px', height: '20px', marginRight: '12px' }}></span> // Espaçador para alinhar
+                    <span style={{ width: '20px', height: '20px'}}></span>
                 )}                
                 <img 
                     src={excluirIcon} 

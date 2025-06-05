@@ -1,17 +1,15 @@
-{"cidade":"Florianópolis","pais":"Brasil","observacoes":"Canasvieiras","lat":-27.446967,"lon":-48.509809,"_id":"6a7pp1fgSfwzVpQR","createdAt":{"$$date":1749098092196},"updatedAt":{"$$date":1749098092196}}
-{"cidade":"Fortaleza","pais":"Brasil","observacoes":"","lat":-3.739272,"lon":-38.539073,"_id":"6izpChGBknSaYd2N","createdAt":{"$$date":1749100398526},"updatedAt":{"$$date":1749100398526}}
-{"cidade":"Porto Velho","pais":"Brasil","observacoes":"","lat":-8.767546,"lon":-63.873493,"_id":"ANoMsOAbOlzcFm6Q","createdAt":{"$$date":1749102929565},"updatedAt":{"$$date":1749102929565}}
-{"cidade":"Manaus","pais":"Brasil","observacoes":"","lat":-3.011942,"lon":-59.979328,"_id":"AgZdTWpk4xTvznfy","createdAt":{"$$date":1749102943351},"updatedAt":{"$$date":1749102943351}}
-{"cidade":"Dortmund","pais":"Alemanha","observacoes":"Sigma Induna Park","lat":40.006396,"lon":-105.275507,"_id":"HReF4prdsVFmPDjf","createdAt":{"$$date":1749093176837},"updatedAt":{"$$date":1749093176837}}
-{"cidade":"Cuiaba","pais":"Brasil","observacoes":"","lat":-15.579321,"lon":-56.10009,"_id":"OVJkLo7pUdVOLcGI","createdAt":{"$$date":1749102921023},"updatedAt":{"$$date":1749102921023}}
-{"cidade":"Paris","pais":"França","observacoes":"Catedral de Notredame","lat":19.255816,"lon":-103.763066,"_id":"QE8kWJzMGvvzbrv3","createdAt":{"$$date":1749093222267},"updatedAt":{"$$date":1749093222267}}
-{"cidade":"São Paulo","pais":"Brasil","observacoes":"","lat":-23.570533,"lon":-46.663713,"_id":"Qc7iTg3DvRwooGBt","createdAt":{"$$date":1749096836145},"updatedAt":{"$$date":1749096836145}}
-{"cidade":"Florianópolis","pais":"Brasil","observacoes":"","lat":-27.595267,"lon":-48.541812,"_id":"cKIfg3lMje8NwyIK","createdAt":{"$$date":1749097430186},"updatedAt":{"$$date":1749097430186}}
-{"cidade":"Ponta Grossa","pais":"Brasil","observacoes":"Rua Coronel Francisco Ribas, 1162","lat":-25.08379,"lon":-50.163896,"_id":"erox8fDNdgK94FCq","createdAt":{"$$date":1749094050202},"updatedAt":{"$$date":1749094050202}}
-{"cidade":"Natal","pais":"Brasil","observacoes":"","lat":-5.803737,"lon":-35.218408,"_id":"iJGBYb3G45VZlJ0w","createdAt":{"$$date":1749100527186},"updatedAt":{"$$date":1749100527186}}
-{"cidade":"Guaratuba","pais":"Brasil","observacoes":"","lat":-25.899199,"lon":-48.591948,"_id":"jrcMrjoVrJyRzUQY","createdAt":{"$$date":1749097383313},"updatedAt":{"$$date":1749097383313}}
-{"cidade":"Salvador","pais":"Brasil","observacoes":"","lat":-12.964413,"lon":-38.421936,"_id":"nZ9V5QeYKiDybJXy","createdAt":{"$$date":1749100391372},"updatedAt":{"$$date":1749100391372}}
-{"cidade":"Munique","pais":"Alemanha","observacoes":"Allianz Arena","lat":-6.209742,"lon":106.831468,"_id":"pAhDoN8F4Zprg8Qj","createdAt":{"$$date":1749093149178},"updatedAt":{"$$date":1749093149178}}
-{"cidade":"Lisboa","pais":"Portugal","observacoes":"","lat":38.748243,"lon":-9.140093,"_id":"pn4BFNOAQNm38pYG","createdAt":{"$$date":1749094493043},"updatedAt":{"$$date":1749094493043}}
-{"cidade":"Rio de Janeiro","pais":"Brasil","observacoes":"","lat":-22.935024,"lon":-43.518246,"_id":"sQ4BjTeRVYHNmSFo","createdAt":{"$$date":1749097169163},"updatedAt":{"$$date":1749097169163}}
-{"cidade":"Paris","pais":"França","observacoes":"","lat":48.858705,"lon":2.342865,"_id":"zrRcUSDoEGiYirRj","createdAt":{"$$date":1749094503261},"updatedAt":{"$$date":1749094503261}}
+{"cidade":"Foz do Iguaçu","pais":"Brasil","observacoes":"Usina Itaipu","lat":-25.511383,"lon":-54.550203,"_id":"BAHXhlBUQd3SS9DY","createdAt":{"$$date":1749125677891},"updatedAt":{"$$date":1749125677891}}
+{"$$deleted":true,"_id":"BAHXhlBUQd3SS9DY"}
+{"cidade":"Foz do Iguaçu","pais":"Brasil","observacoes":"Usina Itaipu","lat":-25.511383,"lon":-54.550203,"_id":"xwQRJMzVzFqSt2ol","createdAt":{"$$date":1749125713846},"updatedAt":{"$$date":1749125713846}}
+{"cidade":"Ponta Grossa","pais":"Brasil","observacoes":"Vila Velha","lat":-25.140907,"lon":-50.198765,"_id":"1z855VYuO6cgNFMW","createdAt":{"$$date":1749125727600},"updatedAt":{"$$date":1749125727600}}
+{"cidade":"Curitiba","pais":"Brasil","observacoes":"Arena da Baixada","lat":-25.459935,"lon":-49.280018,"_id":"dztX1YRAq0w5PVMa","createdAt":{"$$date":1749125744234},"updatedAt":{"$$date":1749125744234}}
+{"cidade":"Guaratuba","pais":"Brasil","observacoes":"","lat":-25.899199,"lon":-48.591948,"_id":"czD9F1g5XXSZ2Mg9","createdAt":{"$$date":1749125759286},"updatedAt":{"$$date":1749125759286}}
+{"cidade":"Morretes","pais":"Brasil","observacoes":"","lat":-25.474009,"lon":-48.83032,"_id":"LnyVMhRA8FNzxjZy","createdAt":{"$$date":1749125775410},"updatedAt":{"$$date":1749125775410}}
+{"cidade":"Piraí do Sul","pais":"Brasil","observacoes":"","lat":-24.535216,"lon":-49.937335,"_id":"tlsZcyUsHIyd6hAX","createdAt":{"$$date":1749125869202},"updatedAt":{"$$date":1749125869202}}
+{"cidade":"Salvador","pais":"Brasil","observacoes":"","lat":-12.964413,"lon":-38.421936,"_id":"mGE5zfFtu8RuiPPY","createdAt":{"$$date":1749125912757},"updatedAt":{"$$date":1749125912757}}
+{"cidade":"João Pesso","pais":"Brasil","observacoes":"","lat":-19.820744,"lon":-43.174408,"_id":"NThdyEeRvcW6y6m7","createdAt":{"$$date":1749125928254},"updatedAt":{"$$date":1749125928254}}
+{"cidade":"Barcelona","pais":"Espanha","observacoes":"","lat":41.400347,"lon":2.159592,"_id":"GDJqL9UZnJlGhMSM","createdAt":{"$$date":1749125997153},"updatedAt":{"$$date":1749125997153}}
+{"cidade":"Paris","pais":"França","observacoes":"Torre Eiffel","lat":48.857966,"lon":2.294501,"_id":"xLGcgTGqLmXmAMo5","createdAt":{"$$date":1749126011156},"updatedAt":{"$$date":1749126011156}}
+{"cidade":"Berlim","pais":"Alemanha","observacoes":"","lat":52.524932,"lon":13.407032,"_id":"kfBcPuQGE9RxgfFU","createdAt":{"$$date":1749126032337},"updatedAt":{"$$date":1749126032337}}
+{"cidade":"Moscou","pais":"Rússia","observacoes":"","lat":55.741469,"lon":37.615561,"_id":"XsLWo0Dq26HbNRy8","createdAt":{"$$date":1749126110027},"updatedAt":{"$$date":1749126110027}}
+{"cidade":"Kiev","pais":"Ucrânia","observacoes":"","lat":50.469863,"lon":30.431971,"_id":"l1eE24IicbhBS094","createdAt":{"$$date":1749126122280},"updatedAt":{"$$date":1749126122280}}

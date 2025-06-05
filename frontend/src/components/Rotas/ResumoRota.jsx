@@ -1,56 +1,58 @@
 import React from 'react';
 import { formatarDistancia, formatarDuracao } from '../../utils/formatacao.js'
+import styles from './ResumoRota.module.css'
+import iconeRelogio from '../../assets/tempoIcon.svg'
+import iconeDistancia from '../../assets/distanciaIcon.svg'
 
 function ResumoRota({ detalhesCalculados, isLoading, error, numDestinosNaRotaAtual }) {
-
-    let tempoDisplay = "-- min";
-    let distanciaDisplay = "-- km";
-    let segmentosDisplay = null;
-    let mensagemInformativa = null;
+    let conteudoPrincipal;
 
     if (isLoading) {
-        tempoDisplay = "Calculando...";
-        distanciaDisplay = "Calculando...";
+        conteudoPrincipal = (
+            <>
+                <p className={styles.linhaResumo}><img src={iconeRelogio} alt="Tempo" className={styles.iconeResumo} /> Tempo Total: Calculando...</p>
+                <p className={styles.linhaResumo}><img src={iconeDistancia} alt="Distância" className={styles.iconeResumo} /> Distância Total: Calculando...</p>
+            </>
+        );
     } else if (error) {
-        tempoDisplay = "Erro";
-        distanciaDisplay = "Erro";
+        conteudoPrincipal = <p className={styles.textoErro}>Falha ao calcular prévia: {error}</p>;
     } else if (detalhesCalculados && detalhesCalculados.total) {
-        tempoDisplay = formatarDuracao(detalhesCalculados.total.duracaoSegundos);
-        distanciaDisplay = formatarDistancia(detalhesCalculados.total.distanciaMetros);
-        
-        if (detalhesCalculados.segmentos && detalhesCalculados.segmentos.length > 0) {
-            segmentosDisplay = (
-                <div style={{marginTop: '10px', fontSize: '0.9em'}}>
-                    <strong>Trechos:</strong>
-                    <ul style={{listStyle: 'none', paddingLeft: '10px', maxHeight: '100px', overflowY: 'auto'}}>
-                        {detalhesCalculados.segmentos.map((seg, idx) => (
-                            <li key={idx} style={{display: 'flex', alignItems: 'center', marginBottom: '4px'}}>
-                                <span style={{minWidth: '70px'}}>Trecho {idx + 1}:</span>
-                                {formatarDistancia(seg.distanciaMetros)}
-                                <span style={{margin: "0 5px"}}>|</span>
-                                {formatarDuracao(seg.duracaoSegundos)}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            );
-        }
+        conteudoPrincipal = (
+            <>
+                <p className={styles.linhaResumo}>
+                    <img src={iconeRelogio} alt="Tempo" className={styles.iconeResumo} /> 
+                    Tempo Total: {formatarDuracao(detalhesCalculados.total.duracaoSegundos)}
+                </p>
+                <p className={styles.linhaResumo}>
+                    <img src={iconeDistancia} alt="Distância" className={styles.iconeResumo} /> 
+                    Distância Total: {formatarDistancia(detalhesCalculados.total.distanciaMetros)}
+                </p>
+                {detalhesCalculados.segmentos && detalhesCalculados.segmentos.length > 0 && (
+                    <div className={styles.segmentosContainer}>
+                        <strong className={styles.segmentosTitulo}>Trechos:</strong>
+                        <ul className={styles.listaSegmentos}>
+                            {detalhesCalculados.segmentos.map((seg, idx) => (
+                                <li key={idx} className={styles.itemSegmento}>
+                                    <span style={{minWidth: '70px'}}>Trecho {idx + 1}:</span>
+                                    <img src={iconeDistancia} alt="Distância" className={styles.iconeResumo} style={{width: '14px', height: '14px'}} /> {formatarDistancia(seg.distanciaMetros)}
+                                    <span>|</span>
+                                    <img src={iconeRelogio} alt="Tempo" className={styles.iconeResumo} style={{width: '14px', height: '14px'}} /> {formatarDuracao(seg.duracaoSegundos)}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </>
+        );
     } else if (numDestinosNaRotaAtual >= 2) {
-        mensagemInformativa = <p style={{fontStyle: 'italic', fontSize: '0.9em'}}>Clique em "Calcular Prévia Detalhada" para ver os totais.</p>;
+        conteudoPrincipal = <p className={styles.statusCalculo}>Clique em "Calcular Prévia Detalhada" para ver os totais.</p>;
     } else {
-        mensagemInformativa = <p style={{fontStyle: 'italic', fontSize: '0.9em'}}>Adicione pelo menos dois destinos para calcular a rota.</p>;
+        conteudoPrincipal = <p className={styles.statusCalculo}>Adicione pelo menos dois destinos para calcular a rota.</p>;
     }
 
     return (
-        <div>
-            <p>
-                Tempo Total: {tempoDisplay}
-            </p>
-            <p>
-                Distância Total: {distanciaDisplay}
-            </p>
-            {segmentosDisplay}
-            {mensagemInformativa}
+        <div className={styles.resumoContainer}>
+            {conteudoPrincipal}
         </div>
     );
 }

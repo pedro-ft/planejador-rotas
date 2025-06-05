@@ -1,0 +1,12 @@
+.lista {
+    list-style-type: none; 
+    padding-left: 0;      
+    margin-top: 0;        
+}
+
+.listaVaziaMensagem {
+    font-style: italic;
+    color: #eceff481; 
+    padding: 10px 0; 
+    text-align: center; 
+}

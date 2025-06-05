@@ -1,5 +1,5 @@
 .itemDestino {
-    background-color: #3b4252; /* Um pouco mais claro que o card principal da seção */
+    background-color: #2e3440; 
     padding: 12px 15px;
     margin-bottom: 10px;
     border-radius: 6px;
@@ -17,23 +17,20 @@
 .destinoNome {
     color: #eceff4;
     font-weight: 500;
-    display: block; /* Para o subtítulo ficar abaixo */
+    display: block; 
 }
 .destinoSubtitulo {
     font-size: 0.85em;
-    color: #a3be8c; /* Verde para o subtítulo/endereço */
+    color: #a3be8c; 
     display: block;
 }
 .itemActions {
     display: flex;
     align-items: center;
-    gap: 12px; /* Espaço entre os ícones de ação */
+    gap: 12px;
 }
-.actionIcon { /* Estilo para os ícones de seta e lixeira */
-    width: 20px;
-    height: 20px;
+.actionIcon {
+    width: 22px;
+    height: 22px;
     cursor: pointer;
-}
-.actionIcon:hover {
-    filter: invert(90%) sepia(10%) saturate(150%) hue-rotate(180deg) brightness(100%) contrast(90%); /* Mais claro no hover */
 }
