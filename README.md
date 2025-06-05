@@ -1,19 +1,17 @@
-#  маршрут (Marshrut) - Seu Planejador de Rotas de Viagem Inteligente  маршрут 🗺️✈️
+#   Seu Planejador de Rotas de Viagem Inteligente 
 
-Bem-vindo ao ** маршрут (Marshrut)** (Russo para "Rota")! Uma aplicação web completa desenvolvida para te ajudar a planejar suas viagens de forma eficiente e organizada. Crie rotas, adicione destinos, visualize distâncias, tempos de percurso e muito mais!
+Bem-vindo ao seu planejador de rotas, uma aplicação web completa desenvolvida para te ajudar a planejar suas viagens de forma eficiente e organizada. Crie rotas, adicione destinos, visualize distâncias, tempos de percurso e muito mais!
 
 ---
 
 ## 🌟 Funcionalidades Principais
-
-O ** маршрут ** oferece um conjunto robusto de funcionalidades para o planejamento de suas viagens:
 
 * **👤 Autenticação de Usuários:**
     * Sistema de registro com nome de usuário e senha.
     * Validação de senha (mínimo 6 caracteres, com letras e números).
     * Login seguro com uso de JSON Web Tokens (JWT) para gerenciamento de sessão.
     * Rotas da API protegidas, garantindo que cada usuário acesse apenas suas próprias informações.
-* ** маршрут Rotas de Viagem Personalizadas:**
+* ** Rotas de Viagem Personalizadas:**
     * Criação, listagem, edição e exclusão (CRUD completo) de rotas de viagem, associadas individualmente a cada usuário.
     * Interface intuitiva para nomear e gerenciar múltiplas rotas.
 * **📍 Gerenciamento Detalhado de Destinos:**
