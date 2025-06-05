@@ -1,0 +1,111 @@
+/* frontend/src/pages/AuthForm.module.css */
+.authPageContainer {
+    max-width: 450px; /* Um pouco mais de espaço se necessário */
+    margin: 60px auto; /* Aumenta a margem do topo */
+    padding: 30px 40px; /* Mais padding interno */
+    border: 1px solid #4c566a; /* Borda sutil do tema escuro */
+    border-radius: 10px;
+    background-color: #3b4252; /* Fundo escuro do tema Nord */
+    color: #eceff4; /* Texto claro */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.title {
+    text-align: center;
+    color: #eceff4;
+    border-bottom: 1px solid #4c566a;
+    padding-bottom: 15px;
+    margin-bottom: 30px; /* Mais espaço após o título */
+    font-size: 1.8rem; /* Tamanho do título */
+}
+
+.formGroup {
+    margin-bottom: 20px; /* Espaço entre os campos do formulário */
+}
+
+.label {
+    display: block;
+    margin-bottom: 8px; /* Espaço entre label e input */
+    color: #d8dee9;   /* Cor de label mais clara */
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.inputField {
+    width: 100%;
+    padding: 12px 15px; /* Padding um pouco maior nos inputs */
+    border-radius: 6px;
+    border: 1px solid #4c566a;
+    background-color: #2e3440; /* Fundo de input bem escuro */
+    color: #eceff4;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+.inputField::placeholder { /* Se você adicionar placeholders */
+    color: #d8dee9a0;
+}
+.inputField:focus {
+    outline: none;
+    border-color: #88c0d0; /* Cor de destaque Nord ao focar */
+    box-shadow: 0 0 0 2px #88c0d033;
+}
+
+.errorMessage {
+    color: #bf616a; /* Vermelho Nord para erros */
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    background-color: #4c566a33;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em; /* Fonte um pouco maior */
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+}
+.submitButton:disabled {
+    background-color: #4c566a !important; /* Garante que o estilo de desabilitado se aplique */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Cores específicas para botões de Login e Registro */
+.loginButton { /* Classe para o botão de login */
+    background-color: #5e81ac; /* Azul Nord */
+    color: #eceff4;
+}
+.loginButton:hover:not(:disabled) {
+    background-color: #81a1c1;
+}
+
+.registerButton { /* Classe para o botão de registro */
+    background-color: #a3be8c; /* Verde Nord */
+    color: #2e3440; /* Texto escuro para contraste com verde claro */
+}
+.registerButton:hover:not(:disabled) {
+    background-color: #b4d0a0;
+}
+
+
+.switchFormLinkContainer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 0.9em;
+    color: #d8dee9;
+}
+
+.switchFormLink {
+    color: #88c0d0; /* Azul claro Nord para o link */
+    text-decoration: underline;
+    cursor: pointer;
+}
+.switchFormLink:hover {
+    color: #8fbcbb;
+}

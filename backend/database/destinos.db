@@ -11,3 +11,22 @@
 {"cidade":"Piraí do Sul","pais":"Brasil","observacoes":"","lat":-24.535216,"lon":-49.937335,"_id":"tlsZcyUsHIyd6hAX","createdAt":{"$$date":1749125869202},"updatedAt":{"$$date":1749125869202}}
 {"cidade":"Paris","pais":"França","observacoes":"Torre Eiffel","lat":48.857966,"lon":2.294501,"_id":"xLGcgTGqLmXmAMo5","createdAt":{"$$date":1749126011156},"updatedAt":{"$$date":1749126011156}}
 {"cidade":"Foz do Iguaçu","pais":"Brasil","observacoes":"Usina Itaipu","lat":-25.511383,"lon":-54.550203,"_id":"xwQRJMzVzFqSt2ol","createdAt":{"$$date":1749125713846},"updatedAt":{"$$date":1749125713846}}
+{"cidade":"Paris","pais":"França","observacoes":"Museu do Louvre","lat":-18.429463,"lon":-49.198701,"_id":"9O7yPjwzG2sMOWow","createdAt":{"$$date":1749134569383},"updatedAt":{"$$date":1749134569383}}
+{"cidade":"Zurique","pais":"Suiça","observacoes":"","lat":-7.024002,"lon":-37.277776,"_id":"BW6dN1rdYIohxczA","createdAt":{"$$date":1749134600159},"updatedAt":{"$$date":1749134600159}}
+{"$$deleted":true,"_id":"9O7yPjwzG2sMOWow"}
+{"cidade":"Paris","pais":"França","observacoes":"Torre Eiffel","lat":48.857966,"lon":2.294501,"_id":"aOAhXiVTDi00ihJ5","createdAt":{"$$date":1749134642858},"updatedAt":{"$$date":1749134642858}}
+{"cidade":"Paris","pais":"França","observacoes":"Museu do Louvre","lat":-18.429463,"lon":-49.198701,"_id":"H668Aorjbd8rAbRI","createdAt":{"$$date":1749134666200},"updatedAt":{"$$date":1749134666200}}
+{"$$deleted":true,"_id":"H668Aorjbd8rAbRI"}
+{"$$deleted":true,"_id":"BW6dN1rdYIohxczA"}
+{"cidade":"Barcelona","pais":"Espanha","observacoes":"","lat":41.400347,"lon":2.159592,"_id":"7lXatLEYEuuZv2N0","createdAt":{"$$date":1749134705858},"updatedAt":{"$$date":1749134705858}}
+{"$$deleted":true,"_id":"aOAhXiVTDi00ihJ5"}
+{"cidade":"Barcelona","pais":"Espanha","observacoes":"","lat":41.400347,"lon":2.159592,"_id":"275UQqeaf73Lyzk2","createdAt":{"$$date":1749134728140},"updatedAt":{"$$date":1749134728140}}
+{"$$deleted":true,"_id":"275UQqeaf73Lyzk2"}
+{"cidade":"3124","pais":"5453","observacoes":"","lat":51.94809,"lon":4.379345,"_id":"RYG7qHforWRRVuud","createdAt":{"$$date":1749134752986},"updatedAt":{"$$date":1749134752986}}
+{"$$deleted":true,"_id":"RYG7qHforWRRVuud"}
+{"cidade":"Balneário Camboriu","pais":"Brasil","observacoes":"","lat":-27.022919,"lon":-48.598626,"_id":"nyTu0GCIyEfQjt3j","createdAt":{"$$date":1749134842836},"updatedAt":{"$$date":1749134842836}}
+{"$$deleted":true,"_id":"nyTu0GCIyEfQjt3j"}
+{"cidade":"Zurique","pais":"Suiça","observacoes":"","lat":-7.024002,"lon":-37.277776,"_id":"Qsdx3GOm2hD1uVU9","createdAt":{"$$date":1749134893755},"updatedAt":{"$$date":1749134893755}}
+{"$$deleted":true,"_id":"Qsdx3GOm2hD1uVU9"}
+{"cidade":"Zurique","pais":"Suica","observacoes":"","lat":47.373754,"lon":8.537087,"_id":"gToFzfaqCdArkyqR","createdAt":{"$$date":1749134904325},"updatedAt":{"$$date":1749134904325}}
+{"cidade":"Paris","pais":"França","observacoes":"Torre Eiffel","lat":48.857966,"lon":2.294501,"_id":"qZtiwwCsj6aYgqEg","createdAt":{"$$date":1749134958251},"updatedAt":{"$$date":1749134958251}}

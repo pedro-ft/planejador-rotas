@@ -1,4 +1,6 @@
 {"username":"pedroca","password":"$2b$10$59TfwsQyilrW7tkd3WD.uuwED8fezm3bzLk97d20Km3wrdV7a42hG","_id":"MvQ41aGO7GE0JTPG","createdAt":{"$$date":1749128077318},"updatedAt":{"$$date":1749128077318}}
 {"username":"pedro","password":"$2b$10$u1.xmA0ocbCvC5H0ynXgJ.pRquWl5xvMHjzDS3nSL20EcbUCannYq","_id":"ofVvtzZaSIDGydSw","createdAt":{"$$date":1749127189516},"updatedAt":{"$$date":1749127189516}}
-{"$$indexCreated":{"fieldName":"username","unique":true,"sparse":false}}
 {"username":"maressa","password":"$2b$10$/AyQKA7ofTmHhuqeWtr6cePvHJOdMydc5.si/SLdzoILlg7bTVBxe","_id":"rVxVAwWeOnfROSOn","createdAt":{"$$date":1749129336222},"updatedAt":{"$$date":1749129336222}}
+{"$$indexCreated":{"fieldName":"username","unique":true,"sparse":false}}
+{"username":"peterzin","password":"$2b$10$hox54XV2V7Z8x9BZrvKTy.oZqMdoBNb2nmc7qVNadcUpuUdQAENYG","_id":"C8eqUOHYgM1ZuUfj","createdAt":{"$$date":1749131217700},"updatedAt":{"$$date":1749131217700}}
+{"username":"erick","password":"$2b$10$.iSk2tTV3lkqd1EpyOdVBuM6ecO2lh.YiGqRbmWtJBymj6s9OOJ7.","_id":"8VaouzjJQ4PJhgjP","createdAt":{"$$date":1749134496261},"updatedAt":{"$$date":1749134496261}}

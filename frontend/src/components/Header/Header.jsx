@@ -1,13 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import styles from './Header.module.css';
 import iconeRotas from '../../assets/rotasIcon.svg';
 import iconeLista from '../../assets/listIcon.svg';
 import iconeAdicionar from '../../assets/addIcon.svg';
 import userIcon from '../../assets/userIcon.svg'
+import logoutIcon from '../../assets/logoutIcon.svg'
 
 function Header() {
-    const nomeUsuario = "pedrotaborda";
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
 
     return (
         <header className={styles.appHeader}>
@@ -28,8 +36,12 @@ function Header() {
                 </div>
                 <div className={styles.userInfo}>
                     <img src={userIcon} alt="Usuário" className={styles.userIcon} />
-                    {nomeUsuario}
+                    <span className={styles.buttonText}>{user? user.username : 'Carregando...' }</span>
                 </div>
+                    <button onClick={handleLogout} className={`${styles.buttonLink} ${styles.logoutButton}`} title="Sair">
+                    <img src={logoutIcon} alt="Sair" className={styles.icon} />
+                    <span className={styles.buttonText}>Sair</span>
+                </button>
             </div>
         </header>
     );

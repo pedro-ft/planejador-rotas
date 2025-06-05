@@ -56,6 +56,10 @@
     font-size: 15px;
 }
 
+.buttonText { 
+    display: inline;
+}
+
 .buttonLink .icon {
     width: 22px;
     height: 22px;
@@ -95,5 +99,13 @@
 
 .groupActions {
     display: flex;
+    align-items: center;
     gap: 2rem;
+}
+
+.logoutButton {
+    background-color: #bf616a; 
+}
+.logoutButton:hover {
+    background-color: #bd441f; 
 }
