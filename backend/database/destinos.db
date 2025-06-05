@@ -8,3 +8,11 @@
 {"$$deleted":true,"_id":"8XvVVraKifNuuJxZ"}
 {"cidade":"Lisboa","pais":"Portugal","observacoes":"","lat":38.748243,"lon":-9.140093,"_id":"pn4BFNOAQNm38pYG","createdAt":{"$$date":1749094493043},"updatedAt":{"$$date":1749094493043}}
 {"cidade":"Paris","pais":"França","observacoes":"","lat":48.858705,"lon":2.342865,"_id":"zrRcUSDoEGiYirRj","createdAt":{"$$date":1749094503261},"updatedAt":{"$$date":1749094503261}}
+{"cidade":"São Paulo","pais":"Brasil","observacoes":"","lat":-23.570533,"lon":-46.663713,"_id":"Qc7iTg3DvRwooGBt","createdAt":{"$$date":1749096836145},"updatedAt":{"$$date":1749096836145}}
+{"cidade":"Rio de Janeiro","pais":"Brasil","observacoes":"","lat":-22.935024,"lon":-43.518246,"_id":"bgaE4vx9WgLZhJus","createdAt":{"$$date":1749097110595},"updatedAt":{"$$date":1749097110595}}
+{"$$deleted":true,"_id":"bgaE4vx9WgLZhJus"}
+{"cidade":"Rio de Janeiro","pais":"Brasil","observacoes":"","lat":-22.935024,"lon":-43.518246,"_id":"5UlNdp2wxJhReOaW","createdAt":{"$$date":1749097152868},"updatedAt":{"$$date":1749097152868}}
+{"$$deleted":true,"_id":"5UlNdp2wxJhReOaW"}
+{"cidade":"Rio de Janeiro","pais":"Brasil","observacoes":"","lat":-22.935024,"lon":-43.518246,"_id":"sQ4BjTeRVYHNmSFo","createdAt":{"$$date":1749097169163},"updatedAt":{"$$date":1749097169163}}
+{"cidade":"teste","pais":"teste","observacoes":"","lat":22.70898,"lon":47.69526,"_id":"JUOKiazimD3D2SFL","createdAt":{"$$date":1749097186792},"updatedAt":{"$$date":1749097186792}}
+{"$$deleted":true,"_id":"JUOKiazimD3D2SFL"}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import { deletarRota as apiDeletarRota } from '../services/apiClient';
+import { formatarDistancia, formatarDuracao } from '../utils/formatacao';
 import styles from './RouteCard.module.css';
 import editarIcon from '../assets/editarIcon.svg';
 import excluirIcon from '../assets/excluirIcon.svg';
@@ -12,11 +13,12 @@ function RouteCard({ rota, onRotaDeletada }) {
 
     if (!rota) return null;
 
-    // Estimativa simples de tempo/distância (igual à de ResumoDaRota)
-    const numeroDeDestinos = rota.destinos ? rota.destinos.length : 0;
-    const numeroDeTrechos = numeroDeDestinos > 1 ? numeroDeDestinos - 1 : 0;
-    const tempoEstimadoTotalMinutos = numeroDeTrechos * 20;
-    const distanciaEstimadaTotalKm = numeroDeTrechos * 15;
+    const detalhesValidos = rota.detalhesCalculados && !rota.detalhesCalculados.error;
+    const totalCalculado = detalhesValidos ? rota.detalhesCalculados.total : null;
+    const segmentosCalculados = detalhesValidos ? rota.detalhesCalculados.segmentos : [];
+
+    const tempoDisplay = totalCalculado ? formatarDuracao(totalCalculado.duracaoSegundos) : null;
+    const distanciaDisplay = totalCalculado ? formatarDistancia(totalCalculado.distanciaMetros) : null;
 
     const handleEdit = () => {
         navigate(`/rotas/editar/${rota._id}`);
@@ -52,7 +54,7 @@ function RouteCard({ rota, onRotaDeletada }) {
             </div>
 
             <div className={styles.destinationsSection}>
-                <p className={styles.destinationsTitle}>Destinos ({numeroDeDestinos}):</p>
+                <p className={styles.destinationsTitle}>Destinos ({rota.destinos ? rota.destinos.length : 0}):</p>
                 <ul className={styles.destinationsList}>
                     {rota.destinos && rota.destinos.slice(0, 3).map((destino, index) => (
                         <li key={destino._id || index}>
@@ -60,18 +62,39 @@ function RouteCard({ rota, onRotaDeletada }) {
                             {destino.observacoes ? <span className={styles.destinationDetail}> ({destino.observacoes})</span> : ''}
                         </li>
                     ))}
-                    {numeroDeDestinos > 5 && <li>... e mais {numeroDeDestinos - 5}.</li>}
+                    {rota.destinos && rota.destinos.length > 5 && <li>... e mais {rota.destinos.length - 5}.</li>}
                 </ul>
             </div>
+
+            {detalhesValidos && segmentosCalculados && segmentosCalculados.length > 0 && (
+                <div className={styles.segmentsSection}>
+                    <p className={styles.segmentsTitle}>Trechos da Rota:</p>
+                    <ul className={styles.segmentsList}>
+                        {segmentosCalculados.map((segmento, index) => (
+                            <li key={index}>
+                                Trecho {index + 1}: 
+                                <img src={distanciaIcon} alt="Distância" className={styles.inlineSummaryIcon} /> {formatarDistancia(segmento.distanciaMetros)} 
+                                <span style={{margin: "0 5px"}}>|</span>
+                                <img src={tempoIcon} alt="Tempo" className={styles.inlineSummaryIcon} /> {formatarDuracao(segmento.duracaoSegundos)}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+            {rota.detalhesCalculados && rota.detalhesCalculados.error && (
+                <p className={styles.calculationError}>
+                    Aviso: Não foi possível calcular os detalhes da rota. Pois ela ultrapassou o limite de 6000km.
+                </p>
+            )}
 
             <div className={styles.summarySection}>
                 <span>
                     <img src={tempoIcon} alt="Tempo" className={styles.summaryIcon} />
-                    Tempo Total: {tempoEstimadoTotalMinutos} min
+                    Tempo Total: {tempoDisplay}
                 </span>
                 <span>
                     <img src={distanciaIcon} alt="Distância" className={styles.summaryIcon} />
-                    Distância Total: {distanciaEstimadaTotalKm} km
+                    Distância Total: {distanciaDisplay}
                 </span>
             </div>
             <div className={styles.creationDate}>
