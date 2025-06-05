@@ -4,7 +4,7 @@ import InputNome from '../components/Rotas/InputNome';
 import AdicionarDestino from '../components/Rotas/AdicionarDestino';
 import ListaDestinos from '../components/Rotas/ListaDestinos';
 import ResumoRota from '../components/Rotas/ResumoRota';
-import { criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, criarRota as apiCriarRota } from '../services/apiClient';
+import { criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, criarRota as apiCriarRota, obterCalculoDetalhesRota } from '../services/apiClient';
 
 // import './NovaRota.module.css';
 
@@ -13,19 +13,26 @@ function NovaRota() {
     const [nomeRota, setNomeRota] = useState('');
     const [destinosNaRota, setDestinosNaRota] = useState([]);
 
-    const handleAdicionarDestino = async (dadosNovoDestino) => {
-        console.log("Dados recebidos no formulário:", dadosNovoDestino);
+    const [previaDetalhes, setPreviaDetalhes] = useState(null);
+    const [isLoadingPrevia, setIsLoadingPrevia] = useState(false);
+    const [errorPrevia, setErrorPrevia] = useState(null);
 
+    const invalidarPrevia = () => {
+        setPreviaDetalhes(null);
+        setErrorPrevia(null);
+    };
+
+    const handleAdicionarDestino = async (dadosNovoDestino) => {
         const dadosParaApi = {
             cidade: dadosNovoDestino.nome,
             pais: dadosNovoDestino.pais,
             observacoes: dadosNovoDestino.endereco,
             nomeDaRotaPertecente: nomeRota
         };
-
         try {
             const respostaApi = await apiCriarDestino(dadosParaApi);
             setDestinosNaRota(destinosAnteriores => [...destinosAnteriores, respostaApi.data]);
+            invalidarPrevia()
         } catch (error) {
             alert(`Erro ao adicionar destino: ${error.message}`);
         }
@@ -38,9 +45,38 @@ function NovaRota() {
             setDestinosNaRota(destinosAnteriores => 
                 destinosAnteriores.filter(destino => destino._id !== idDoDestino)
             );
+            invalidarPrevia()
         } catch (error) {
             alert(`Erro ao deletar destino: ${error.message}`);
         }
+    };
+
+        const moverDestino = (idDoDestino, direcao) => {
+        setDestinosNaRota(destinosAtuais => {
+            const index = destinosAtuais.findIndex(d => d._id === idDoDestino);
+            if (index === -1) return destinosAtuais;
+            if (direcao === 'cima' && index === 0) return destinosAtuais;
+            if (direcao === 'baixo' && index === destinosAtuais.length - 1) return destinosAtuais;
+
+            const novosDestinos = [...destinosAtuais];
+            const destinoMovido = novosDestinos.splice(index, 1)[0];
+
+            if (direcao === 'cima') {
+                novosDestinos.splice(index - 1, 0, destinoMovido);
+            } else { 
+                novosDestinos.splice(index + 1, 0, destinoMovido);
+            }
+            invalidarPrevia(); 
+            return novosDestinos;
+        });
+    };
+
+    const handleMoverDestinoParaCima = (idDoDestino) => {
+        moverDestino(idDoDestino, 'cima');
+    };
+
+    const handleMoverDestinoParaBaixo = (idDoDestino) => {
+        moverDestino(idDoDestino, 'baixo');
     };
 
     const handleMudarNomeRota = (novoNome) => {
@@ -54,13 +90,43 @@ function NovaRota() {
             destinos: destinosNaRota 
         };
         try {
-            const respostaApi = await apiCriarRota(dadosNovaRotaParaApi); // <<< Usar apiClient
+            const respostaApi = await apiCriarRota(dadosNovaRotaParaApi); 
             alert(`Rota "${respostaApi.data.nome}" salva com sucesso no backend!`);
             setNomeRota('');
             setDestinosNaRota([]);
             navigate('/');
         } catch (error) {
             alert(`Erro ao salvar rota: ${error.message}`);
+        }
+    };
+
+    const handleCalcularPrevia = async () => {
+        if (destinosNaRota.length < 2) {
+            alert("Adicione pelo menos dois destinos para calcular a prévia da rota.");
+            return;
+        }
+
+        const coordenadasParaCalculo = destinosNaRota.map(d => {
+            if (typeof d.lon !== 'number' || typeof d.lat !== 'number') {
+                console.error("Destino sem coordenadas válidas:", d);
+                throw new Error("Alguns destinos na rota não possuem coordenadas válidas para cálculo.");
+            }
+            return [d.lon, d.lat];
+        });
+
+        setIsLoadingPrevia(true);
+        setErrorPrevia(null);
+        setPreviaDetalhes(null);
+
+        try {
+            const respostaApi = await obterCalculoDetalhesRota(coordenadasParaCalculo);
+            setPreviaDetalhes(respostaApi.data);
+        } catch (error) {
+            console.error("Erro ao calcular prévia da rota:", error);
+            setErrorPrevia(error.message || "Falha ao calcular prévia.");
+            setPreviaDetalhes(null); 
+        } finally {
+            setIsLoadingPrevia(false);
         }
     };
 
@@ -78,8 +144,27 @@ function NovaRota() {
 
             <InputNome valor={nomeRota} aoMudar={handleMudarNomeRota} />
             <AdicionarDestino aoAdicionar={handleAdicionarDestino} />
-            <ListaDestinos destinos={destinosNaRota} aoDeletar={handleDeletarDestino} />
-            <ResumoRota destinos={destinosNaRota} />
+            <ListaDestinos destinos={destinosNaRota} aoDeletar={handleDeletarDestino}  aoMoverParaCima={handleMoverDestinoParaCima} aoMoverParaBaixo={handleMoverDestinoParaBaixo}/>
+            <div /*className={styles.sectionCard}*/ style={{backgroundColor: '#434c5e', padding: '25px', borderRadius: '8px', marginBottom: '30px', border: '1px solid #4c566a'}}>
+                <h3 /*className={styles.sectionTitle}*/ style={{fontSize: '1.3rem', color: '#eceff4', marginTop: '0', marginBottom: '20px', borderBottom: '1px solid #4c566a', paddingBottom: '10px'}}>
+                    Resumo da Rota
+                </h3>
+                <ResumoRota 
+                    detalhesCalculados={previaDetalhes}
+                    isLoading={isLoadingPrevia}
+                    error={errorPrevia}
+                    numDestinosNaRotaAtual={destinosNaRota.length}
+                />
+                {destinosNaRota.length >= 2 && ( 
+                    <button 
+                        onClick={handleCalcularPrevia} 
+                        disabled={isLoadingPrevia}
+                        style={{ marginTop: '15px', padding: '10px 15px', backgroundColor: '#88c0d0', color: '#2e3440', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                    >
+                        {isLoadingPrevia ? 'Calculando Prévia...' : 'Calcular Prévia Detalhada'}
+                    </button>
+                )}
+            </div>
             
             <div style={{ textAlign: 'right', marginTop: '30px' }}>
                 <button onClick={handleSalvarRota} style={{ padding: '12px 25px', backgroundColor: '#0275d8', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '16px' }}>

@@ -16,3 +16,18 @@
 {"cidade":"Rio de Janeiro","pais":"Brasil","observacoes":"","lat":-22.935024,"lon":-43.518246,"_id":"sQ4BjTeRVYHNmSFo","createdAt":{"$$date":1749097169163},"updatedAt":{"$$date":1749097169163}}
 {"cidade":"teste","pais":"teste","observacoes":"","lat":22.70898,"lon":47.69526,"_id":"JUOKiazimD3D2SFL","createdAt":{"$$date":1749097186792},"updatedAt":{"$$date":1749097186792}}
 {"$$deleted":true,"_id":"JUOKiazimD3D2SFL"}
+{"cidade":"Curitiba","pais":"Brasil","observacoes":"Jardim Botânico","lat":-25.443093,"lon":-49.240636,"_id":"Z3y8DbfylUZ6TVDH","createdAt":{"$$date":1749097372103},"updatedAt":{"$$date":1749097372103}}
+{"cidade":"Guaratuba","pais":"Brasil","observacoes":"","lat":-25.899199,"lon":-48.591948,"_id":"jrcMrjoVrJyRzUQY","createdAt":{"$$date":1749097383313},"updatedAt":{"$$date":1749097383313}}
+{"cidade":"Florianópolis","pais":"Brasil","observacoes":"","lat":-27.595267,"lon":-48.541812,"_id":"cKIfg3lMje8NwyIK","createdAt":{"$$date":1749097430186},"updatedAt":{"$$date":1749097430186}}
+{"cidade":"Florianópolis","pais":"Brasil","observacoes":"Canasvieiras","lat":-27.446967,"lon":-48.509809,"_id":"6a7pp1fgSfwzVpQR","createdAt":{"$$date":1749098092196},"updatedAt":{"$$date":1749098092196}}
+{"cidade":"Salvador","pais":"Bahia","observacoes":"","lat":-12.964413,"lon":-38.421936,"_id":"N6kzXxgnJ8vgjrMy","createdAt":{"$$date":1749100347020},"updatedAt":{"$$date":1749100347020}}
+{"cidade":"Fortaleza","pais":"Ceára","observacoes":"","lat":-3.72271,"lon":-38.52465,"_id":"jVzmFPJxVyhMOJZg","createdAt":{"$$date":1749100359740},"updatedAt":{"$$date":1749100359740}}
+{"$$deleted":true,"_id":"jVzmFPJxVyhMOJZg"}
+{"$$deleted":true,"_id":"N6kzXxgnJ8vgjrMy"}
+{"cidade":"Salvador","pais":"Brasil","observacoes":"","lat":-12.964413,"lon":-38.421936,"_id":"nZ9V5QeYKiDybJXy","createdAt":{"$$date":1749100391372},"updatedAt":{"$$date":1749100391372}}
+{"cidade":"Fortaleza","pais":"Brasil","observacoes":"","lat":-3.739272,"lon":-38.539073,"_id":"6izpChGBknSaYd2N","createdAt":{"$$date":1749100398526},"updatedAt":{"$$date":1749100398526}}
+{"cidade":"Natal","pais":"Brasil","observacoes":"","lat":-5.803737,"lon":-35.218408,"_id":"iJGBYb3G45VZlJ0w","createdAt":{"$$date":1749100527186},"updatedAt":{"$$date":1749100527186}}
+{"$$deleted":true,"_id":"Z3y8DbfylUZ6TVDH"}
+{"cidade":"Cuiaba","pais":"Brasil","observacoes":"","lat":-15.579321,"lon":-56.10009,"_id":"OVJkLo7pUdVOLcGI","createdAt":{"$$date":1749102921023},"updatedAt":{"$$date":1749102921023}}
+{"cidade":"Porto Velho","pais":"Brasil","observacoes":"","lat":-8.767546,"lon":-63.873493,"_id":"ANoMsOAbOlzcFm6Q","createdAt":{"$$date":1749102929565},"updatedAt":{"$$date":1749102929565}}
+{"cidade":"Manaus","pais":"Brasil","observacoes":"","lat":-3.011942,"lon":-59.979328,"_id":"AgZdTWpk4xTvznfy","createdAt":{"$$date":1749102943351},"updatedAt":{"$$date":1749102943351}}

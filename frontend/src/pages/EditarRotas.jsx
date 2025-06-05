@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getRotaPorId, atualizarRota, criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino } from '../services/apiClient';
+import { getRotaPorId, atualizarRota, criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, obterCalculoDetalhesRota } from '../services/apiClient';
 import styles from './EditarRotas.module.css';
 
 import InputNome from '../components/Rotas/InputNome';
@@ -16,19 +16,28 @@ function EditarRotaPage() {
     const [destinosNaRota, setDestinosNaRota] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [rotaOriginalNome, setRotaOriginalNome] = useState('');
+    const [rotaOriginal, setRotaOriginal] = useState(null);
+
+
+    const [previaDetalhes, setPreviaDetalhes] = useState(null);
+    const [isLoadingPrevia, setIsLoadingPrevia] = useState(false);
+    const [errorPrevia, setErrorPrevia] = useState(null);
+    const [destinosModificadosDesdeLoad, setDestinosModificadosDesdeLoad] = useState(false);
 
     useEffect(() => {
         const carregarDadosRota = async () => {
             if (!idRota) return;
             setIsLoading(true);
             setError(null);
+            setPreviaDetalhes(null);
+            setErrorPrevia(null);
             try {
                 const respostaApi = await getRotaPorId(idRota);
                 if (respostaApi && respostaApi.data) {
-                    setRotaOriginalNome(respostaApi.data.nome);
+                    setRotaOriginal(respostaApi.data);
                     setNomeRota(respostaApi.data.nome);
                     setDestinosNaRota(respostaApi.data.destinos || []);
+                    setDestinosModificadosDesdeLoad(false); 
                 } else {
                     throw new Error("Rota não encontrada ou resposta inválida da API.");
                 }
@@ -42,26 +51,70 @@ function EditarRotaPage() {
         carregarDadosRota();
     }, [idRota]);
 
-    // ... (suas funções handleMudarNomeRota, handleAdicionarDestino, handleDeletarDestino - sem mudanças na lógica interna por enquanto) ...
-    const handleMudarNomeRota = (novoNome) => setNomeRota(novoNome);
-    const handleAdicionarDestino = async (dadosFormularioDestino) => { /* ... sua lógica ... */ try { const r = await apiCriarDestino({cidade: dadosFormularioDestino.nome, pais: dadosFormularioDestino.pais, observacoes: dadosFormularioDestino.observacoes}); setDestinosNaRota(d => [...d, r.data]);} catch(e){alert(e.message);}};
+    const invalidarPrevia = () => {
+        setPreviaDetalhes(null);
+        setErrorPrevia(null);
+        setDestinosModificadosDesdeLoad(true);
+    };
+
+    const handleMudarNomeRota = (novoNome) => {setNomeRota(novoNome)};
+
+    const handleAdicionarDestino = async (dadosFormularioDestino) => {
+    const dadosParaApi = {
+        cidade: dadosFormularioDestino.nome,
+        pais: dadosFormularioDestino.pais,
+        observacoes: dadosFormularioDestino.endereco 
+    };
+    try {
+        const respostaApi = await apiCriarDestino(dadosParaApi);
+        setDestinosNaRota(destinosAnteriores => [...destinosAnteriores, respostaApi.data]);
+        invalidarPrevia();
+    } catch (e) {
+        alert(e.message);
+        console.error("Erro ao adicionar novo destino em EditarRotaPage:", e);
+    }
+};
+
     
     const handleDeletarDestino = async (idDoDestinoParaRemover) => {
         if (!window.confirm("Tem certeza que deseja remover este destino da rota E APAGÁ-LO PERMANENTEMENTE do sistema? Esta ação não pode ser desfeita.")) {
             return;
         }
-
         try {
             await apiDeletarDestino(idDoDestinoParaRemover); 
             setDestinosNaRota(destinosAnteriores =>
                 destinosAnteriores.filter(destino => destino._id !== idDoDestinoParaRemover)
             );
-
-            alert("Destino removido da rota e apagado do sistema com sucesso!");
-
+            invalidarPrevia();
         } catch (error) {
             console.error("Erro ao deletar destino:", error);
             alert(`Erro ao tentar deletar o destino: ${error.message}. Verifique se ele ainda está na lista.`);
+        }
+    };
+
+    const handleCalcularPrevia = async () => {
+        if (destinosNaRota.length < 2) {
+            alert("Adicione pelo menos dois destinos para calcular a prévia da rota.");
+            return;
+        }
+        const coordenadasParaCalculo = destinosNaRota.map(d => {
+            if (typeof d.lon !== 'number' || typeof d.lat !== 'number') {
+                throw new Error(`Destino "${d.nome || d.cidade}" não possui coordenadas válidas.`);
+            }
+            return [d.lon, d.lat];
+        });
+
+        setIsLoadingPrevia(true);
+        setErrorPrevia(null);
+        setPreviaDetalhes(null);
+        try {
+            const respostaApi = await obterCalculoDetalhesRota(coordenadasParaCalculo);
+            setPreviaDetalhes(respostaApi.data);
+        } catch (error) {
+            setErrorPrevia(error.message || "Falha ao calcular prévia.");
+            setPreviaDetalhes(null);
+        } finally {
+            setIsLoadingPrevia(false);
         }
     };
 
@@ -70,14 +123,13 @@ function EditarRotaPage() {
         if (!nomeRota.trim()) { alert("O nome da rota não pode ser vazio."); return; }
 
         const destinosAtualizadosParaApi = destinosNaRota.map(destino => ({
-            ...destino, // Mantém todos os outros campos do destino
-            nomeDaRotaPertencente: nomeRota // Define/atualiza para o nome da rota atual
+            ...destino, 
+            nomeDaRotaPertencente: nomeRota 
         }));
          const dadosRotaAtualizada = {
             nome: nomeRota,
             destinos: destinosAtualizadosParaApi, 
         };
-
         try {
             setIsLoading(true);
             const respostaApi = await atualizarRota(idRota, dadosRotaAtualizada);
@@ -91,7 +143,14 @@ function EditarRotaPage() {
         }
     };
 
-    if (isLoading && !rotaOriginalNome) { // Mostra carregando só no load inicial
+    let detalhesParaExibirNoResumo = null;
+    if (previaDetalhes) {
+        detalhesParaExibirNoResumo = previaDetalhes;
+    } else if (!destinosModificadosDesdeLoad && rotaOriginal && rotaOriginal.detalhesCalculados && !rotaOriginal.detalhesCalculados.error) {
+        detalhesParaExibirNoResumo = rotaOriginal.detalhesCalculados;
+    }
+
+    if (isLoading && !rotaOriginal) {
         return <div className={styles.loadingMessage}>Carregando dados da rota...</div>;
     }
 
@@ -118,8 +177,10 @@ function EditarRotaPage() {
 
             if (direcao === 'cima') {
                 novosDestinos.splice(index - 1, 0, destinoMovido);
-            } else { // direcao === 'baixo'
+                invalidarPrevia();
+            } else {
                 novosDestinos.splice(index + 1, 0, destinoMovido);
+                invalidarPrevia();
             }
             return novosDestinos;
         });
@@ -139,10 +200,7 @@ function EditarRotaPage() {
                 &larr; Voltar para Lista
             </button>
             <h2 className={styles.pageTitle}>Editar Rota</h2>
-
-            {/* Cada seção agora pode ser envolvida por um div com styles.sectionCard */}
             <div className={styles.sectionCard}>
-                {/* O InputNomeRota já tem um div wrapper, mas podemos adicionar título aqui */}
                 <h3 className={styles.sectionTitle}>Nome da Rota</h3>
                 <InputNome valor={nomeRota} aoMudar={handleMudarNomeRota} />
             </div>
@@ -159,8 +217,23 @@ function EditarRotaPage() {
             </div>
 
             <div className={styles.sectionCard}>
-                <h3 className={styles.sectionTitle}>Resumo da Rota (Estimado)</h3>
-                <ResumoRota destinos={destinosNaRota} />
+                <h3 className={styles.sectionTitle}>Resumo da Rota</h3>
+                <ResumoRota 
+                    detalhesCalculados={detalhesParaExibirNoResumo}
+                    isLoading={isLoadingPrevia} 
+                    error={errorPrevia}         
+                    numDestinosNaRotaAtual={destinosNaRota.length}
+                />
+                {destinosNaRota.length >= 2 && (
+                    <button 
+                        onClick={handleCalcularPrevia} 
+                        disabled={isLoadingPrevia}
+                        // className={styles.calcularPreviaButton}
+                        style={{ marginTop: '15px', padding: '10px 15px', backgroundColor: '#88c0d0', /* ... */ }}
+                    >
+                        {isLoadingPrevia ? 'Calculando Prévia...' : 'Calcular Prévia Detalhada'}
+                    </button>
+                )}
             </div>
 
             <div className={styles.saveButtonContainer}>

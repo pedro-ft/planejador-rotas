@@ -49,9 +49,8 @@ export const getRotaPorId = (idRota) => request(`/rotas/${idRota}`);
 export const criarRota = (dadosRota) => request('/rotas', { method: 'POST', body: JSON.stringify(dadosRota) });
 export const deletarRota = (idRota) => request(`/rotas/${idRota}`, { method: 'DELETE' });
 export const atualizarRota = (idRota, dadosAtualizados) => request(`/rotas/${idRota}`, { method: 'PUT', body: JSON.stringify(dadosAtualizados) });
+export const obterCalculoDetalhesRota = (coordenadasArray) => request('/rotas/calcular-detalhes', { method: 'POST', body: JSON.stringify({ coordenadas: coordenadasArray }) });
 
-// export const getDestinos = () => request('/destinos'); // Se precisarmos listar todos os destinos independentemente
 export const criarDestino = (dadosDestino) => request('/destinos', { method: 'POST', body: JSON.stringify(dadosDestino) });
 export const deletarDestino = (idDestino) => request(`/destinos/${idDestino}`, { method: 'DELETE' });
-// Adicionar getDestinoPorId(id), atualizarDestino(id, dados) quando necessário
 
