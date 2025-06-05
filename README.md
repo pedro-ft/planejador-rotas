@@ -8,17 +8,17 @@ Bem-vindo ao seu planejador de rotas, uma aplicação web completa desenvolvida 
 
 * **👤 Autenticação de Usuários:**
     * Sistema de registro com nome de usuário e senha.
-    * Validação de senha (mínimo 6 caracteres, com letras e números).
+    * Validação de senha.
     * Login seguro com uso de JSON Web Tokens (JWT) para gerenciamento de sessão.
     * Rotas da API protegidas, garantindo que cada usuário acesse apenas suas próprias informações.
-* ** Rotas de Viagem Personalizadas:**
+* **✈️ Rotas de Viagem Personalizadas:**
     * Criação, listagem, edição e exclusão (CRUD completo) de rotas de viagem, associadas individualmente a cada usuário.
     * Interface intuitiva para nomear e gerenciar múltiplas rotas.
 * **📍 Gerenciamento Detalhado de Destinos:**
     * Adição de múltiplos destinos a cada rota, especificando cidade, país e observações/endereço.
     * **Geocodificação Automática:** Ao adicionar um destino com informações textuais, o sistema busca automaticamente suas coordenadas (latitude e longitude) usando a API do OpenRouteService.
     * **Reordenação de Destinos:** Interface permite que o usuário reorganize a ordem dos destinos dentro de uma rota de forma fácil.
-    * Exclusão de destinos de uma rota (com deleção global do destino do sistema).
+    * Exclusão e edição de destinos de uma rota.
 * **📈 Cálculo e Visualização de Percurso (Integrado com OpenRouteService):**
     * Ao salvar ou atualizar uma rota com pelo menos dois destinos, o sistema calcula automaticamente:
         * A **distância total** e o **tempo total estimado** da viagem.
@@ -36,24 +36,7 @@ Bem-vindo ao seu planejador de rotas, uma aplicação web completa desenvolvida 
     * Persistência de dados com NeDB (banco de dados leve baseado em arquivos).
     * Tratamento de erros padronizado e informativo.
     * Uso de variáveis de ambiente para configuração segura de chaves de API e segredos JWT.
-
----
-
-## 📸 Screenshots (Demonstração Visual)
-
-Aqui você pode adicionar algumas imagens da sua aplicação em funcionamento!
-
-*(Sugestão: Adicione screenshots da tela de login, registro, listagem de rotas, criação/edição de uma rota mostrando os destinos e o resumo calculado, etc. Você me mostrou algumas ótimas imagens durante o desenvolvimento!)*
-
-*Tela de Login/Registro:*
-`![Tela de Login](link_para_sua_imagem_login.png)`
-
-*Listagem de Rotas:*
-`![Listagem de Rotas](link_para_sua_imagem_lista_rotas.png)`
-
-*Página de Criação/Edição de Rota:*
-`![Página de Edição de Rota](link_para_sua_imagem_edicao_rota.png)`
-
+      
 ---
 
 ## 🛠️ Tecnologias Utilizadas
@@ -86,6 +69,7 @@ Aqui você pode adicionar algumas imagens da sua aplicação em funcionamento!
 
 **Ferramentas de Desenvolvimento:**
 * ESLint (Para linting de código JavaScript/JSX)
+* Postman (Para testes da API)
 * Git & GitHub (Para versionamento de código)
 
 ---
@@ -175,15 +159,4 @@ Este projeto é uma base sólida, mas aqui estão algumas ideias para evoluçõe
 * **Feedback ao Usuário Aprimorado:** Usar "toasts" ou notificações mais elegantes para mensagens de sucesso/erro, em vez de apenas modais de alerta.
 * **Validações de Formulário Mais Detalhadas no Frontend:** Para feedback instantâneo ao usuário.
 * **Paginação ou Scroll Infinito:** Na lista de rotas, se ela se tornar muito grande.
-* **Testes Automatizados:** Adicionar testes unitários e de integração.
-* **Otimizações de Performance:** Para aplicações maiores.
 * **Deploy:** Publicar a aplicação em uma plataforma de hospedagem.
-
----
-
-✨ **Agradecimento Especial** ✨
-Agradeço a você, Pedro, pela dedicação incrível e pela maratona de desenvolvimento! Foi um prazer te acompanhar.
-
-*(Se este projeto for para um desafio específico, você pode adicionar uma pequena nota aqui sobre o desafio ou seus aprendizados)*
-
----
