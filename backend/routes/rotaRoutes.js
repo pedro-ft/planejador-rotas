@@ -7,5 +7,6 @@ router.get('/', rotaController.listarRotas);
 router.get('/:id', rotaController.buscarRotaPorId);
 router.put('/:id', rotaController.atualizarRota);
 router.delete('/:id', rotaController.deletarRota);
+router.post('/calcular-detalhes', rotaController.obterDetalhesRota)
 
 module.exports = router;

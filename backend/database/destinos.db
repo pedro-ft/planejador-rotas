@@ -4,12 +4,13 @@
 {"cidade":"Budapeste","pais":"Hungria","observacoes":"Puskaz Arena","lat":0,"lon":0,"_id":"9Y2lUjp7bdureEwO","createdAt":{"$$date":1749012484886},"updatedAt":{"$$date":1749012484886}}
 {"cidade":"Nova York","pais":"Estados Unidos","observacoes":"Estatua da Liberdade","nomeDaRotaPertecente":"Viagem Escolar","lat":0,"lon":0,"_id":"GeoOknDIgjmz5f5I","createdAt":{"$$date":1749020327886},"updatedAt":{"$$date":1749020327886}}
 {"cidade":"Londres","pais":"Inglaterra","observacoes":"Big Bang","nomeDaRotaPertecente":"Viagem Escolar","lat":0,"lon":0,"_id":"M7nZkCMgIpBnQfjY","createdAt":{"$$date":1749020308987},"updatedAt":{"$$date":1749020308987}}
-{"cidade":"Curitiba","pais":"Brasil","observacoes":"Jardim Botânico","lat":0,"lon":0,"_id":"P025t4aynFm5RucF","createdAt":{"$$date":1749071997802},"updatedAt":{"$$date":1749071997802}}
 {"cidade":"Porto Alegre","pais":"Brasil","observacoes":"","lat":0,"lon":0,"_id":"Qo4A9vkRS7SumwQl","createdAt":{"$$date":1749012639621},"updatedAt":{"$$date":1749012639621}}
 {"cidade":"Seattle","pais":"Estados Unidos","observacoes":"","lat":0,"lon":0,"_id":"WVK6slEL8BBmhspK","createdAt":{"$$date":1749022102746},"updatedAt":{"$$date":1749022102746}}
 {"cidade":"Paris","pais":"França","observacoes":"Torre Eiffel","lat":0,"lon":0,"_id":"bTzqn4BZUkf0qVH0","createdAt":{"$$date":1749012460280},"updatedAt":{"$$date":1749012460280}}
-{"cidade":"teste","pais":"teste","observacoes":"","lat":0,"lon":0,"_id":"jIn4HY3H7ot6PYMs","createdAt":{"$$date":1749012662036},"updatedAt":{"$$date":1749012662036}}
-{"cidade":"Berlim","pais":"Alemanha","observacoes":"Muro de Berlim","lat":0,"lon":0,"_id":"ukqRr2UWe8wbZqWt","createdAt":{"$$date":1749012470656},"updatedAt":{"$$date":1749012470656}}
-{"$$deleted":true,"_id":"P025t4aynFm5RucF"}
+{"cidade":"blablabla","pais":"seila","observacoes":"","lat":2.853219,"lon":34.164355,"_id":"cTNsqWWC1erKl7vj","createdAt":{"$$date":1749073752281},"updatedAt":{"$$date":1749073752281}}
+{"cidade":"Ponta Grossa","pais":"Brasil","observacoes":"Condomio Inova","lat":-25.107222,"lon":-50.140055,"_id":"e7iPQhjU4GBSTbuk","createdAt":{"$$date":1749074011814},"updatedAt":{"$$date":1749074011814}}
 {"cidade":"Curitiba","pais":"Brasil","observacoes":"Jardim Botânico","lat":-25.443093,"lon":-49.240636,"_id":"eT0k2Fun7Uthovp0","createdAt":{"$$date":1749072217220},"updatedAt":{"$$date":1749072217220}}
+{"cidade":"teste","pais":"teste","observacoes":"","lat":0,"lon":0,"_id":"jIn4HY3H7ot6PYMs","createdAt":{"$$date":1749012662036},"updatedAt":{"$$date":1749012662036}}
 {"cidade":"Ponta Grossa","pais":"Brasil","observacoes":"Rua Coronel Francisco Ribas, 1162","lat":-25.08379,"lon":-50.163896,"_id":"paC2UvyWIzFx7fmq","createdAt":{"$$date":1749072406454},"updatedAt":{"$$date":1749072406454}}
+{"cidade":"Berlim","pais":"Alemanha","observacoes":"Muro de Berlim","lat":0,"lon":0,"_id":"ukqRr2UWe8wbZqWt","createdAt":{"$$date":1749012470656},"updatedAt":{"$$date":1749012470656}}
+{"cidade":"Ponta Grossa","pais":"Brasil","observacoes":"Condomio INOVA Uvaranas","lat":-25.107222,"lon":-50.140055,"_id":"xZbfDwfp4Pr1qzo0","createdAt":{"$$date":1749073947205},"updatedAt":{"$$date":1749073947205}}

@@ -1,10 +1,6 @@
 const dbDestinos = require('../database/destinos.tabela');
 
 const ORS_API_KEY = process.env.ORS_API_KEY;
-if (!ORS_API_KEY) {
-    console.error("Chave da API não foi encontrada");
-}
-
 
 const criarNovoDestino = (dadosDestino) => {
     return new Promise(async (resolve ,reject) => {
@@ -22,36 +18,34 @@ const criarNovoDestino = (dadosDestino) => {
         let lat = 0;
         let lon = 0; 
 
-        if (ORS_API_KEY) { 
+        if (!ORS_API_KEY) { 
+            return reject({ statusCode: 500, message: "Configuração interna do servidor: Chave da API de geocodificação ausente." });
+        }else{
             try {
                 const enderecoTextual = `${dadosDestino.observacoes || ''}, ${dadosDestino.cidade}, ${dadosDestino.pais}`.trim().replace(/^,|,$/g, '');
                 const encodedAddress = encodeURIComponent(enderecoTextual);
                 const geocodeUrl = `https://api.openrouteservice.org/geocode/search?api_key=${ORS_API_KEY}&text=${encodedAddress}&size=1`
-                console.log(`Buscando coordenadas para: ${enderecoTextual}`);
-                console.log(`URL Geocodificação ORS: ${geocodeUrl}`);
-
                 const geocodeResponse = await fetch(geocodeUrl);
                 const geocodeData = await geocodeResponse.json();
 
-                if (geocodeResponse.ok && geocodeData.features && geocodeData.features.length > 0) {
-                    const coordinates = geocodeData.features[0].geometry.coordinates;
-                    lon = coordinates[0]; 
-                    lat = coordinates[1];
-                    console.log(`Coordenadas encontradas: Lon=<span class="math-inline">\{lon\}, Lat\=</span>{lat}`);
-                } else {
-                    console.warn(`Geocodificação não encontrou coordenadas para "${enderecoTextual}". Resposta ORS:`, geocodeData);
-                    // Decide se quer lançar um erro ou continuar com lat/lon = 0
-                    // Por agora, vamos apenas logar e continuar com 0,0
-                    // Poderia ser: reject(new Error(`Endereço não encontrado: ${enderecoTextual}`));
+                if (!geocodeResponse.ok) {
+                    console.error("Erro da API ORS:", geocodeResponse.status, geocodeData);
+                    const orsErrorMessage = geocodeData.error?.message || geocodeData.error || `Falha na comunicação com o serviço de geocodificação (status: ${geocodeResponse.status})`;
+                    return reject({ statusCode: 502, message: `Serviço de geocodificação indisponível ou retornou um erro: ${orsErrorMessage}` });
                 }
+                if (!geocodeData.features || geocodeData.features.length === 0) {
+                    console.warn(`Geocodificação não encontrou coordenadas para "${enderecoTextual}".`);
+                    return reject({ statusCode: 400, message: `Endereço não localizável: "${enderecoTextual}". Verifique os dados fornecidos.` });
+                }
+                
+                const coordinates = geocodeData.features[0].geometry.coordinates;
+                lon = coordinates[0];
+                lat = coordinates[1];
+
             } catch (geocodeError) {
-                console.error("Erro durante a chamada de geocodificação para ORS:", geocodeError);
-                // Decide se quer lançar um erro ou continuar com lat/lon = 0
-                // Por agora, vamos apenas logar e continuar com 0,0
-                // reject(new Error("Falha ao buscar coordenadas do endereço.")); return;
+                console.error("Exceção durante a chamada de geocodificação para ORS:", geocodeError);
+                return reject({ statusCode: 503, message: `Falha ao conectar com o serviço de geocodificação: ${geocodeError.message}` }); // 503 Service Unavailable
             }
-        } else {
-            console.warn("Chave da API ORS não configurada. Lat/Lon serão definidos como 0.");
         }
 
         const destinoParaSalvar = {

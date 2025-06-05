@@ -90,6 +90,38 @@ const deletarRota = async (req, res) => {
     }
 };
 
+const obterDetalhesRota = async (req, res) => {
+    try {
+        const { coordenadas } = req.body; 
+
+        if (!coordenadas || !Array.isArray(coordenadas) || coordenadas.length < 2) {
+            return res.status(400).json({ message: "Formato de coordenadas inválido ou insuficiente." });
+        }
+
+        // Formatar as coordenadas se necessário (o ORS espera [longitude, latitude])
+        // Se seus objetos de destino têm { lat: ..., lon: ... }, você precisará mapeá-los
+        // antes de passar para rotaService.calcularDetalhesRotaExterna.
+        // Exemplo de como o frontend enviaria (e o controller receberia):
+        // [ { "lon": -46.6333, "lat": -23.5505 }, { "lon": -43.1729, "lat": -22.9068 } ]
+        // E o ORS precisa: [ [-46.6333, -23.5505], [-43.1729, -22.9068] ]
+
+        // Vamos assumir que o frontend já envia no formato [[lon, lat], [lon, lat]]
+        // Se não, a transformação seria feita aqui ou no service.
+
+        const detalhes = await rotaService.calcularDetalhesRota(coordenadas);
+
+        res.status(200).json({
+            message: "Detalhes da rota calculados com sucesso.",
+            data: detalhes
+        });
+
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            message: error.message || "Erro ao calcular detalhes da rota."
+        });
+    }
+};
+
 
 
 module.exports = {
@@ -97,5 +129,6 @@ module.exports = {
     listarRotas,
     buscarRotaPorId,
     atualizarRota,
-    deletarRota
+    deletarRota,
+    obterDetalhesRota
 };
