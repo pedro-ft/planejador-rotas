@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const rotaController = require('../controllers/rotaController')
+const protegerRota = require('../middleware/authMiddleware')
+
+router.use(protegerRota)
 
 router.post('/', rotaController.criarRota)
 router.get('/', rotaController.listarRotas)

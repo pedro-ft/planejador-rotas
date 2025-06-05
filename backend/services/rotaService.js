@@ -1,16 +1,17 @@
 const dbRotas = require('../database/rotas.tabela.js');
 const ORS_API_KEY = process.env.ORS_API_KEY;
 
-const criarNova = (dadosRota) => {
+const criarNova = (dadosRota, userId) => {
     return new Promise(async (resolve, reject) => {
         if (!dadosRota.nome || !dadosRota.nome.trim()) {
             return reject({ message: "O nome da rota é obrigatório.", statusCode: 400 });
         }
         if (!dadosRota.destinos || !Array.isArray(dadosRota.destinos)) {
-            return reject({ message: "A lista de destinos é inválida (deve ser um array).", statusCode: 400 });
+            return reject({ message: "A lista de destinos é inválida.", statusCode: 400 });
         }
 
         const rotaParaSalvar = {
+            userId: userId,
             nome: dadosRota.nome.trim(),
             destinos: dadosRota.destinos, 
             detalhesCalculados: null
@@ -35,7 +36,6 @@ const criarNova = (dadosRota) => {
 
         dbRotas.insert(rotaParaSalvar, (err, novaRotaSalva) => {
             if (err) {
-                console.error("Erro ao inserir rota no NeDB:", err);
                 return reject({ message: "Erro interno ao salvar a rota no banco de dados.", statusCode: 500 });
             }
             resolve(novaRotaSalva); 
@@ -43,9 +43,9 @@ const criarNova = (dadosRota) => {
     });
 };
 
-const buscarTodas = () => {
+const buscarTodas = (userId) => {
     return new Promise((resolve, reject) => {
-        dbRotas.find({}).sort({ createdAt: -1 }).exec((err, rotas) => {
+        dbRotas.find({userId: userId}).sort({ createdAt: -1 }).exec((err, rotas) => {
             if (err) {
                 console.error("Erro ao buscar rotas no NeDB:", err);
                 return reject({ message: "Erro interno ao buscar as rotas no banco de dados.", statusCode: 500 });;
@@ -55,11 +55,10 @@ const buscarTodas = () => {
     });
 };
 
-const buscarPorIdUnica = (id) => {
+const buscarPorIdUnica = (id, userId) => {
     return new Promise((resolve, reject) => {
-        dbRotas.findOne({ _id: id }, (err, rota) => {
+        dbRotas.findOne({ _id: id, userId: userId }, (err, rota) => {
             if (err) {
-                console.error("Erro ao buscar rota por ID no NeDB:", err);
                 return reject({ message: "Erro interno ao buscar a rota por ID.", statusCode: 500 });
             }
             resolve(rota); 
@@ -67,7 +66,7 @@ const buscarPorIdUnica = (id) => {
     });
 };
 
-const atualizarPorId = (id, dadosParaAtualizar) => {
+const atualizarPorId = (id, dadosParaAtualizar, userId) => {
     return new Promise(async (resolve, reject) => {
         if (!dadosParaAtualizar || Object.keys(dadosParaAtualizar).length === 0) {
             return reject({ message: "Nenhum dado fornecido para atualização da rota.", statusCode: 400 });
@@ -99,7 +98,7 @@ const atualizarPorId = (id, dadosParaAtualizar) => {
             dadosSet.detalhesCalculados = null;
         }
 
-        dbRotas.update({ _id: id }, { $set: dadosSet }, { returnUpdatedDocs: true }, (err, numAffected, affectedDoc) => {
+        dbRotas.update({ _id: id, userId: userId }, { $set: dadosSet }, { returnUpdatedDocs: true }, (err, numAffected, affectedDoc) => {
             if (err) {
                 console.error("Erro ao atualizar rota no NeDB:", err);
                 return reject({ message: "Erro interno ao atualizar a rota.", statusCode: 500 });
@@ -112,9 +111,9 @@ const atualizarPorId = (id, dadosParaAtualizar) => {
     });
 };
 
-const removerPorId = (id) => {
+const removerPorId = (id, userId) => {
     return new Promise((resolve, reject) => {
-        dbRotas.remove({ _id: id }, {}, (err, numRemoved) => {
+        dbRotas.remove({ _id: id, userId: userId }, {}, (err, numRemoved) => {
             if (err) {
                 console.error("Erro ao deletar rota no NeDB:", err);
                 return reject({ message: "Erro interno ao deletar a rota.", statusCode: 500 });
