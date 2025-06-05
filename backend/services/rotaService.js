@@ -3,7 +3,7 @@ const dbRotas = require('../database/rotas.tabela.js');
 const ORS_API_KEY = process.env.ORS_API_KEY;
 
 const criarNova = (dadosRota) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         if (!dadosRota.nome || !dadosRota.nome.trim()) {
             const error = new Error("O nome da rota é obrigatório.");
             error.statusCode = 400;
@@ -18,7 +18,25 @@ const criarNova = (dadosRota) => {
         const rotaParaSalvar = {
             nome: dadosRota.nome.trim(),
             destinos: dadosRota.destinos, 
+            detalhesCalculados: null
         };
+
+        if (dadosRota.destinos.length >= 2) {
+            try {
+                const coordenadas = dadosRota.destinos.map(d => {
+                    if (typeof d.lon !== 'number' || typeof d.lat !== 'number') {
+                        throw new Error(`Destino "${d.nome || d.cidade || 'Desconhecido'}" na rota não possui coordenadas válidas.`);
+                    }
+                    return [d.lon, d.lat];
+                });
+                
+                const calculo = await calcularDetalhesRota(coordenadas);
+                rotaParaSalvar.detalhesCalculados = calculo;
+            } catch (errorCalculo) {
+                console.error(`Falha ao calcular detalhes para a nova rota "${rotaParaSalvar.nome}": ${errorCalculo.message}`);
+                rotaParaSalvar.detalhesCalculados = { error: `Falha no cálculo: ${errorCalculo.message}` };
+            }
+        }
 
         dbRotas.insert(rotaParaSalvar, (err, novaRotaSalva) => {
             if (err) {
@@ -61,7 +79,7 @@ const buscarPorIdUnica = (id) => {
 };
 
 const atualizarPorId = (id, dadosParaAtualizar) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         if (!dadosParaAtualizar || Object.keys(dadosParaAtualizar).length === 0) {
             const error = new Error("Nenhum dado fornecido para atualização da rota.");
             error.statusCode = 400;
@@ -79,7 +97,32 @@ const atualizarPorId = (id, dadosParaAtualizar) => {
             return reject(error);
         }
 
-        dbRotas.update({ _id: id }, { $set: dadosParaAtualizar }, { returnUpdatedDocs: true }, (err, numAffected, affectedDoc) => {
+        let dadosSet = { ...dadosParaAtualizar };
+
+        if (dadosParaAtualizar.destinos && Array.isArray(dadosParaAtualizar.destinos) && dadosParaAtualizar.destinos.length >= 2) {
+            try {
+                const coordenadas = dadosParaAtualizar.destinos.map(d => {
+                    if (typeof d.lon !== 'number' || typeof d.lat !== 'number') {
+                        throw new Error(`Destino "${d.nome || d.cidade || 'Desconhecido'}" na rota atualizada não possui coordenadas válidas.`);
+                    }
+                    return [d.lon, d.lat];
+                });
+
+                const calculo = await calcularDetalhesRota(coordenadas);
+                dadosSet.detalhesCalculados = calculo;
+            } catch (errorCalculo) {
+                console.error(`Falha ao recalcular detalhes para a rota ID "${id}": ${errorCalculo.message}`);
+                dadosSet.detalhesCalculados = { error: `Falha no recálculo: ${errorCalculo.message}` };
+            }
+        } else if (dadosParaAtualizar.destinos && dadosParaAtualizar.destinos.length < 2) {
+            // Se a atualização resultar em menos de 2 destinos, limpa os detalhes calculados
+            dadosSet.detalhesCalculados = null;
+        }
+        // Se 'destinos' não estiver em dadosParaAtualizar, os detalhesCalculados existentes não são alterados
+        // a menos que você queira forçar um recálculo se o nome mudar, por exemplo.
+        // Para este caso, estamos recalculando apenas se a lista de destinos for explicitamente enviada na atualização.
+
+        dbRotas.update({ _id: id }, { $set: dadosSet }, { returnUpdatedDocs: true }, (err, numAffected, affectedDoc) => {
             if (err) {
                 console.error("Erro ao atualizar rota no NeDB:", err);
                 const error = new Error("Erro interno ao atualizar a rota.");
@@ -117,10 +160,10 @@ const calcularDetalhesRota = async (coordenadas) => {
 
     const requestBody = {
         coordinates: coordenadas,
-        instructions: true,   
-        units: "m",
-        preference: "fastest",
-        geometry: false
+        //instructions: true,   
+        //units: "m",
+       // preference: "fastest",
+        //geometry: false
     };
 
     try {

@@ -1,16 +1,10 @@
-{"cidade":"dasdsa","pais":"dsadsad","observacoes":"dsadsa","lat":0,"lon":0,"_id":"4q4bM3X81OqdHwmG","createdAt":{"$$date":1749015043706},"updatedAt":{"$$date":1749015043706}}
-{"cidade":"Londres","pais":"Inglaterra","observacoes":"Big Bang","lat":0,"lon":0,"_id":"87NyjgLVNQ6z3VQq","createdAt":{"$$date":1749071904895},"updatedAt":{"$$date":1749071904895}}
-{"cidade":"Bombinhas","pais":"Brasil","observacoes":"","lat":0,"lon":0,"_id":"9QF5pGJEqjnZBFQC","createdAt":{"$$date":1749012625022},"updatedAt":{"$$date":1749012625022}}
-{"cidade":"Budapeste","pais":"Hungria","observacoes":"Puskaz Arena","lat":0,"lon":0,"_id":"9Y2lUjp7bdureEwO","createdAt":{"$$date":1749012484886},"updatedAt":{"$$date":1749012484886}}
-{"cidade":"Nova York","pais":"Estados Unidos","observacoes":"Estatua da Liberdade","nomeDaRotaPertecente":"Viagem Escolar","lat":0,"lon":0,"_id":"GeoOknDIgjmz5f5I","createdAt":{"$$date":1749020327886},"updatedAt":{"$$date":1749020327886}}
-{"cidade":"Londres","pais":"Inglaterra","observacoes":"Big Bang","nomeDaRotaPertecente":"Viagem Escolar","lat":0,"lon":0,"_id":"M7nZkCMgIpBnQfjY","createdAt":{"$$date":1749020308987},"updatedAt":{"$$date":1749020308987}}
-{"cidade":"Porto Alegre","pais":"Brasil","observacoes":"","lat":0,"lon":0,"_id":"Qo4A9vkRS7SumwQl","createdAt":{"$$date":1749012639621},"updatedAt":{"$$date":1749012639621}}
-{"cidade":"Seattle","pais":"Estados Unidos","observacoes":"","lat":0,"lon":0,"_id":"WVK6slEL8BBmhspK","createdAt":{"$$date":1749022102746},"updatedAt":{"$$date":1749022102746}}
-{"cidade":"Paris","pais":"França","observacoes":"Torre Eiffel","lat":0,"lon":0,"_id":"bTzqn4BZUkf0qVH0","createdAt":{"$$date":1749012460280},"updatedAt":{"$$date":1749012460280}}
-{"cidade":"blablabla","pais":"seila","observacoes":"","lat":2.853219,"lon":34.164355,"_id":"cTNsqWWC1erKl7vj","createdAt":{"$$date":1749073752281},"updatedAt":{"$$date":1749073752281}}
-{"cidade":"Ponta Grossa","pais":"Brasil","observacoes":"Condomio Inova","lat":-25.107222,"lon":-50.140055,"_id":"e7iPQhjU4GBSTbuk","createdAt":{"$$date":1749074011814},"updatedAt":{"$$date":1749074011814}}
-{"cidade":"Curitiba","pais":"Brasil","observacoes":"Jardim Botânico","lat":-25.443093,"lon":-49.240636,"_id":"eT0k2Fun7Uthovp0","createdAt":{"$$date":1749072217220},"updatedAt":{"$$date":1749072217220}}
-{"cidade":"teste","pais":"teste","observacoes":"","lat":0,"lon":0,"_id":"jIn4HY3H7ot6PYMs","createdAt":{"$$date":1749012662036},"updatedAt":{"$$date":1749012662036}}
-{"cidade":"Ponta Grossa","pais":"Brasil","observacoes":"Rua Coronel Francisco Ribas, 1162","lat":-25.08379,"lon":-50.163896,"_id":"paC2UvyWIzFx7fmq","createdAt":{"$$date":1749072406454},"updatedAt":{"$$date":1749072406454}}
-{"cidade":"Berlim","pais":"Alemanha","observacoes":"Muro de Berlim","lat":0,"lon":0,"_id":"ukqRr2UWe8wbZqWt","createdAt":{"$$date":1749012470656},"updatedAt":{"$$date":1749012470656}}
-{"cidade":"Ponta Grossa","pais":"Brasil","observacoes":"Condomio INOVA Uvaranas","lat":-25.107222,"lon":-50.140055,"_id":"xZbfDwfp4Pr1qzo0","createdAt":{"$$date":1749073947205},"updatedAt":{"$$date":1749073947205}}
+{"cidade":"Dortmund","pais":"Alemanha","observacoes":"Sigma Induna Park","lat":40.006396,"lon":-105.275507,"_id":"HReF4prdsVFmPDjf","createdAt":{"$$date":1749093176837},"updatedAt":{"$$date":1749093176837}}
+{"cidade":"Paris","pais":"França","observacoes":"Catedral de Notredame","lat":19.255816,"lon":-103.763066,"_id":"QE8kWJzMGvvzbrv3","createdAt":{"$$date":1749093222267},"updatedAt":{"$$date":1749093222267}}
+{"cidade":"Munique","pais":"Alemanha","observacoes":"Allianz Arena","lat":-6.209742,"lon":106.831468,"_id":"pAhDoN8F4Zprg8Qj","createdAt":{"$$date":1749093149178},"updatedAt":{"$$date":1749093149178}}
+{"cidade":"São Paulo","pais":"Brasil","observacoes":"Parque Ibirapuera","lat":-23.6,"lon":-46.63333,"_id":"QwQM2bFR8x7IB2Zb","createdAt":{"$$date":1749093827274},"updatedAt":{"$$date":1749093827274}}
+{"cidade":"Rio de Janeiro","pais":"Brasil","observacoes":"Cristo Redentor","lat":-22.953091,"lon":-43.078406,"_id":"8XvVVraKifNuuJxZ","createdAt":{"$$date":1749093960429},"updatedAt":{"$$date":1749093960429}}
+{"cidade":"Ponta Grossa","pais":"Brasil","observacoes":"Rua Coronel Francisco Ribas, 1162","lat":-25.08379,"lon":-50.163896,"_id":"erox8fDNdgK94FCq","createdAt":{"$$date":1749094050202},"updatedAt":{"$$date":1749094050202}}
+{"$$deleted":true,"_id":"QwQM2bFR8x7IB2Zb"}
+{"$$deleted":true,"_id":"8XvVVraKifNuuJxZ"}
+{"cidade":"Lisboa","pais":"Portugal","observacoes":"","lat":38.748243,"lon":-9.140093,"_id":"pn4BFNOAQNm38pYG","createdAt":{"$$date":1749094493043},"updatedAt":{"$$date":1749094493043}}
+{"cidade":"Paris","pais":"França","observacoes":"","lat":48.858705,"lon":2.342865,"_id":"zrRcUSDoEGiYirRj","createdAt":{"$$date":1749094503261},"updatedAt":{"$$date":1749094503261}}
