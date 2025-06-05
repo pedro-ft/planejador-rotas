@@ -26,7 +26,7 @@ function Login() {
 
     return (
         <div className={styles.authPageContainer}>
-            <h2 className={styles.title}>Entrar no Planejador</h2>
+            <h2 className={styles.title}>Planejador de Rotas</h2>
             <form onSubmit={handleSubmit}>
                 <div className={styles.formGroup}>
                     <label htmlFor="username" className={styles.label}>Usuário</label>

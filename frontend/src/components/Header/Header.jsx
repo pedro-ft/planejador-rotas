@@ -31,7 +31,7 @@ function Header() {
                     </Link>
                     <Link to="/rotas/nova" className={`${styles.buttonLink} ${styles.novaRotaBtn}`}>
                         <img src={iconeAdicionar} alt="Ícone Mais" className={styles.icon} />
-                        Nova Rota
+                        Nova Rotas
                     </Link>
                 </div>
                 <div className={styles.userInfo}>

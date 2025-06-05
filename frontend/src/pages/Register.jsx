@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import styles from './LoginRegister.module.css';
@@ -20,17 +20,11 @@ function Register() {
             auth.setAuthError("As senhas não coincidem.");
             return;
         }
-        // A validação de complexidade da senha (mínimo 6 chars, letras e números)
-        // já está no backend, mas você poderia adicionar aqui também para feedback imediato.
 
         const result = await auth.register(username, password);
         if (result.success) {
-            // alert(result.message); // Ou usar um modal
-            // Idealmente, redirecionar para login ou logar automaticamente
-            navigate('/login', { state: { message: "Registro bem-sucedido! Por favor, faça o login." } });
-        } else {
-            // O auth.authError já deve ter sido setado dentro de auth.register()
-        }
+            navigate('/', { state: { message: "Registro bem-sucedido" } });
+        } 
     };
 
     return (
@@ -53,7 +47,7 @@ function Register() {
                         className={styles.inputField}
                     />
                 </div>
-                <div className={styles.formGroup}> {/* Era marginBottom: 20px, agora controlado por formGroup */}
+                <div className={styles.formGroup}>
                     <label htmlFor="confirmPassword" className={styles.label}>Confirmar Senha</label>
                     <input 
                         type="password" id="confirmPassword" value={confirmPassword} 
@@ -68,7 +62,7 @@ function Register() {
                 <button 
                     type="submit" 
                     disabled={auth.isLoading}
-                    className={`${styles.submitButton} ${styles.registerButton}`} // Adiciona classe específica de cor
+                    className={`${styles.submitButton} ${styles.registerButton}`}
                 >
                     {auth.isLoading ? 'Registrando...' : 'Registrar'}
                 </button>

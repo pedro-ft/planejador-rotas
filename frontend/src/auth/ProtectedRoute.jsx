@@ -7,7 +7,7 @@ function ProtectedRoute() {
     const location = useLocation(); 
 
     if (isLoadingAuth && !localStorage.getItem('authToken')) { 
-         return <div>Verificando autenticação...</div>; 
+         return <div>Verificando autenticação</div>; 
     }
 
     if (!isAuthenticated) {

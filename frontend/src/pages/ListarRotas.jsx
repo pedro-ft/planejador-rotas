@@ -18,7 +18,7 @@ function ListarRotas() {
         onConfirm: null,
         confirmText: "Confirmar",
         cancelText: "Cancelar",
-        onCloseAction: null // Adicionado para consistência com a lógica de fechar
+        onCloseAction: null
     });
 
     const abrirAlerta = (title, message) => {

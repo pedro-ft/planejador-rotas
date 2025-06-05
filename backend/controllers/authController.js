@@ -1,4 +1,4 @@
-const authService = require('../services/authService'); // Criaremos em breve
+const authService = require('../services/authService');
 
 const registrarUsuario = async (req, res) => {
     try {
@@ -7,9 +7,6 @@ const registrarUsuario = async (req, res) => {
         if (!username || !password) {
             return res.status(400).json({ message: "Nome de usuário e senha são obrigatórios." });
         }
-
-        // Idealmente, adicione mais validações para username e password (tamanho, caracteres, etc.)
-        // Ex: if (password.length < 6) { return res.status(400).json({ message: "Senha deve ter pelo menos 6 caracteres."})}
 
         const novoUsuario = await authService.registrar(username, password);
 

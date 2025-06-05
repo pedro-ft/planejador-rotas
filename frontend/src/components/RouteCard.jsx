@@ -23,7 +23,6 @@ function RouteCard({ rota, onRotaDeletada, aoAbrirConfirmacao, aoAbrirAlerta }) 
     const handleEdit = () => {
         navigate(`/rotas/editar/${rota._id}`);
     };
-//teste
     const handleDelete = async () => {
         aoAbrirConfirmacao(
             "Confirmar Exclusão de Rota",

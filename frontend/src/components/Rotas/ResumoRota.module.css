@@ -11,8 +11,8 @@
 }
 .statusCalculo { 
     font-style: italic;
-    font-size: 0.9em;
-    color: #d8dee9;
+    color: #eceff481;
+    text-align: center;
 }
 .textoErro {
     color: #bf616a;
