@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import styles from './LoginRegister.module.css';
+import InputSenha from '../components/InputSenha';
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -40,19 +41,17 @@ function Register() {
                     />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="password" className={styles.label}>Senha</label>
-                    <input 
-                        type="password" id="password" value={password} 
-                        onChange={(e) => setPassword(e.target.value)} required 
-                        className={styles.inputField}
+                    <InputSenha
+                        label="Senha"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="confirmPassword" className={styles.label}>Confirmar Senha</label>
-                    <input 
-                        type="password" id="confirmPassword" value={confirmPassword} 
-                        onChange={(e) => setConfirmPassword(e.target.value)} required 
-                        className={styles.inputField}
+                    <InputSenha
+                        label="Confirmar Senha"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 </div>
 

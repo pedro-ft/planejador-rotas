@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import InputSenha from '../components/InputSenha';
 import styles from './LoginRegister.module.css';
 
 function Login() {
@@ -35,11 +36,10 @@ function Login() {
                     />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="password" className={styles.label}>Senha</label>
-                    <input
-                        type="password" id="password" value={password}
-                        onChange={(e) => setPassword(e.target.value)} required
-                        className={styles.inputField}
+                    <InputSenha
+                        label="Senha"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
 

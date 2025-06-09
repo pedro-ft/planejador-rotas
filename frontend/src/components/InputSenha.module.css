@@ -1,0 +1,47 @@
+.label {
+    display: block;
+    margin-bottom: 8px; 
+    color: #eceff4;   
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.inputField {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #4c566a; 
+    background-color: #2e3440; 
+    color: #eceff4;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.toggleButton {
+    position: absolute;
+    right: 10px; 
+    height: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+.toggleIcon {
+    width: 22px; 
+    height: 22px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+.toggleButton:hover .toggleIcon {
+    opacity: 1;
+}
