@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Modal.module.css';
 
-function Modal({ isOpen, onClose, title, children, showConfirmButton = false, confirmText = "Confirmar", onConfirm, cancelText = "Cancelar" }) {
+function Modal({ isOpen, onClose, title, children, showFooter = true, showConfirmButton = false, confirmText = "Confirmar", onConfirm, cancelText = "Cancelar" }) {
     if (!isOpen) {
         return null;
     }
@@ -20,6 +20,7 @@ function Modal({ isOpen, onClose, title, children, showConfirmButton = false, co
                 <div className={styles.modalBody}>
                     {children}
                 </div>
+                {showFooter && (
                 <div className={styles.modalFooter}>
                     <button onClick={onClose} className={`${styles.modalButton} ${styles.cancelButton}`}>
                         {showConfirmButton ? cancelText : "OK"} 
@@ -30,6 +31,7 @@ function Modal({ isOpen, onClose, title, children, showConfirmButton = false, co
                         </button>
                     )}
                 </div>
+                )}
             </div>
         </div>
     );

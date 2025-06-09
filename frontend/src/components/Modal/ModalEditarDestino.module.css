@@ -1,0 +1,66 @@
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 8px; 
+    color: #eceff4;   
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.inputField {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #4c566a; 
+    background-color: #2e3440; 
+    color: #eceff4;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center; 
+    gap: 30px;
+    margin-bottom: 0px;
+}
+
+.modalButton {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.cancelButton {
+    background-color: #5e81ac;
+    color: #eceff4;
+}
+
+.cancelButton:hover {
+    background-color: #3574b3;
+}
+
+.saveButton {
+    background-color: #83ba54; 
+    color: #eceff4; 
+}
+
+.saveButton:hover {
+    background-color: #68c327;
+}
+
+.errorMessage {
+    color: #d84352;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    background-color: #4c566a33;
+    padding: 10px;
+    border-radius: 4px;
+}

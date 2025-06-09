@@ -54,6 +54,7 @@ export const obterCalculoDetalhesRota = (coordenadasArray) => request('/rotas/ca
 
 export const criarDestino = (dadosDestino) => request('/destinos', { method: 'POST', body: JSON.stringify(dadosDestino) });
 export const deletarDestino = (idDestino) => request(`/destinos/${idDestino}`, { method: 'DELETE' });
+export const atualizarDestino = (idDestino, dadosAtualizados) => request(`/destinos/${idDestino}`, { method: 'PUT',  body: JSON.stringify(dadosAtualizados)});
 
 export const login = (username, password) => request('/auth/login', { method: 'POST', body: JSON.stringify({ username, password })});
 export const registrar = (username, password) => request('/auth/registrar', { method: 'POST',body: JSON.stringify({ username, password })});

@@ -3,8 +3,9 @@ import styles from './ItemDestino.module.css'
 import setaCima from '../../assets/setaCima.svg'
 import setaBaixo from '../../assets/setaBaixo.svg'
 import excluirIcon from '../../assets/excluirIcon.svg'
+import editarIcon from '../../assets/editarIcon.svg'
 
-function ItemDestino({ destino, aoDeletar, aoReordenarCima, aoReordenarBaixo, index, totalDestinos }) {
+function ItemDestino({ destino, aoDeletar, aoEditar, aoReordenarCima, aoReordenarBaixo, index, totalDestinos }) {
     if (!destino || !destino._id) {
         return null; 
     }
@@ -41,7 +42,14 @@ function ItemDestino({ destino, aoDeletar, aoReordenarCima, aoReordenarBaixo, in
                     />
                 ) : (
                     <span style={{ width: '20px', height: '20px'}}></span>
-                )}                
+                )}    
+                <img 
+                    src={editarIcon} 
+                    alt="Editar Destino" 
+                    className={styles.actionIcon} 
+                    onClick={() => aoEditar(destino)}
+                    title="Editar detalhes do destino"
+                />
                 <img 
                     src={excluirIcon} 
                     alt="Excluir Destino" 

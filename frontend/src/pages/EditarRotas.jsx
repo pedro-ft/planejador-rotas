@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getRotaPorId, atualizarRota, criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, obterCalculoDetalhesRota } from '../services/apiClient';
+import { getRotaPorId, atualizarRota, criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, obterCalculoDetalhesRota, atualizarDestino as apiAtualizarDestino } from '../services/apiClient';
 import styles from './EditarRotas.module.css';
 import InputNome from '../components/Rotas/InputNome';
 import AdicionarDestino from '../components/Rotas/AdicionarDestino';
 import ListaDestinos from '../components/Rotas/ListaDestinos';
 import ResumoRota from '../components/Rotas/ResumoRota';
 import Modal from '../components/Modal/Modal';
+import ModalEditarDestino from '../components/Modal/ModalEditarDestino';
 
 function EditarRotaPage() {
     const { idRota } = useParams();
@@ -19,6 +20,7 @@ function EditarRotaPage() {
     const [previaDetalhes, setPreviaDetalhes] = useState(null);
     const [isLoadingPrevia, setIsLoadingPrevia] = useState(false);
     const [errorPrevia, setErrorPrevia] = useState(null);
+    const [destinoEmEdicao, setDestinoEmEdicao] = useState(null);
     const [destinosModificadosDesdeLoad, setDestinosModificadosDesdeLoad] = useState(false);
 
     useEffect(() => {
@@ -233,6 +235,36 @@ function EditarRotaPage() {
         moverDestino(idDoDestino, 'baixo');
     };
 
+    const handleAbrirModalEdicao = (destino) => {
+        setDestinoEmEdicao(destino);
+    };
+
+    const handleFecharModalEdicao = () => {
+        setDestinoEmEdicao(null);
+    };
+
+    const handleSalvarEdicaoDestino = async (dadosEditados) => {
+    if (!destinoEmEdicao) return; 
+
+    try {
+        const respostaApi = await apiAtualizarDestino(destinoEmEdicao._id, dadosEditados);
+        const destinoAtualizado = respostaApi.data;
+
+        setDestinosNaRota(destinosAtuais => 
+            destinosAtuais.map(d => 
+                d._id === destinoAtualizado._id ? destinoAtualizado : d
+            )
+        );
+
+        invalidarPrevia(); 
+        handleFecharModalEdicao();
+        abrirAlerta("Sucesso", "Destino atualizado com sucesso!");
+    } catch (error) {
+        console.error("Erro ao atualizar destino:", error);
+        abrirAlerta("Erro", `Erro ao atualizar destino: ${error.message}`);
+    }
+    };
+
     return (
         <div className={styles.paginaEditarRota}>
             <div className={styles.pageHeaderContainer}>
@@ -254,7 +286,7 @@ function EditarRotaPage() {
 
             <div className={styles.sectionCard}>
                 <h3 className={styles.sectionTitle}>Destinos da Rota ({destinosNaRota.length})</h3>
-                <ListaDestinos destinos={destinosNaRota} aoDeletar={handleDeletarDestino} aoMoverParaCima={handleMoverDestinoParaCima}  aoMoverParaBaixo={handleMoverDestinoParaBaixo}/>
+                <ListaDestinos destinos={destinosNaRota} aoDeletar={handleDeletarDestino} aoEditar={handleAbrirModalEdicao} aoMoverParaCima={handleMoverDestinoParaCima}  aoMoverParaBaixo={handleMoverDestinoParaBaixo}/>
             </div>
 
             <div className={styles.sectionCard}>
@@ -284,6 +316,11 @@ function EditarRotaPage() {
                     </button>
                 </div>
             </div>
+            <ModalEditarDestino 
+                destinoParaEditar={destinoEmEdicao}
+                onSave={handleSalvarEdicaoDestino}
+                onClose={handleFecharModalEdicao}
+            />
             <Modal 
                 isOpen={modalConfig.isOpen}
                 onClose={() => {

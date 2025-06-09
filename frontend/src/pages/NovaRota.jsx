@@ -5,7 +5,8 @@ import AdicionarDestino from '../components/Rotas/AdicionarDestino';
 import ListaDestinos from '../components/Rotas/ListaDestinos';
 import ResumoRota from '../components/Rotas/ResumoRota';
 import Modal from '../components/Modal/Modal';
-import { criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, criarRota as apiCriarRota, obterCalculoDetalhesRota } from '../services/apiClient';
+import ModalEditarDestino from '../components/Modal/ModalEditarDestino'
+import { criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, criarRota as apiCriarRota, obterCalculoDetalhesRota, atualizarDestino as apiAtualizarDestino } from '../services/apiClient';
 import styles from './NovaRota.module.css';
 
 function NovaRota() {
@@ -15,6 +16,7 @@ function NovaRota() {
     const [previaDetalhes, setPreviaDetalhes] = useState(null);
     const [isLoadingPrevia, setIsLoadingPrevia] = useState(false);
     const [errorPrevia, setErrorPrevia] = useState(null);
+    const [destinoEmEdicao, setDestinoEmEdicao] = useState(null);
 
     const [modalConfig, setModalConfig] = useState({
         isOpen: false,
@@ -178,6 +180,36 @@ function NovaRota() {
         }
     };
 
+    const handleAbrirModalEdicao = (destino) => {
+        setDestinoEmEdicao(destino);
+    };
+
+    const handleFecharModalEdicao = () => {
+        setDestinoEmEdicao(null);
+    };
+
+    const handleSalvarEdicaoDestino = async (dadosEditados) => {
+        if (!destinoEmEdicao) return;
+
+        try {
+            const respostaApi = await apiAtualizarDestino(destinoEmEdicao._id, dadosEditados);
+            const destinoAtualizado = respostaApi.data;
+
+            setDestinosNaRota(destinosAtuais => 
+                destinosAtuais.map(d => 
+                    d._id === destinoAtualizado._id ? destinoAtualizado : d
+                )
+            );
+            
+            invalidarPrevia();
+            handleFecharModalEdicao();
+            abrirAlerta("Sucesso", "Destino atualizado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao atualizar destino:", error);
+            abrirAlerta("Erro", `Erro ao atualizar destino: ${error.message}`);
+        }
+    };
+
     return (
        <div className={styles.paginaNovaRota}> 
             <div className={styles.pageHeaderContainer}>
@@ -202,7 +234,7 @@ function NovaRota() {
 
             <div className={styles.sectionCard}>
                 <h3 className={styles.sectionTitle}>Destinos da Rota ({destinosNaRota.length})</h3>
-                <ListaDestinos destinos={destinosNaRota} aoDeletar={handleDeletarDestino}  aoMoverParaCima={handleMoverDestinoParaCima} aoMoverParaBaixo={handleMoverDestinoParaBaixo}/>
+                <ListaDestinos destinos={destinosNaRota} aoDeletar={handleDeletarDestino} aoEditar={handleAbrirModalEdicao} aoMoverParaCima={handleMoverDestinoParaCima} aoMoverParaBaixo={handleMoverDestinoParaBaixo}/>
             </div>
             
             <div className={styles.sectionCard}>
@@ -228,6 +260,11 @@ function NovaRota() {
                     </button>
                 </div>
             </div>
+            <ModalEditarDestino 
+                destinoParaEditar={destinoEmEdicao}
+                onSave={handleSalvarEdicaoDestino}
+                onClose={handleFecharModalEdicao}
+            />
             <Modal 
                 isOpen={modalConfig.isOpen}
                 onClose={() => {

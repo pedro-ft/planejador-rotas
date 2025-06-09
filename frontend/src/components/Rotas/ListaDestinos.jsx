@@ -2,7 +2,7 @@ import React from 'react'
 import ItemDestino from './ItemDestino'
 import styles from './ListaDestinos.module.css';
 
-function ListaDestinos({ destinos, aoDeletar, aoMoverParaCima, aoMoverParaBaixo }) {
+function ListaDestinos({ destinos, aoDeletar, aoEditar, aoMoverParaCima, aoMoverParaBaixo }) {
     if (destinos.length === 0) {
         return <p className={styles.listaVaziaMensagem}>Nenhum destino adicionado ainda.</p>;
     }
@@ -13,6 +13,7 @@ function ListaDestinos({ destinos, aoDeletar, aoMoverParaCima, aoMoverParaBaixo 
                     key={destino._id} 
                     destino={destino} 
                     aoDeletar={aoDeletar} 
+                    aoEditar={aoEditar}
                     aoReordenarCima={aoMoverParaCima}     
                     aoReordenarBaixo={aoMoverParaBaixo} 
                     index={index}      
