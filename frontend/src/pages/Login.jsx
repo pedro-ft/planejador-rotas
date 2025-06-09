@@ -12,8 +12,6 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!username || !password) {
-            // Poderíamos usar o modal aqui também, mas por ora um alerta simples
-            // ou deixar o auth.authError lidar com isso.
             auth.setAuthError("Nome de usuário e senha são obrigatórios."); 
             return;
         }
@@ -36,7 +34,7 @@ function Login() {
                         className={styles.inputField}
                     />
                 </div>
-                <div className={styles.formGroup}> {/* Era marginBottom: 20px */}
+                <div className={styles.formGroup}>
                     <label htmlFor="password" className={styles.label}>Senha</label>
                     <input
                         type="password" id="password" value={password}
@@ -51,7 +49,7 @@ function Login() {
                 <button 
                     type="submit" 
                     disabled={auth.isLoading}
-                    className={`${styles.submitButton} ${styles.loginButton}`} // Adiciona classe específica de cor
+                    className={`${styles.submitButton} ${styles.loginButton}`}
                 >
                     {auth.isLoading ? 'Entrando...' : 'Entrar'}
                 </button>
