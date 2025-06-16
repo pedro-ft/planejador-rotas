@@ -85,8 +85,8 @@ Siga os passos abaixo para configurar e rodar o projeto na sua máquina.
 ### Backend Setup
 1.  Clone o repositório:
     ```bash
-    git clone URL_DO_SEU_REPOSITORIO_AQUI
-    cd nome_da_pasta_do_projeto/backend
+    git clone https://github.com/pedro-ft/planejador-rotas
+    cd planejador-rotas/backend
     ```
 2.  Instale as dependências:
     ```bash
@@ -94,25 +94,21 @@ Siga os passos abaixo para configurar e rodar o projeto na sua máquina.
     ```
 3.  Configure as Variáveis de Ambiente:
     * Crie um arquivo chamado `.env` na raiz da pasta `backend/`.
-    * Adicione as seguintes variáveis (substitua pelos seus valores):
+    * Adicione as seguintes variáveis (substitua pelos valores corretos):
       ```env
-      # Exemplo de backend/.env
-      PORT=4000
       ORS_API_KEY=SUA_CHAVE_API_REAL_DO_OPENROUTESERVICE
       JWT_SECRET=SEU_SEGREDO_JWT_FORTE_E_ALEATORIO
       ```
 4.  Inicie o servidor backend:
     ```bash
     npm run dev 
-    # Ou, se não houver script dev: node index.js
     ```
-    O backend estará rodando em `http://localhost:4000` (ou a porta que você definiu).
+    O backend estará rodando em `http://localhost:4000`.
 
 ### Frontend Setup
 1.  Em um novo terminal, navegue até a pasta do frontend:
     ```bash
     cd nome_da_pasta_do_projeto/frontend 
-    # Se já estiver na raiz do projeto: cd frontend
     ```
 2.  Instale as dependências:
     ```bash
@@ -122,7 +118,7 @@ Siga os passos abaixo para configurar e rodar o projeto na sua máquina.
     ```bash
     npm run dev
     ```
-    A aplicação frontend estará acessível em `http://localhost:5173` (ou a porta que o Vite indicar).
+    A aplicação frontend estará acessível em `http://localhost:5173`.
 
 ---
 
@@ -142,7 +138,7 @@ O projeto está dividido em duas pastas principais:
     * `src/pages/`: Componentes que representam as diferentes páginas da aplicação (Login, Listar Rotas, Nova Rota, etc.).
     * `src/context/`: Contextos React (ex: AuthContext).
     * `src/services/`: Módulos para interagir com a API backend (ex: apiClient.js).
-    * `src/utils/`: Funções utilitárias (ex: formatadores).
+    * `src/utils/`: Funções utilitárias.
     * `src/assets/`: Ícones e outros assets estáticos.
     * `App.jsx`: Componente raiz que define o layout e as rotas principais.
     * `main.jsx`: Ponto de entrada da aplicação React.
@@ -151,12 +147,9 @@ O projeto está dividido em duas pastas principais:
 
 ## 🔮 Possíveis Melhorias e Funcionalidades Futuras
 
-Este projeto é uma base sólida, mas aqui estão algumas ideias para evoluções futuras:
+Aqui estão algumas ideias para evoluções futuras:
 * **Integração Visual com Mapa:**
     * Permitir adicionar/selecionar destinos clicando em um mapa (ex: usando Leaflet, Mapbox GL JS).
     * Visualizar a rota traçada no mapa.
 * **Reordenação Drag-and-Drop:** Tornar a reordenação de destinos mais interativa com arrastar e soltar.
-* **Feedback ao Usuário Aprimorado:** Usar "toasts" ou notificações mais elegantes para mensagens de sucesso/erro, em vez de apenas modais de alerta.
-* **Validações de Formulário Mais Detalhadas no Frontend:** Para feedback instantâneo ao usuário.
-* **Paginação ou Scroll Infinito:** Na lista de rotas, se ela se tornar muito grande.
 * **Deploy:** Publicar a aplicação em uma plataforma de hospedagem.
