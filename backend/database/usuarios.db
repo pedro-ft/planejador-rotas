@@ -1,3 +1,1 @@
-{"username":"maressa","password":"$2b$10$Abz.d9ggqPRXvxtt0UsGc.nzOn4APvQWGfDSf8dxAoikp8ocXZN.O","_id":"OpcbeOqfP4Mozpvb","createdAt":{"$$date":1750223024400},"updatedAt":{"$$date":1750223024400}}
 {"$$indexCreated":{"fieldName":"username","unique":true,"sparse":false}}
-{"username":"pedro","password":"$2b$10$rciRSeGbo.Onke6uBns/AuLipqAqUk3wNeNjOWgG5cmD9aT0bk3AW","_id":"tugpwWh2mcrnPRdJ","createdAt":{"$$date":1750225767255},"updatedAt":{"$$date":1750225767255}}
