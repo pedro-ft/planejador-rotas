@@ -2,36 +2,40 @@
 
 Bem-vindo ao seu planejador de rotas, uma aplicação web completa desenvolvida para te ajudar a planejar suas viagens de forma eficiente e organizada. Crie rotas, adicione destinos, visualize distâncias, tempos de percurso e muito mais!
 
+Este projeto foi construído como parte de um desafio técnico, demonstrando habilidades em desenvolvimento full-stack com Node.js, React, e integração de serviços externos, além de estar totalmente configurado para rodar com Docker.
+
 ---
 
-## 🌟 Funcionalidades Principais
+## Funcionalidades Principais
 
-* **👤 Autenticação de Usuários:**
-    * Sistema de registro com nome de usuário e senha.
-    * Validação de senha.
-    * Login seguro com uso de JSON Web Tokens (JWT) para gerenciamento de sessão.
-    * Rotas da API protegidas, garantindo que cada usuário acesse apenas suas próprias informações.
-* **✈️ Rotas de Viagem Personalizadas:**
+* **Ambiente Dockerizado:**
+    * Configuração completa com `Docker` e `Docker Compose`, permitindo que toda a aplicação (backend e frontend) seja iniciada com um único comando.
+    * Garante um ambiente de desenvolvimento consistente e simplifica o deploy.
+* **Autenticação de Usuários:**
+    * Sistema de registro seguro com validação e criptografia de senhas (`bcryptjs`).
+    * Login com gerenciamento de sessão via **JSON Web Tokens (JWT)**.
+    * API com rotas protegidas, garantindo que cada usuário acesse apenas suas próprias informações.
+* **Rotas de Viagem Personalizadas:**
     * Criação, listagem, edição e exclusão (CRUD completo) de rotas de viagem, associadas individualmente a cada usuário.
     * Interface intuitiva para nomear e gerenciar múltiplas rotas.
-* **📍 Gerenciamento Detalhado de Destinos:**
+* **Gerenciamento Detalhado de Destinos:**
     * Adição de múltiplos destinos a cada rota, especificando cidade, país e observações/endereço.
     * **Geocodificação Automática:** Ao adicionar um destino com informações textuais, o sistema busca automaticamente suas coordenadas (latitude e longitude) usando a API do OpenRouteService.
     * **Reordenação de Destinos:** Interface permite que o usuário reorganize a ordem dos destinos dentro de uma rota de forma fácil.
     * Exclusão e edição de destinos de uma rota.
-* **📈 Cálculo e Visualização de Percurso (Integrado com OpenRouteService):**
+* ** Cálculo e Visualização de Percurso (Integrado com OpenRouteService):**
     * Ao salvar ou atualizar uma rota com pelo menos dois destinos, o sistema calcula automaticamente:
         * A **distância total** e o **tempo total estimado** da viagem.
         * A **distância e tempo de cada trecho individual** entre os destinos.
     * Esses dados precisos são armazenados e exibidos para o usuário.
     * Botão "Calcular Prévia Detalhada" nas telas de criação/edição para obter uma estimativa atualizada antes de salvar.
-* **💅 Interface Moderna e Reativa:**
-    * Frontend construído com React, utilizando componentes reutilizáveis.
+* ** Interface Moderna e Reativa:**
+    * Frontend construído com React e Vite, utilizando componentes reutilizáveis.
     * Navegação fluida entre páginas com React Router DOM.
     * Estilização com CSS Modules para componentes escopados e organizados.
     * Uso de modais customizados para alertas e confirmações, melhorando a experiência do usuário.
-    * Header responsivo (ajustes iniciais para mobile).
-* **🔧 Backend Robusto:**
+    * Header responsivo.
+* ** Backend Robusto:**
     * API RESTful construída com Node.js e Express.js.
     * Persistência de dados com NeDB (banco de dados leve baseado em arquivos).
     * Tratamento de erros padronizado e informativo.
@@ -42,6 +46,7 @@ Bem-vindo ao seu planejador de rotas, uma aplicação web completa desenvolvida 
 ## 🛠️ Tecnologias Utilizadas
 
 <p align="center">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
   <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"/>
   <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js"/>
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"/>
@@ -68,7 +73,7 @@ Bem-vindo ao seu planejador de rotas, uma aplicação web completa desenvolvida 
 * `fetch` API (Para comunicação com o backend)
 
 **Ferramentas de Desenvolvimento:**
-* ESLint (Para linting de código JavaScript/JSX)
+* Docker (Containerização)
 * Postman (Para testes da API)
 * Git & GitHub (Para versionamento de código)
 
@@ -88,6 +93,7 @@ Bem-vindo ao seu planejador de rotas, uma aplicação web completa desenvolvida 
 
 ![Página de Edição de Rota](screenshots/Editar1.png)
 ![Página de Edição de Rota](screenshots/Editar2.png)
+![Página de Edição de Rota](screenshots/Editar3.png)
 
 ---
 
@@ -95,47 +101,32 @@ Bem-vindo ao seu planejador de rotas, uma aplicação web completa desenvolvida 
 
 Siga os passos abaixo para configurar e rodar o projeto na sua máquina.
 
-### Pré-requisitos
-* Node.js (versão LTS recomendada, ex: 18.x ou 20.x)
-* npm (geralmente vem com o Node.js) ou Yarn
+**Pré-requisitos:**
+* Docker e Docker Compose instalados.
 
-### Backend Setup
+**Passos:**
 1.  Clone o repositório:
     ```bash
-    git clone https://github.com/pedro-ft/planejador-rotas
-    cd planejador-rotas/backend
+    git clone [https://github.com/pedro-ft/planejador-rotas.git](https://github.com/pedro-ft/planejador-rotas.git)
+    cd planejador-rotas
     ```
-2.  Instale as dependências:
-    ```bash
-    npm install
-    ```
-3.  Configure as Variáveis de Ambiente:
-    * Crie um arquivo chamado `.env` na raiz da pasta `backend/`.
-    * Adicione as seguintes variáveis (substitua pelos valores corretos):
+2.  Configure as Variáveis de Ambiente do Backend:
+    * Navegue até a pasta `backend`.
+    * Crie um novo arquivo `.env`.
+    * Preencha as variáveis necessárias:
       ```env
+      # backend/.env
       ORS_API_KEY=SUA_CHAVE_API_REAL_DO_OPENROUTESERVICE
       JWT_SECRET=SEU_SEGREDO_JWT_FORTE_E_ALEATORIO
       ```
-4.  Inicie o servidor backend:
-    ```bash
-    npm run dev 
-    ```
-    O backend estará rodando em `http://localhost:4000`.
-
-### Frontend Setup
-1.  Em um novo terminal, navegue até a pasta do frontend:
-    ```bash
-    cd nome_da_pasta_do_projeto/frontend 
-    ```
-2.  Instale as dependências:
-    ```bash
-    npm install
-    ```
-3.  Inicie o servidor de desenvolvimento do frontend:
-    ```bash
-    npm run dev
-    ```
-    A aplicação frontend estará acessível em `http://localhost:5173`.
+3.  Inicie a aplicação com Docker Compose:
+    * Na **raiz do projeto** (onde está o arquivo `docker-compose.yml`), execute:
+      ```bash
+      docker-compose up --build
+      ```
+4.  Pronto!
+    * O frontend estará acessível em `http://localhost:5173`.
+    * O backend estará rodando em `http://localhost:4000`.
 
 ---
 
@@ -165,8 +156,5 @@ O projeto está dividido em duas pastas principais:
 ## 🔮 Possíveis Melhorias e Funcionalidades Futuras
 
 Aqui estão algumas ideias para evoluções futuras:
-* **Integração Visual com Mapa:**
-    * Permitir adicionar/selecionar destinos clicando em um mapa (ex: usando Leaflet, Mapbox GL JS).
-    * Visualizar a rota traçada no mapa.
 * **Reordenação Drag-and-Drop:** Tornar a reordenação de destinos mais interativa com arrastar e soltar.
 * **Deploy:** Publicar a aplicação em uma plataforma de hospedagem.
