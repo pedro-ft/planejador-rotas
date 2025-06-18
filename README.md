@@ -1,4 +1,4 @@
-#   Seu Planejador de Rotas de Viagem Inteligente 
+#  🗺️ Seu Planejador de Rotas de Viagem Inteligente 
 
 Bem-vindo ao seu planejador de rotas, uma aplicação web completa desenvolvida para te ajudar a planejar suas viagens de forma eficiente e organizada. Crie rotas, adicione destinos, visualize distâncias, tempos de percurso e muito mais!
 
@@ -6,7 +6,7 @@ Este projeto foi construído como parte de um desafio técnico, demonstrando hab
 
 ---
 
-## Funcionalidades Principais
+## 🌟 Funcionalidades Principais
 
 * **Ambiente Dockerizado:**
     * Configuração completa com `Docker` e `Docker Compose`, permitindo que toda a aplicação (backend e frontend) seja iniciada com um único comando.
@@ -23,19 +23,19 @@ Este projeto foi construído como parte de um desafio técnico, demonstrando hab
     * **Geocodificação Automática:** Ao adicionar um destino com informações textuais, o sistema busca automaticamente suas coordenadas (latitude e longitude) usando a API do OpenRouteService.
     * **Reordenação de Destinos:** Interface permite que o usuário reorganize a ordem dos destinos dentro de uma rota de forma fácil.
     * Exclusão e edição de destinos de uma rota.
-* ** Cálculo e Visualização de Percurso (Integrado com OpenRouteService):**
+* **Cálculo e Visualização de Percurso (Integrado com OpenRouteService):**
     * Ao salvar ou atualizar uma rota com pelo menos dois destinos, o sistema calcula automaticamente:
         * A **distância total** e o **tempo total estimado** da viagem.
         * A **distância e tempo de cada trecho individual** entre os destinos.
     * Esses dados precisos são armazenados e exibidos para o usuário.
     * Botão "Calcular Prévia Detalhada" nas telas de criação/edição para obter uma estimativa atualizada antes de salvar.
-* ** Interface Moderna e Reativa:**
+* **Interface Moderna e Reativa:**
     * Frontend construído com React e Vite, utilizando componentes reutilizáveis.
     * Navegação fluida entre páginas com React Router DOM.
     * Estilização com CSS Modules para componentes escopados e organizados.
     * Uso de modais customizados para alertas e confirmações, melhorando a experiência do usuário.
     * Header responsivo.
-* ** Backend Robusto:**
+* **Backend Robusto:**
     * API RESTful construída com Node.js e Express.js.
     * Persistência de dados com NeDB (banco de dados leve baseado em arquivos).
     * Tratamento de erros padronizado e informativo.
@@ -107,13 +107,13 @@ Siga os passos abaixo para configurar e rodar o projeto na sua máquina.
 **Passos:**
 1.  Clone o repositório:
     ```bash
-    git clone [https://github.com/pedro-ft/planejador-rotas.git](https://github.com/pedro-ft/planejador-rotas.git)
+    git clone https://github.com/pedro-ft/planejador-rotas.git
     cd planejador-rotas
     ```
 2.  Configure as Variáveis de Ambiente do Backend:
     * Navegue até a pasta `backend`.
     * Crie um novo arquivo `.env`.
-    * Preencha as variáveis necessárias:
+    * Preencha as variáveis necessárias trocando para seus valores:
       ```env
       # backend/.env
       ORS_API_KEY=SUA_CHAVE_API_REAL_DO_OPENROUTESERVICE
