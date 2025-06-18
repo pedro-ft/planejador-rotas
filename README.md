@@ -74,6 +74,23 @@ Bem-vindo ao seu planejador de rotas, uma aplicação web completa desenvolvida 
 
 ---
 
+## 🖼️ Interfaces
+
+### Tela de Autenticação
+
+![Tela de Login](screenshots/Login.png)
+
+### Dashboard Principal (Listagem de Rotas)
+
+![Dashboard com a Lista de Rotas](screenshots/Lista.png)
+
+### Criação e Edição de Rotas
+
+![Página de Edição de Rota](screenshots/Editar1.png)
+![Página de Edição de Rota](screenshots/Editar2.png)
+
+---
+
 ## 🚀 Como Rodar o Projeto Localmente
 
 Siga os passos abaixo para configurar e rodar o projeto na sua máquina.
