@@ -71,9 +71,30 @@ const deletarDestino = async (req, res) => {
     }
 }
 
+const geocodificacaoReversa = async (req, res) => {
+    try {
+        const { lat, lon } = req.body;
+        if (typeof lat !== 'number' || typeof lon !== 'number') {
+            return res.status(400).json({ message: "Latitude e Longitude são obrigatórias e devem ser números." });
+        }
+
+        const dadosEndereco = await destinoService.obterEnderecoPorCoordenadas({ lat, lon });
+
+        res.status(200).json({ 
+            message: "Endereço encontrado com sucesso.", 
+            data: dadosEndereco 
+        });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            message: error.message || "Ocorreu um erro na geocodificação reversa."
+        });
+    }
+}
+
 module.exports = {
     criarDestino,
     listarDestinos,
     atualizarDestino,
-    deletarDestino
+    deletarDestino,
+    geocodificacaoReversa
 }

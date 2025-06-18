@@ -51,7 +51,6 @@ const registrar = async (username, password) => {
     return new Promise((resolve, reject) => {
         dbUsuarios.insert(novoUsuarioDoc, (err, usuarioSalvo) => {
             if (err) {
-                console.error("Erro ao salvar novo usuário no NeDB:", err);
                 return reject({statusCode: 500, message:"Erro interno ao registrar o usuário."})
             }
             const { password, ...usuarioParaRetorno } = usuarioSalvo;

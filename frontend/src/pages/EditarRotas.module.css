@@ -108,3 +108,11 @@
 .calcularPreviaButton:hover{
     background-color: #3574b3;
 }
+
+.textoMapa{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #d8dee9;
+    font-size: 0.95em;
+}

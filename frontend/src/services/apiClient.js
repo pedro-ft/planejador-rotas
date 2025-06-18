@@ -51,6 +51,7 @@ export const criarRota = (dadosRota) => request('/rotas', { method: 'POST', body
 export const deletarRota = (idRota) => request(`/rotas/${idRota}`, { method: 'DELETE' });
 export const atualizarRota = (idRota, dadosAtualizados) => request(`/rotas/${idRota}`, { method: 'PUT', body: JSON.stringify(dadosAtualizados) });
 export const obterCalculoDetalhesRota = (coordenadasArray) => request('/rotas/calcular-detalhes', { method: 'POST', body: JSON.stringify({ coordenadas: coordenadasArray }) });
+export const obterEnderecoPorCoordenadas = ({ lat, lon }) => request('/destinos/geocodificacao-reversa', { method: 'POST', body: JSON.stringify({ lat, lon })})
 
 export const criarDestino = (dadosDestino) => request('/destinos', { method: 'POST', body: JSON.stringify(dadosDestino) });
 export const deletarDestino = (idDestino) => request(`/destinos/${idDestino}`, { method: 'DELETE' });

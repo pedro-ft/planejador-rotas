@@ -1,10 +1,7 @@
-import React, { useState, useId } from 'react';
+import React, { useId } from 'react';
 import styles from './AdicionarDestino.module.css'
 
-function AdicionarDestino({ aoAdicionar, aoDispararAlerta }) {
-    const [nomeDestino, setNomeDestino] = useState('');
-    const [paisDestino, setPaisDestino] = useState('');
-    const [enderecoDestino, setEnderecoDestino] = useState('');
+function AdicionarDestino({ nome, onNomeChange, pais, onPaisChange, endereco, onEnderecoChange, onSubmit, aoDispararAlerta  }) {
 
     const idNome = useId();
     const idPais = useId();
@@ -12,21 +9,13 @@ function AdicionarDestino({ aoAdicionar, aoDispararAlerta }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!nomeDestino.trim() || !paisDestino.trim()) {
+        if (!nome.trim() || !pais.trim()) {
             if (aoDispararAlerta) {
                 aoDispararAlerta("Atenção", "Por favor, informe o nome da Cidade e o País.");
-            } else {
-                alert("Por favor, informe o Nome da Cidade e o País.");
             }
             return;
         }
-        aoAdicionar({
-            nome: nomeDestino,
-            pais: paisDestino,
-            endereco: enderecoDestino });
-        setNomeDestino('');
-        setPaisDestino('');
-        setEnderecoDestino('');
+        onSubmit();
     };
 
     return (
@@ -36,10 +25,11 @@ function AdicionarDestino({ aoAdicionar, aoDispararAlerta }) {
                 <input
                     type="text"
                     id={idNome}
-                    value={nomeDestino}
-                    onChange={(e) => setNomeDestino(e.target.value)}
+                    value={nome}
+                    onChange={onNomeChange}
                     placeholder="Ex: Salvador, Paris, Tóquio"
                     className={styles.inputField}
+                    required
                 />
             </div>
             <div className={styles.formGroup}>
@@ -47,10 +37,11 @@ function AdicionarDestino({ aoAdicionar, aoDispararAlerta }) {
                 <input
                     type="text"
                     id={idPais}
-                    value={paisDestino}
-                    onChange={(e) => setPaisDestino(e.target.value)}
+                    value={pais}
+                    onChange={onPaisChange}
                     placeholder="Ex: Brasil, França, Japão"
                     className={styles.inputField}
+                    required
                 />
             </div>
             <div className={styles.formGroup}>
@@ -58,8 +49,8 @@ function AdicionarDestino({ aoAdicionar, aoDispararAlerta }) {
                 <input
                     type="text"
                     id={idEndereco}
-                    value={enderecoDestino}
-                    onChange={(e) => setEnderecoDestino(e.target.value)}
+                    value={endereco}
+                    onChange={onEnderecoChange}
                     placeholder="Ex: Rua das Palmeiras, 123 ou Torre Eiffel"
                     className={styles.inputField}
                 />

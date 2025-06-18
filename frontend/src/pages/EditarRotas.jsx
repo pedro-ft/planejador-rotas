@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getRotaPorId, atualizarRota, criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, obterCalculoDetalhesRota, atualizarDestino as apiAtualizarDestino } from '../services/apiClient';
+import { getRotaPorId, atualizarRota, criarDestino as apiCriarDestino, deletarDestino as apiDeletarDestino, obterCalculoDetalhesRota, atualizarDestino as apiAtualizarDestino, obterEnderecoPorCoordenadas } from '../services/apiClient';
 import styles from './EditarRotas.module.css';
 import InputNome from '../components/Rotas/InputNome';
 import AdicionarDestino from '../components/Rotas/AdicionarDestino';
@@ -8,6 +8,7 @@ import ListaDestinos from '../components/Rotas/ListaDestinos';
 import ResumoRota from '../components/Rotas/ResumoRota';
 import Modal from '../components/Modal/Modal';
 import ModalEditarDestino from '../components/Modal/ModalEditarDestino';
+import Mapa from '../components/Mapa/Mapa';
 
 function EditarRotaPage() {
     const { idRota } = useParams();
@@ -22,6 +23,9 @@ function EditarRotaPage() {
     const [errorPrevia, setErrorPrevia] = useState(null);
     const [destinoEmEdicao, setDestinoEmEdicao] = useState(null);
     const [destinosModificadosDesdeLoad, setDestinosModificadosDesdeLoad] = useState(false);
+    const [formNome, setFormNome] = useState('');
+    const [formPais, setFormPais] = useState('');
+    const [formEndereco, setFormEndereco] = useState('');
 
     useEffect(() => {
         const carregarDadosRota = async () => {
@@ -96,17 +100,20 @@ function EditarRotaPage() {
 
     const handleMudarNomeRota = (novoNome) => {setNomeRota(novoNome)};
 
-    const handleAdicionarDestino = async (dadosFormularioDestino) => {
+    const handleAdicionarDestino = async () => {
     const dadosParaApi = {
-        cidade: dadosFormularioDestino.nome,
-        pais: dadosFormularioDestino.pais,
-        observacoes: dadosFormularioDestino.endereco, 
-        nomeDaRotaPertecente: nomeRota
+            cidade: formNome,
+            pais: formPais,
+            observacoes: formEndereco,
+            nomeDaRotaPertecente: nomeRota
     };
     try {
         const respostaApi = await apiCriarDestino(dadosParaApi);
         setDestinosNaRota(destinosAnteriores => [...destinosAnteriores, respostaApi.data]);
         invalidarPrevia();
+        setFormNome('');
+        setFormPais('');
+        setFormEndereco('');
     } catch (error) {
          abrirAlerta("Erro", `Erro ao adicionar destino: ${error.message}`);
     }
@@ -265,6 +272,24 @@ function EditarRotaPage() {
     }
     };
 
+    const handleMapClick = async (latlng) => {
+            const { lat, lng: lon } = latlng; 
+    
+            try {
+                const respostaApi = await obterEnderecoPorCoordenadas({ lat, lon });
+                const dadosEndereco = respostaApi.data;
+    
+                if (dadosEndereco) {
+                    setFormNome(dadosEndereco.cidade || '');
+                    setFormPais(dadosEndereco.pais || '');
+                    setFormEndereco(dadosEndereco.observacoes || '');
+                }
+            } catch (error) {
+                console.error("Erro na geocodificação reversa:", error);
+                abrirAlerta("Erro", `Não foi possível encontrar um endereço para este local: ${error.message}`);
+            }
+        };
+
     return (
         <div className={styles.paginaEditarRota}>
             <div className={styles.pageHeaderContainer}>
@@ -280,8 +305,28 @@ function EditarRotaPage() {
             </div>
 
             <div className={styles.sectionCard}>
+                <h3 className={styles.sectionTitle}>Adicionar Destino por Mapa</h3>
+                    <p className={styles.textoMapa}>
+                        Clique em um local no mapa para preencher o formulário de destino abaixo.
+                    </p> 
+                <Mapa 
+                    onMapClick={handleMapClick}
+                    posicoesDestinos={destinosNaRota}
+                />
+            </div>
+
+            <div className={styles.sectionCard}>
                 <h3 className={styles.sectionTitle}>Adicionar Destino</h3>
-                <AdicionarDestino aoAdicionar={handleAdicionarDestino} aoDispararAlerta={abrirAlerta}/> 
+                <AdicionarDestino 
+                    nome={formNome}
+                    onNomeChange={(e) => setFormNome(e.target.value)}
+                    pais={formPais}
+                    onPaisChange={(e) => setFormPais(e.target.value)}
+                    endereco={formEndereco}
+                    onEnderecoChange={(e) => setFormEndereco(e.target.value)}
+                    onSubmit={handleAdicionarDestino}
+                    aoDispararAlerta={abrirAlerta}                
+                /> 
             </div>
 
             <div className={styles.sectionCard}>

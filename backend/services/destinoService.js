@@ -29,6 +29,33 @@ async function obterCoordenadas(enderecoTextual) {
     }
 }
 
+const obterEnderecoPorCoordenadas = async ({ lat, lon }) => {
+    if (!ORS_API_KEY) {
+        throw new Error("Chave API ORS ausente. Geocodificação pulada.")
+    }
+
+    try {
+        const reverseGeocodeUrl = `https://api.openrouteservice.org/geocode/reverse?api_key=${ORS_API_KEY}&point.lon=${lon}&point.lat=${lat}&size=1`;
+        const geocodeResponse = await fetch(reverseGeocodeUrl);
+        const geocodeData = await geocodeResponse.json();
+
+        if (geocodeResponse.ok && geocodeData.features && geocodeData.features.length > 0) {
+            const properties = geocodeData.features[0].properties;
+            return {
+                cidade: properties.locality || properties.county || '',
+                pais: properties.country || '',
+                observacoes: properties.label || ''
+            };
+        } else {
+            throw new Error("Não foi possível encontrar um endereço para as coordenadas fornecidas.");
+        }
+    } catch (error) {
+        if (error.statusCode) throw error;
+        
+        throw new Error("Falha na comunicação com o serviço de geocodificação.");
+    }
+};
+
 const criarNovoDestino = (dadosDestino) => {
     return new Promise(async (resolve ,reject) => {
         try{
@@ -129,5 +156,6 @@ module.exports = {
     criarNovoDestino,
     buscarTodos,
     atualizarDestinoPorId,
-    deletarDestinoPorId
+    deletarDestinoPorId,
+    obterEnderecoPorCoordenadas
 }
